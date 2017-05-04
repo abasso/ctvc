@@ -18,6 +18,7 @@ Work.add({
 	carousel: { type: Types.Boolean },
 	class: {type: String},
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
+	broadcastDate: { type: Types.Date },
 	image: { type: Types.CloudinaryImage },
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
@@ -29,7 +30,7 @@ Work.add({
 Work.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;
 });
-// 
+//
 // Work.schema.pre('save', function(next) {
 // 		console.log('pre save', this);
 //     next();

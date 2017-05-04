@@ -1,25 +1,32 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12">
-			<div class="work-filter">
-					<a href="/work" class="active ">All</a>
+		<div class="col-sm-12 filters">
+			<div class="work-filter type">
+					<a href="/work" class="active" data-filter="all">All</a>
 				{{# each data.categories }}
-				<a href="{{categoryUrl key}}" class="{{key}}">{{name}}</a>
+				<a href="{{categoryUrl key}}" class="{{key}}" data-filter="{{key}}">{{name}}</a>
+				{{/each}}
+			</div>
+			<div class="work-filter date">
+				<a href="/work" class="active" data-filter="all">All</a>
+				{{# each data.years }}
+				<a href="" class="{{this}}" data-filter="_{{this}}">{{this}}</a>
 				{{/each}}
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="grid-row work">
+			<div class="grid-row work" data-isotope='{ "itemSelector": ".list-item", "layoutMode": "fitRows" }'>
 				{{# each data.work.results}}
-				<div class="list-item {{categoryClasses categories}}">
+				<div class="list-item all {{categoryClasses categories}} _{{broadCastYear}}">
 					<a href="{{postUrl slug}}">
 					{{#if image}}<img src="{{{cloudinaryUrl image width=350 height=196 crop='fit' }}}" class="img pull-right">{{/if}}
 					<div class="list-item-overlay">
 						<div class="list-item-title">
 							<h2>{{{title}}}</h2>
 							{{{content.brief}}}
+							<!-- {{#if shortBroadcastDate}}<span class="broadcast-date">{{shortBroadcastDate}}</span>{{/if}} -->
 						</div>
 					</div>
 					</a>

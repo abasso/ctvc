@@ -30,13 +30,11 @@
 								<img src="/images/logo.svg"/>
 							</a>
 						</div>
-							<ul class="nav">
+							<nav class="nav">
 									{{# each navLinks}}
-									<li {{#ifeq ../section key}}class="active"{{else}}{{/ifeq}}>
-										<a href="{{ href }}">{{ label }}</a>
-									</li>
+										<a {{#ifeq ../section key}}class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}">{{ label }}</a>
 								{{/each}}
-							</ul>
+							</nav>
 							<!-- <ul class="nav navbar-nav navbar-right">
 								{{#if user}}
 								<li><a href="/keystone/signout">Sign Out</a></li>
@@ -47,7 +45,8 @@
 				</div>
 			</div>
 		</div>
-		<div id="body">
+		<div class="header-background"></div>
+		<div id="body" class="content-wrapper">
 			<!--
 				Flash messages allow you to display once-off status messages to users, e.g. form
 				validation errors, success messages, etc
@@ -76,25 +75,13 @@
 				{{/if}}
 			</div>
 			{{/if}}
-			<!-- The content block should contain the body of your template's content-->
+			<!-- The content block should contain the body of your template"s content-->
 			{{{body}}}
 		</div>
-		<div class="container">
-			<div id="footer">
-				<p>Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.</p>
-			</div>
-		</div>
-		{{!--
-			//- jQuery 1.11.3 is included by default, and required by both Bootstrap
-			//- and the KeystoneJS Content Editor. If you are not targeting IE8,
-			//- you can upgrade to 2.1.4 (also bundled) for better performance.
-		--}}
+		<script src="/js/isotope/isotope.pkgd.min.js"></script>
 		<script src="/js/jquery/jquery-2.1.4.min.js"></script>
-		{{!--
-			//- Customise which Bootstrap javascript files are served by including
-			//- them specifically here, instead of bootstrap-3.3.5.min.js
-		--}}
 		<script src="/js/bootstrap/bootstrap.min.js"></script>
+		<script src="/js/lodash/lodash.min.js"></script>
 		{{{isAdminEditorJS user}}}
 		<script>
 		$(function() {
@@ -106,6 +93,42 @@
 						$(this).addClass("blur").removeClass("focus");
 					}
 			});
+			var elem = document.querySelector(".grid-row");
+			var iso = new Isotope( ".grid-row", {
+				itemSelector: '.list-item',
+				layoutMode: 'fitRows',
+			});
+
+			var filterArray = [];
+
+			$(".work-filter a").on("click", function(e) {
+				e.preventDefault()
+					_.each(filterArray, (arrayItem, index) => {
+						_.each($(this).siblings(), function(sibling) {
+						if (arrayItem === "." + $(sibling).attr("data-filter")) {
+								filterArray.splice(index, 1);
+							}
+						})
+					})
+
+				if ($(this).hasClass("active") && !$(this).hasClass("all")) {
+					$(this).removeClass("active");
+					var filterKey = "all";
+					$(this).siblings(".work-filter a[data-filter=all]").addClass("active");
+					_.each(filterArray, (arrayItem, index) => {
+						if(arrayItem === "." + $(this).attr("data-filter")) {
+							filterArray.splice(index, 1);
+						}
+					});
+				} else {
+					$(this).siblings().removeClass("active");
+					$(this).addClass("active");
+					filterArray.push("." + $(this).attr("data-filter"));
+				}
+				iso.arrange({
+				  filter: filterArray.join("")
+				});
+			})
 		});
 		</script>
 	</body>
