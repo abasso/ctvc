@@ -16,6 +16,12 @@
 							</h5>
 						</header>
 						{{{data.item.content.extended}}}
+						{{#if data.item.content.press}}
+						<div class="item-info-block">
+							<h5>Press Links</h5>
+							{{{data.item.content.press}}}
+						</div>
+						{{/if}}
 					</div>
 					<div class="col-sm-12 col-lg-4 offset-lg-1">
 						{{#if data.item.content.quote}}
