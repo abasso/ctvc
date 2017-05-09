@@ -16,9 +16,11 @@ Work.add({
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	carousel: { type: Types.Boolean },
+	carouselPosition: { type: Types.Select, numeric: true, options: [{ value: 1, label: 'One' }, { value: 2, label: 'Two' }, { value: 3, label: 'Three' }, { value: 4, label: 'Four' } ], dependsOn: { carousel: true} },
 	class: {type: String},
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	broadcastDate: { type: Types.Date },
+	thumbnail: { type: Types.CloudinaryImage },
 	image: { type: Types.CloudinaryImage },
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },

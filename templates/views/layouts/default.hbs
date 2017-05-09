@@ -6,9 +6,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>CTVC</title>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
 		<link href="/styles/site.css" rel="stylesheet">
-
-		<link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700" rel="stylesheet">
 		{{!-- This file provides the default styling for the KeystoneJS Content Editor
 			- only renders when user is logged in and admin--}}
 		{{{isAdminEditorCSS user}}}
@@ -23,7 +23,6 @@
 	</head>
 	<body>
 		<div id="header">
-			<div class="container">
 				<div role="navigation" class="navbar navbar-default">
 						<div class="navbar-header">
 							<a href="/" class="navbar-brand">
@@ -43,7 +42,6 @@
 								{{/if}}
 							</ul> -->
 				</div>
-			</div>
 		</div>
 		<div class="header-background"></div>
 		<div id="body" class="content-wrapper">
@@ -81,55 +79,65 @@
 		<script src="/js/isotope/isotope.pkgd.min.js"></script>
 		<script src="/js/jquery/jquery-2.1.4.min.js"></script>
 		<script src="/js/bootstrap/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
 		<script src="/js/lodash/lodash.min.js"></script>
 		{{{isAdminEditorJS user}}}
 		<script>
-		$(function() {
-			$(".work .list-item").on({
-					"mouseenter": function() {
-					$(this).addClass("focus").removeClass("blur");
-				},
-					"mouseleave": function() {
-						$(this).addClass("blur").removeClass("focus");
-					}
-			});
-			var elem = document.querySelector(".grid-row");
-			var iso = new Isotope( ".grid-row", {
-				itemSelector: '.list-item',
-				layoutMode: 'fitRows',
-			});
+		  var mySwiper = new Swiper ('.swiper-container', {
+		    loop: true,
+		    pagination: '.swiper-pagination',
+		    nextButton: '.swiper-button-next',
+		    prevButton: '.swiper-button-prev'
+		  })
 
-			var filterArray = [];
+			$(function() {
+				$(".work .list-item").on({
+						"mouseenter": function() {
+						$(this).addClass("focus").removeClass("blur");
+					},
+						"mouseleave": function() {
+							$(this).addClass("blur").removeClass("focus");
+						}
+				});
+				var elem = document.querySelector(".grid-row");
+				var iso = new Isotope( ".grid-row", {
+					itemSelector: '.list-item',
+					layoutMode: 'fitRows',
+				});
 
-			$(".work-filter a").on("click", function(e) {
-				e.preventDefault()
-					_.each(filterArray, (arrayItem, index) => {
-						_.each($(this).siblings(), function(sibling) {
-						if (arrayItem === "." + $(sibling).attr("data-filter")) {
+				var filterArray = [];
+
+				$(".work-filter a").on("click", function(e) {
+					e.preventDefault()
+						_.each(filterArray, (arrayItem, index) => {
+							_.each($(this).siblings(), function(sibling) {
+							if (arrayItem === "." + $(sibling).attr("data-filter")) {
+									filterArray.splice(index, 1);
+								}
+							})
+						})
+
+					if ($(this).hasClass("active") && !$(this).hasClass("all")) {
+						$(this).removeClass("active");
+						var filterKey = "all";
+						$(this).siblings(".work-filter a[data-filter=all]").addClass("active");
+						_.each(filterArray, (arrayItem, index) => {
+							if(arrayItem === "." + $(this).attr("data-filter")) {
 								filterArray.splice(index, 1);
 							}
-						})
-					})
-
-				if ($(this).hasClass("active") && !$(this).hasClass("all")) {
-					$(this).removeClass("active");
-					var filterKey = "all";
-					$(this).siblings(".work-filter a[data-filter=all]").addClass("active");
-					_.each(filterArray, (arrayItem, index) => {
-						if(arrayItem === "." + $(this).attr("data-filter")) {
-							filterArray.splice(index, 1);
-						}
+						});
+					} else {
+						$(this).siblings().removeClass("active");
+						$(this).addClass("active");
+						filterArray.push("." + $(this).attr("data-filter"));
+					}
+					iso.arrange({
+						filter: filterArray.join("")
 					});
-				} else {
-					$(this).siblings().removeClass("active");
-					$(this).addClass("active");
-					filterArray.push("." + $(this).attr("data-filter"));
-				}
-				iso.arrange({
-				  filter: filterArray.join("")
-				});
-			})
-		});
-		</script>
+				})
+			});
+
+
+		  </script>
 	</body>
 </html>
