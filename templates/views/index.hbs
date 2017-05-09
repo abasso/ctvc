@@ -1,14 +1,70 @@
 <div class="swiper-container">
-    <div class="swiper-wrapper">
-			{{# each data.carousel }}
-        <div class="swiper-slide swiper-slide-{{this.class}}">
-					<img src="{{this.image.url}}"/>
-					<a class="slide-title"><h2><span>{{this.title}}</span></h2></a>
-				</div>
-			{{/each}}
-    </div>
-    <div class="swiper-pagination"></div>
-    <!-- <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div> -->
+	<div class="swiper-wrapper">
+		{{# each data.carousel }}
+		<div class="swiper-slide swiper-slide-{{this.class}}">
+			<a href="/work/item/{{this.slug}}">
+				{{#if image}}<span class="image-wrapper"><img src="{{{cloudinaryUrl image width=1400 height=900 crop='fit' }}}" class="img pull-right"></span>{{/if}}
 
-</div>
+				<span class="slide-title"><h2><span>{{this.title}}</span></h2></span>
+				</a>
+			</div>
+			{{/each}}
+		</div>
+		<div class="swiper-pagination"></div>
+		<!-- <div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div> -->
+
+	</div>
+		<div class="intro offset">
+			<div class="container">
+			<h1>{{{toTitle data.copy.content.brief}}}</h1>
+			<p>{{{data.copy.content.extended}}}</p>
+			<a class="btn-showreel" href="/showreel"><span>Watch our show reel</span></a>
+		</div>
+	</div>
+		<div class="homepage-categories offset">
+			<div class="container">
+			<div class="row">
+			{{# each data.categories }}
+				<div class="col-sm-12 col-md-6 col-lg-3 homepage-categories-column">
+					<a href="work/{{this.key}}" class=" homepage-category {{this.key}}">
+				{{#if image}}<img src="{{{cloudinaryUrl image width=400 height=214 crop='fit' }}}" class="img pull-right">{{/if}}
+					<h5>{{this.name}}</h5>
+					{{{this.description}}}
+				</a>
+			</div>
+			{{/each}}
+		</div>
+
+		</div>
+	</div>
+
+		<div class="homepage-latest offset">
+			<div class="container">
+				<h4>Our Latest Work</h4>
+				<div class="row justify-content-center">
+					<div class="col-sm-12">
+						<div class="grid-row work">
+							{{# each data.work}}
+							<div class="list-item all {{categoryClasses category}} _{{broadCastYear}}">
+								<a href="{{postUrl slug}}">
+								{{#if thumbnail}}<img src="{{{cloudinaryUrl thumbnail width=350 height=196 crop='fit' }}}" class="img pull-right">{{/if}}
+								<div class="list-item-overlay">
+									<div class="list-item-title">
+										<h2>{{{title}}}</h2>
+										{{{content.brief}}}
+										<!-- {{#if shortBroadcastDate}}<span class="broadcast-date">{{shortBroadcastDate}}</span>{{/if}} -->
+									</div>
+								</div>
+								</a>
+							</div>
+							{{/each}}
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-4 homepage-latest-more ">
+						<a href="/work">See all of our work</a>
+					</div>
+				</div>
+
+		</div>
+	</div>

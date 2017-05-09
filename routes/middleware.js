@@ -25,9 +25,11 @@ exports.initLocals = function (req, res, next) {
 		{ label: 'Show Reel', key: 'show-reel', href: '/show-reel' },
 		{ label: 'People', key: 'people', href: '/people' },
 		{ label: 'Contact', key: 'contact', href: '/contact' },
+	];
+	res.locals.socialLinks = [
 		{ label: '', key: 'facebook', href: '/contact', class: 'social facebook' },
 		{ label: '', key: 'twitter', href: '/twitter', class: 'social twitter' },
-	];
+	]
 	res.locals.user = req.user;
 	next();
 };

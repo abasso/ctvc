@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="-463 265 32 32" style="enable-background:new -463 265 32 32;" xml:space="preserve">
+	 viewBox="-407 252 145 57" style="enable-background:new -407 252 145 57;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#333333;}
+	.st0{filter:url(#Adobe_OpacityMaskFilter);}
+	.st1{fill:#FFFFFF;}
+	.st2{mask:url(#mask-2);}
+	.st3{fill:none;stroke:#FFFFFF;stroke-width:6;}
 </style>
-<title>facebook</title>
-<path class="st0" d="M-444,271h5v-6h-5c-3.9,0-7,3.1-7,7v3h-4v6h4v16h6v-16h5l1-6h-6v-3C-445,271.5-444.5,271-444,271z"/>
 </svg>

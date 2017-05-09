@@ -6,23 +6,33 @@ exports = module.exports = function (req, res) {
 	var view = new keystone.View(req, res)
 	var locals = res.locals
 
+	locals.section = 'homepage';
+
 	locals.data = {
 		work: [],
 		categories: [],
-		carousel: []
+		carousel: [],
+		copy: {}
 	}
 
 	// Load the current category filter
 	view.on('init', function (next) {
 
 			keystone.list('WorkCategory').model.find({}).exec(function (err, result) {
-				locals.data.categories = result
+				locals.data.categories = _.sortBy(result, 'order');
 				next(err)
 			});
 	})
 
 	view.on('init', function (next) {
-		var q = keystone.list('Work').model.find({})
+			keystone.list('Page').model.find({}).exec(function (err, result) {
+				locals.data.copy = _.find(result, {slug: 'homepage'})
+				next(err)
+			});
+	})
+
+	view.on('init', function (next) {
+		var q = keystone.list('Work').model.find({}).lean()
 
 		q.exec(function (err, results) {
 			let yearsObject = {}
@@ -31,9 +41,11 @@ exports = module.exports = function (req, res) {
 						data.class = _.find(locals.data.categories, {_id: data.categories[0]}).key
 						locals.data.carousel.push(data)
 					}
+					data.category = _.filter(locals.data.categories, {_id: data.categories[0]})
 			})
-			console.log(locals.data.carousel);
-			locals.data.work = results
+			locals.data.carousel = _.sortBy(locals.data.carousel, 'carouselPosition')
+			locals.data.work = _.take(results, 3);
+			console.log(locals.data.work)
 			next(err)
 		})
 	})

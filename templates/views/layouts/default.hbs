@@ -5,10 +5,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>CTVC</title>
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-		<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+		<link rel="shortcut icon" href="/images/icon_grayscale_2@2x.png" type="image/x-icon">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
-		<link href="/styles/site.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Dosis:500,600,700|Open+Sans:300,400" rel="stylesheet">		<link href="/styles/site.css" rel="stylesheet">
 		{{!-- This file provides the default styling for the KeystoneJS Content Editor
 			- only renders when user is logged in and admin--}}
 		{{{isAdminEditorCSS user}}}
@@ -21,19 +20,28 @@
 		<![endif]-->
 
 	</head>
-	<body>
+	<body class="{{section}} {{data.item.categories.0.key}}">
 		<div id="header">
+			<div class="container">
 				<div role="navigation" class="navbar navbar-default">
 						<div class="navbar-header">
 							<a href="/" class="navbar-brand">
-								<img src="/images/logo.svg"/>
+								<img src="/images/logo_white.svg"/>
 							</a>
 						</div>
+						<a class="burger-menu-toggle hidden-lg-up"><span>Menu</span></a>
 							<nav class="nav">
 									{{# each navLinks}}
 										<a {{#ifeq ../section key}}class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}">{{ label }}</a>
 								{{/each}}
+								<div class="social-links">
+								{{# each socialLinks}}
+									<a {{#ifeq ../section key}}class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}">{{ label }}</a>
+									{{/each}}
+								</div>
 							</nav>
+
+
 							<!-- <ul class="nav navbar-nav navbar-right">
 								{{#if user}}
 								<li><a href="/keystone/signout">Sign Out</a></li>
@@ -42,6 +50,7 @@
 								{{/if}}
 							</ul> -->
 				</div>
+			</div>
 		</div>
 		<div class="header-background"></div>
 		<div id="body" class="content-wrapper">
@@ -76,6 +85,25 @@
 			<!-- The content block should contain the body of your template"s content-->
 			{{{body}}}
 		</div>
+		<div class="footer offset">
+			<div class="partners">
+				<div class="container">
+					<a href="#"><img src="/images/logos/bbc.png"/></a>
+					<a href="#"><img src="/images/logos/sky.png"/></a>
+					<a href="#"><img src="/images/logos/mtv.png"/></a>
+					<a href="#"><img src="/images/logos/channel4.png"/></a>
+				</div>
+			</div>
+			<div class="contact">
+				<div class="container">
+				<span class="address">
+					<img src="/images/logo-colour.svg"/>
+					CTVC Ltd. First Floor, McBeath House, 310 Goswell Road, London, EC1V 7LW</span>
+				<span class="deets">Tel + 44 (0)20 7940 8480 <a href="mailto:info@ctvc.co.uk">info@ctvc.co.uk</a></span>
+			</div>
+			</div>
+			<div class="copyright"></div>
+		</div>
 		<script src="/js/isotope/isotope.pkgd.min.js"></script>
 		<script src="/js/jquery/jquery-2.1.4.min.js"></script>
 		<script src="/js/bootstrap/bootstrap.min.js"></script>
@@ -83,14 +111,19 @@
 		<script src="/js/lodash/lodash.min.js"></script>
 		{{{isAdminEditorJS user}}}
 		<script>
-		  var mySwiper = new Swiper ('.swiper-container', {
-		    loop: true,
-		    pagination: '.swiper-pagination',
-		    nextButton: '.swiper-button-next',
-		    prevButton: '.swiper-button-prev'
-		  })
 
 			$(function() {
+				$(".burger-menu-toggle").on({
+					"click": function() {
+						if ($(this).hasClass("is-active")) {
+							$(this).removeClass("is-active");
+							$(".nav").removeClass("show");
+						} else {
+							$(this).addClass("is-active");
+							$(".nav").addClass("show");
+						}
+					}
+				});
 				$(".work .list-item").on({
 						"mouseenter": function() {
 						$(this).addClass("focus").removeClass("blur");
@@ -104,37 +137,96 @@
 					itemSelector: '.list-item',
 					layoutMode: 'fitRows',
 				});
+				if($("body").hasClass("homepage")) {
+					console.log($(window).width())
+					if($(window).width() > 1200) {
+						var swiper = $(".swiper-wrapper");
+						var offset = swiper.height();
+						$(".offset").each( function(index, item) {
+							$(item).css('top', offset);
+							console.log($(item).outerHeight());
+						})
+					}
+
+					var mySwiper = new Swiper ('.swiper-container', {
+						loop: true,
+						pagination: '.swiper-pagination',
+						nextButton: '.swiper-button-next',
+						prevButton: '.swiper-button-prev'
+					})
+
+
+					$(window).resize(function() {
+						if($(window).width() > 1200) {
+							var swiper = $(".swiper-wrapper");
+							var offset = swiper.height();
+							$(".offset").each( function(index, item) {
+								$(item).css('top', offset);
+								console.log($(item).outerHeight());
+							})
+						} else {
+							$(".offset").removeAttr("style");
+						}
+					});
+
+				}
 
 				var filterArray = [];
+				if($("body").hasClass("work")) {
 
-				$(".work-filter a").on("click", function(e) {
-					e.preventDefault()
-						_.each(filterArray, (arrayItem, index) => {
-							_.each($(this).siblings(), function(sibling) {
-							if (arrayItem === "." + $(sibling).attr("data-filter")) {
+					console.log(window.location);
+
+					if(window.location.pathname !== "/work") {
+						let pathArray = window.location.pathname.split("/");
+						iso.arrange({
+							filter: "." + pathArray[pathArray.length -1]
+						});
+						$(".work-filter.type a").removeClass("active");
+						$(".work-filter.type a[data-filter=" + pathArray[pathArray.length -1] + "]").addClass("active");
+					}
+
+					$(".work-filter a").on("click", function(e) {
+						e.preventDefault()
+							_.each(filterArray, (arrayItem, index) => {
+								_.each($(this).siblings(), function(sibling) {
+								if (arrayItem === "." + $(sibling).attr("data-filter")) {
+										filterArray.splice(index, 1);
+									}
+								})
+							})
+
+						if ($(this).hasClass("active") && !$(this).hasClass("all")) {
+							$(this).removeClass("active");
+							var filterKey = "all";
+							$(this).siblings(".work-filter a[data-filter=all]").addClass("active");
+							_.each(filterArray, (arrayItem, index) => {
+								history.pushState({}, null, "/work");
+								if (arrayItem === "." + $(this).attr("data-filter")) {
 									filterArray.splice(index, 1);
 								}
-							})
-						})
-
-					if ($(this).hasClass("active") && !$(this).hasClass("all")) {
-						$(this).removeClass("active");
-						var filterKey = "all";
-						$(this).siblings(".work-filter a[data-filter=all]").addClass("active");
-						_.each(filterArray, (arrayItem, index) => {
-							if(arrayItem === "." + $(this).attr("data-filter")) {
-								filterArray.splice(index, 1);
+							});
+						} else {
+							if ($(this).parent().hasClass("type")) {
+								if ($(this).hasClass("all")) {
+									history.pushState({}, null, "/work");
+								} else {
+									history.pushState({}, null, "/work/" + $(this).attr("data-filter"));
+								}
 							}
+							$(this).siblings().removeClass("active");
+							$(this).addClass("active");
+							filterArray.push("." + $(this).attr("data-filter"));
+						}
+						iso.arrange({
+							filter: filterArray.join("")
 						});
-					} else {
-						$(this).siblings().removeClass("active");
-						$(this).addClass("active");
-						filterArray.push("." + $(this).attr("data-filter"));
-					}
-					iso.arrange({
-						filter: filterArray.join("")
-					});
-				})
+						if ($(".grid-row.work").css('height') === '0px') {
+							$(".no-results").removeClass("hidden-xs-up");
+						} else {
+							$(".no-results").addClass("hidden-xs-up");
+						};
+					})
+				}
 			});
 
 

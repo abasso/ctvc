@@ -6,12 +6,12 @@ var Types = keystone.Field.Types;
  * ==========
  */
 
-var Work = new keystone.List('Post', {
+var Page = new keystone.List('Page', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
 });
 
-Work.add({
+Page.add({
 	title: { type: String, required: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	author: { type: Types.Relationship, ref: 'User', index: true },
@@ -21,12 +21,11 @@ Work.add({
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },
 	},
-	categories: { type: Types.Relationship, ref: 'WorkCategory', many: true },
 });
 
-Work.schema.virtual('content.full').get(function () {
+Page.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;
 });
 
-Work.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
-Work.register();
+Page.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
+Page.register();

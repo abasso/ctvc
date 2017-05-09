@@ -334,5 +334,11 @@ module.exports = function () {
 		return block;
 	}
 
+	_helpers.toTitle = (string) => {
+
+		return string.replace('p', 'h1')
+
+	}
+
 	return _helpers;
 };

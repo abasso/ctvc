@@ -25,6 +25,12 @@ Work.add({
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },
+		quote: {type: Types.Html, wysiwyg: true, height: 150},
+		broadcastDetails: {type: Types.Html, wysiwyg: true, height: 150},
+		producedBy: {type: Types.Html, wysiwyg: true, height: 150},
+		inAssociationWith: {type: Types.Html, wysiwyg: true, height: 150},
+		press: {type: Types.Html, wysiwyg: true, height: 150},
+		credits: {type: Types.Html, wysiwyg: true, height: 150}
 	},
 	categories: { type: Types.Relationship, ref: 'WorkCategory', many: true },
 });

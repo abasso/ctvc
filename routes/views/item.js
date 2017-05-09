@@ -6,13 +6,15 @@ exports = module.exports = function (req, res) {
 	var locals = res.locals;
 
 	// Set locals
-	locals.section = 'work';
 	locals.filters = {
 		item: req.params.item,
 	};
 	locals.data = {
 		items: [],
 	};
+
+	locals.section = 'item'
+
 
 	// Load the current post
 	view.on('init', function (next) {

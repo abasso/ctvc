@@ -43,18 +43,18 @@ exports = module.exports = function (req, res) {
 		})
 	})
 
-	// Load the current category filter
-	view.on('init', function (next) {
-
-		if (req.params.category) {
-			keystone.list('WorkCategory').model.findOne({ key: locals.filters.category }).exec(function (err, result) {
-				locals.data.category = result
-				next(err)
-			})
-		} else {
-			next()
-		}
-	})
+	// // Load the current category filter
+	// view.on('init', function (next) {
+	//
+	// 	if (req.params.category) {
+	// 		keystone.list('WorkCategory').model.findOne({ key: locals.filters.category }).exec(function (err, result) {
+	// 			locals.data.category = result
+	// 			next(err)
+	// 		})
+	// 	} else {
+	// 		next()
+	// 	}
+	// })
 
 	// Load the work
 	view.on('init', function (next) {
@@ -87,6 +87,7 @@ exports = module.exports = function (req, res) {
 					locals.data.years.push(data.broadCastYear)
 				}
 			})
+			locals.data.years = _.uniq(locals.data.years);
 			locals.data.work = results
 			next(err)
 		})
