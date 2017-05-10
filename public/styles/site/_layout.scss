@@ -243,19 +243,19 @@ a {
 
         align-items: center;
         justify-content: center;
-      }
-      .social {
-        border: solid 1px rgba(255,255,255,.1);
-        &.facebook {
-          &:before {
-            background: no-repeat 9px 9px url(/images/icons/facebook_white.svg);
-            background-size: 20px;
+        .social {
+          border: solid 1px rgba(255,255,255,.1);
+          &.facebook {
+            &:before {
+              background: no-repeat 9px 9px url(/images/icons/facebook_white.svg);
+              background-size: 20px;
+            }
           }
-        }
-        &.twitter {
-          &:before {
-            background: no-repeat 9px 9px url(/images/icons/twitter_white.svg);
-            background-size: 20px;
+          &.twitter {
+            &:before {
+              background: no-repeat 9px 9px url(/images/icons/twitter_white.svg);
+              background-size: 20px;
+            }
           }
         }
       }
