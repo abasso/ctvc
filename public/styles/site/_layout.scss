@@ -234,7 +234,7 @@ a {
     .social-links {
       display: flex;
       margin-left: 1rem;
-      @media (max-width: $breakpoint-lg) {
+      @media (max-width: $breakpoint-sm) {
         width: 100%;
         margin-top: 2rem;
         margin-left: -.5rem;
@@ -244,7 +244,7 @@ a {
         align-items: center;
         justify-content: center;
         .social {
-          border: solid 1px rgba(255,255,255,.1);
+          border: solid 1px rgba(255,255,255,.3);
           &.facebook {
             &:before {
               background: no-repeat 9px 9px url(/images/icons/facebook_white.svg);
