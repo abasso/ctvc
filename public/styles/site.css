@@ -6862,9 +6862,6 @@ body.true-tube blockquote {
 
 .filters {
   display: flex; }
-  @media (max-width: 992px) {
-    .filters {
-      display: none; } }
   .filters .work-filter {
     display: flex;
     margin-bottom: 1rem;
@@ -6911,6 +6908,10 @@ body.true-tube blockquote {
       margin-left: auto; }
       .filters .work-filter.date a {
         margin: 0 0 0 .5rem; }
+    @media (max-width: 544px) {
+      .filters .work-filter {
+        flex-direction: column;
+        flex-grow: 1; } }
 
 @-webkit-keyframes blur {
   0% {

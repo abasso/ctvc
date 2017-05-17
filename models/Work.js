@@ -21,7 +21,7 @@ Work.add({
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	broadcastDate: { type: Types.Date },
 	thumbnail: { type: Types.CloudinaryImage },
-	image: { type: Types.CloudinaryImage },
+	images: { type: Types.CloudinaryImages },
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },

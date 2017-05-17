@@ -232,9 +232,9 @@
 }
 .filters {
   display: flex;
-  @media (max-width: $breakpoint-lg) {
-    display: none;
-  }
+  // @media (max-width: $breakpoint-lg) {
+  //   display: none;
+  // }
   .work-filter {
     display: flex;
     margin-bottom: 1rem;
@@ -293,6 +293,11 @@
       a {
         margin: 0 0 0 .5rem;
       }
+    }
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+
+      flex-grow: 1;
     }
   }
 }
