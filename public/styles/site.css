@@ -6660,8 +6660,8 @@ a {
   flex-direction: column; }
   .item article blockquote {
     font-family: 'Dosis', sans-serif;
-    font-size: 1.5rem;
-    line-height: 2rem;
+    font-size: 1.25rem;
+    line-height: 1.875rem;
     position: relative;
     margin-top: 2rem;
     padding: 2rem 2rem 1rem 5rem;
@@ -6689,12 +6689,26 @@ a {
       border-style: solid; }
   .item article .item-info-block {
     font-weight: 200;
+    display: flex;
+    flex-direction: column;
     margin: 2rem 0;
     padding: 2rem 0;
     border-top: solid 2px rgba(0, 0, 0, 0.1); }
     .item article .item-info-block h5 {
       font-size: 2rem;
       margin-bottom: 2rem; }
+    .item article .item-info-block .item-info-block_title {
+      margin-right: 1rem; }
+    .item article .item-info-block .item-info-block_item {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: .5rem; }
+    .item article .item-info-block a {
+      text-decoration: none;
+      color: #333;
+      border-bottom: solid 1px #eee; }
+      .item article .item-info-block a:hover {
+        border-bottom-color: #ccc; }
 
 .item .post {
   margin: 0 0 4rem 0; }
@@ -6730,6 +6744,18 @@ body.true-tube blockquote {
   background: rgba(215, 225, 0, 0.9); }
   body.true-tube blockquote:after {
     border-color: transparent rgba(215, 225, 0, 0.9) transparent transparent; }
+
+.link-external {
+  position: relative;
+  padding-right: 14px; }
+  .link-external:before {
+    position: absolute;
+    top: 9px;
+    right: 0;
+    width: 9px;
+    height: 9px;
+    content: '';
+    background: no-repeat center center url("/images/icons/new-window.svg"); }
 
 .grid-row {
   display: flex;

@@ -132,11 +132,13 @@
 							$(this).addClass("blur").removeClass("focus");
 						}
 				});
-				var elem = document.querySelector(".grid-row");
-				var iso = new Isotope( ".grid-row", {
-					itemSelector: '.list-item',
-					layoutMode: 'fitRows',
-				});
+				if($(".grid-row").length) {
+					var elem = document.querySelector(".grid-row");
+					var iso = new Isotope( ".grid-row", {
+						itemSelector: '.list-item',
+						layoutMode: 'fitRows',
+					});
+				}
 				if($("body").hasClass("homepage")) {
 					console.log($(window).width())
 					if($(window).width() > 1200) {

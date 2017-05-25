@@ -1,5 +1,12 @@
 	<div class="item-header">
-		{{#if data.item.image}}<img src="{{{cloudinaryUrl data.item.image width=1600 height=900 crop='fit' }}}" class="img-responsive">{{/if}}
+		{{#unless data.item.carousel}}
+			{{#if data.item.image}}
+				<img src="{{{cloudinaryUrl data.item.image width=1600 height=900 crop='fit' }}}" class="img-responsive">
+			{{/if}}
+			{{#if data.item.video}}
+				<img src="{{{cloudinaryUrl data.item.image width=1600 height=900 crop='fit' }}}" class="img-responsive">
+			{{/if}}
+		{{/unless}}
 	</div>
 <div class="container">
 
@@ -16,11 +23,18 @@
 							</h5>
 						</header>
 						{{{data.item.content.extended}}}
-						{{#if data.item.content.press}}
-						<div class="item-info-block">
-							<h5>Press Links</h5>
-							{{{data.item.content.press}}}
-						</div>
+						{{#if data.item.press}}
+								<div class="item-info-block">
+									<h5>Press Links</h5>
+									{{#each data.item.press}}
+									<div class="item-info-block_item">
+										{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+										{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+										{{#ifEquals type 'link'}}<a href="{{{../link}}}" {{#if ../newWindow}}target="_blank"{{/if}}  class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+										</a>{{/ifEquals}}
+									</div>
+									{{/each}}
+								</div>
 						{{/if}}
 					</div>
 					<div class="col-sm-12 col-lg-4 offset-lg-1">
@@ -29,12 +43,46 @@
 							{{{data.item.content.quote}}}
 						</blockquote>
 						{{/if}}
-						{{#if data.item.content.broadcastDetails}}
+						{{#if data.item.broadcastDetails}}
 						<div class="item-info-block">
 							<h5>Broadcast Details</h5>
-							{{{data.item.content.broadcastDetails}}}
+							{{#each data.item.broadcastDetails}}
+							<div class="item-info-block_item">
+								{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+								{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+								{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+								</a>{{/ifEquals}}
+							</div>
+							{{/each}}
 						</div>
 						{{/if}}
+						{{#if data.item.producedBy}}
+						<div class="item-info-block">
+							<h5>Produced By</h5>
+							{{#each data.item.producedBy}}
+							<div class="item-info-block_item">
+								{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+								{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+								{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+								</a>{{/ifEquals}}
+							</div>
+							{{/each}}
+						</div>
+						{{/if}}
+						{{#if data.item.inAssociationWith}}
+						<div class="item-info-block">
+							<h5>In Association With</h5>
+							{{#each data.item.inAssociationWith}}
+							<div class="item-info-block_item">
+								{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+								{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+								{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+								</a>{{/ifEquals}}
+							</div>
+							{{/each}}
+						</div>
+						{{/if}}
+
 					</div>
 					</div>
 				</div>

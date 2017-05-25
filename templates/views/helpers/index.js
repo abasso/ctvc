@@ -332,13 +332,15 @@ module.exports = function () {
 			block += value.key + ' ';
 		})
 		return block;
-	}
+	};
 
 	_helpers.toTitle = (string) => {
-
 		return string.replace('p', 'h1')
+	};
 
-	}
+	_helpers.ifEquals = (a, b, opts) => {
+	    if(a == b) return opts.fn(this);
+	};
 
 	return _helpers;
 };

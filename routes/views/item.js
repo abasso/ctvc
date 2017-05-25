@@ -1,4 +1,5 @@
-var keystone = require('keystone');
+const keystone = require('keystone');
+const _ = require('lodash')
 
 exports = module.exports = function (req, res) {
 
@@ -18,17 +19,31 @@ exports = module.exports = function (req, res) {
 
 	// Load the current post
 	view.on('init', function (next) {
-		console.log(locals.filters.item);
-
 		var q = keystone.list('Work').model.findOne({
 			state: 'published',
 			slug: locals.filters.item,
-		}).populate('author categories');
+		}).populate('author categories logos').lean();
 
 		q.exec(function (err, result) {
-			console.log(err)
-			console.log(result)
+			result.carousel = [];
+			// Add the video into the carousel if there is one
+			if (result.video) {
+				result.carousel.push(video)
+			}
+			// Add the images to the carousel if there are more than one
+			if (result.images) {
+				_.each(result.images, (image) => {
+					result.carousel.push(image)
+				})
+				result.image = result.images[0]
+			}
+			// If there is only one item in the carousel remove it as we dont need a carousel
+			if (result.carousel.length < 2) {
+				delete result.carousel;
+			}
+
 			locals.data.item = result;
+			console.log(result)
 			next(err);
 		});
 
@@ -40,7 +55,6 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('Work').model.find().where('state', 'published').sort('-publishedDate').populate('author').limit('4');
 
 		q.exec(function (err, results) {
-			console.log(results);
 			locals.data.items = results;
 			next(err);
 		});
