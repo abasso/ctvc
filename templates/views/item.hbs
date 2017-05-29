@@ -1,90 +1,108 @@
-	<div class="item-header">
-		{{#unless data.item.carousel}}
-			{{#if data.item.image}}
-				<img src="{{{cloudinaryUrl data.item.image width=1600 height=900 crop='fit' }}}" class="img-responsive">
-			{{/if}}
-			{{#if data.item.video}}
-				<img src="{{{cloudinaryUrl data.item.image width=1600 height=900 crop='fit' }}}" class="img-responsive">
-			{{/if}}
-		{{/unless}}
+<div class="item-header">
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			{{#each data.item.carousel}}
+			<div class="swiper-slide">
+				{{#if this.video}}
+				<video id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
+				poster="{{{cloudinaryUrl this.image.url width=1600 height=900 crop='fit' }}}" data-setup="{}">
+				<source src="{{this.url}}" type="video/mp4">
+					<p class="vjs-no-js">
+						To view this video please enable JavaScript, and consider upgrading to a web browser that
+						<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+					</p>
+				</video>
+				{{else}}
+				<img src="{{{cloudinaryUrl this width=1600 height=900 crop='fit' }}}" class="img-responsive">
+				{{/if}}
+			</div>
+			{{/each}}
+		</div>
+		<div class="swiper-pagination"></div>
+		<!-- <div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div> -->
+
 	</div>
-<div class="container">
 
-			<article>
 
-				<div class="post">
-					<div class="row">
-					<div class="col-sm-12 col-lg-7">
-						<header>
-							<h1>{{data.item.title}}</h1>
-							<h5>
-								{{{categoryList data.post.categories prefix="Posted in "}}}
-								{{#if author.name.first}}by {{author.name.first}}{{/if}}
-							</h5>
-						</header>
-						{{{data.item.content.extended}}}
-						{{#if data.item.press}}
-								<div class="item-info-block">
-									<h5>Press Links</h5>
-									{{#each data.item.press}}
-									<div class="item-info-block_item">
-										{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
-										{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
-										{{#ifEquals type 'link'}}<a href="{{{../link}}}" {{#if ../newWindow}}target="_blank"{{/if}}  class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
-										</a>{{/ifEquals}}
-									</div>
-									{{/each}}
-								</div>
-						{{/if}}
-					</div>
-					<div class="col-sm-12 col-lg-4 offset-lg-1">
-						{{#if data.item.content.quote}}
-						<blockquote>
-							{{{data.item.content.quote}}}
-						</blockquote>
-						{{/if}}
-						{{#if data.item.broadcastDetails}}
-						<div class="item-info-block">
-							<h5>Broadcast Details</h5>
-							{{#each data.item.broadcastDetails}}
-							<div class="item-info-block_item">
-								{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
-								{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
-								{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
-								</a>{{/ifEquals}}
-							</div>
-							{{/each}}
-						</div>
-						{{/if}}
-						{{#if data.item.producedBy}}
-						<div class="item-info-block">
-							<h5>Produced By</h5>
-							{{#each data.item.producedBy}}
-							<div class="item-info-block_item">
-								{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
-								{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
-								{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
-								</a>{{/ifEquals}}
-							</div>
-							{{/each}}
-						</div>
-						{{/if}}
-						{{#if data.item.inAssociationWith}}
-						<div class="item-info-block">
-							<h5>In Association With</h5>
-							{{#each data.item.inAssociationWith}}
-							<div class="item-info-block_item">
-								{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
-								{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
-								{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
-								</a>{{/ifEquals}}
-							</div>
-							{{/each}}
-						</div>
-						{{/if}}
+</div>
+<div class="container offset">
 
+	<article>
+
+		<div class="post">
+			<div class="row">
+				<div class="col-sm-12 col-lg-7">
+					<header>
+						<h1>{{data.item.title}}</h1>
+						<h5>
+							{{{categoryList data.post.categories prefix="Posted in "}}}
+							{{#if author.name.first}}by {{author.name.first}}{{/if}}
+						</h5>
+					</header>
+					{{{data.item.content.extended}}}
+					{{#if data.item.press}}
+					<div class="item-info-block">
+						<h5>Press Links</h5>
+						{{#each data.item.press}}
+						<div class="item-info-block_item">
+							{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+							{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+							{{#ifEquals type 'link'}}<a href="{{{../link}}}" {{#if ../newWindow}}target="_blank"{{/if}}  class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+							</a>{{/ifEquals}}
+						</div>
+						{{/each}}
 					</div>
-					</div>
+					{{/if}}
 				</div>
-			</article>
-	</div>
+				<div class="col-sm-12 col-lg-4 offset-lg-1">
+					{{#if data.item.content.quote}}
+					<blockquote>
+						{{{data.item.content.quote}}}
+					</blockquote>
+					{{/if}}
+					{{#if data.item.broadcastDetails}}
+					<div class="item-info-block">
+						<h5>Broadcast Details</h5>
+						{{#each data.item.broadcastDetails}}
+						<div class="item-info-block_item">
+							{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+							{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+							{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+							</a>{{/ifEquals}}
+						</div>
+						{{/each}}
+					</div>
+					{{/if}}
+					{{#if data.item.producedBy}}
+					<div class="item-info-block">
+						<h5>Produced By</h5>
+						{{#each data.item.producedBy}}
+						<div class="item-info-block_item">
+							{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+							{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+							{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+							</a>{{/ifEquals}}
+						</div>
+						{{/each}}
+					</div>
+					{{/if}}
+					{{#if data.item.inAssociationWith}}
+					<div class="item-info-block">
+						<h5>In Association With</h5>
+						{{#each data.item.inAssociationWith}}
+						<div class="item-info-block_item">
+							{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+							{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+							{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+							</a>{{/ifEquals}}
+						</div>
+						{{/each}}
+					</div>
+					{{/if}}
+
+				</div>
+			</div>
+		</div>
+	</article>
+</div>

@@ -5990,6 +5990,9 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 h1, h2, h3, h4, h5 {
   font-family: 'Dosis', sans-serif; }
 
+h1 {
+  font-weight: 500; }
+
 body {
   font-family: 'Open Sans', sans-serif;
   color: #333; }
@@ -6047,7 +6050,8 @@ a {
     height: 6px;
     content: '';
     opacity: .9;
-    background-image: linear-gradient(-90deg, #14a9e5 0%, #00a89d 26%, #db115b 73%, #d8e100 100%); }
+    background: linear-gradient(to right, #14a9e5 0%, #14a9e5 25%, #00a89d 25%, #00a89d 50%, #db115b 50%, #db115b 75%, #d8e100 75%);
+    background-color: #d8e100; }
   #header .navbar {
     font-family: 'Dosis', sans-serif;
     z-index: 9;
@@ -6113,36 +6117,42 @@ a {
         border-radius: 40px;
         align-items: center;
         justify-content: center; }
-        #header .nav a.social.facebook:before {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 40px;
-          height: 40px;
-          content: '';
-          background: no-repeat 9px 9px url(/images/icons/facebook.svg);
-          background-size: 20px; }
-        #header .nav a.social.facebook:hover {
+        #header .nav a.social.facebook {
           border-color: #4267b2;
           background-color: #4267b2; }
-          #header .nav a.social.facebook:hover:before {
+          #header .nav a.social.facebook:before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            content: '';
             background: no-repeat 9px 9px url(/images/icons/facebook_white.svg);
             background-size: 20px; }
-        #header .nav a.social.twitter:before {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 40px;
-          height: 40px;
-          content: '';
-          background: no-repeat 9px 9px url(/images/icons/twitter.svg);
-          background-size: 20px; }
-        #header .nav a.social.twitter:hover {
+          #header .nav a.social.facebook:hover {
+            border-color: #34518d;
+            background-color: #34518d; }
+            #header .nav a.social.facebook:hover:before {
+              background: no-repeat 9px 9px url(/images/icons/facebook_white.svg);
+              background-size: 20px; }
+        #header .nav a.social.twitter {
           border-color: #0084b4;
           background-color: #0084b4; }
-          #header .nav a.social.twitter:hover:before {
+          #header .nav a.social.twitter:before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            content: '';
             background: no-repeat 9px 9px url(/images/icons/twitter_white.svg);
             background-size: 20px; }
+          #header .nav a.social.twitter:hover {
+            border-color: #005f81;
+            background-color: #005f81; }
+            #header .nav a.social.twitter:hover:before {
+              background: no-repeat 9px 9px url(/images/icons/twitter_white.svg);
+              background-size: 20px; }
     @media (max-width: 992px) {
       #header .nav {
         position: fixed;
@@ -6203,9 +6213,13 @@ a {
     .swiper-container {
       overflow: hidden;
       margin-top: 0; } }
-  @media (min-width: 1200px) {
-    .swiper-container {
-      position: fixed; } }
+
+@media (min-width: 1200px) {
+  .homepage .swiper-container {
+    position: fixed; } }
+
+.item .swiper-container {
+  padding-bottom: 40%; }
 
 .swiper-slide {
   position: relative; }
@@ -6303,8 +6317,7 @@ a {
   width: 11px;
   height: 11px;
   border-radius: 11px;
-  background: white;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3); }
+  background: white; }
   @media (max-width: 992px) {
     .swiper-pagination-bullet-active {
       background: #333;
@@ -6373,7 +6386,7 @@ a {
     display: flex;
     flex-direction: column; }
   .intro h1 {
-    font-weight: 600; }
+    font-weight: 500; }
     .intro h1 a {
       position: relative;
       text-decoration: none;
@@ -6497,19 +6510,19 @@ a {
     .homepage-categories .homepage-category.tv h5:before {
       background: rgba(20, 169, 229, 0.9); }
     .homepage-categories .homepage-category.tv:hover {
-      background: rgba(8, 70, 95, 0.6); }
+      background: rgba(0, 0, 0, 0.9); }
     .homepage-categories .homepage-category.audio h5:before {
       background: rgba(0, 168, 157, 0.9); }
     .homepage-categories .homepage-category.audio:hover {
-      background: rgba(2, 35, 33, 0.6); }
+      background: rgba(0, 0, 0, 0.9); }
     .homepage-categories .homepage-category.digital h5:before {
       background: rgba(217, 17, 91, 0.9); }
     .homepage-categories .homepage-category.digital:hover {
-      background: rgba(30, 5, 14, 0.6); }
+      background: rgba(0, 0, 0, 0.9); }
     .homepage-categories .homepage-category.true-tube h5:before {
       background: rgba(215, 225, 0, 0.9); }
     .homepage-categories .homepage-category.true-tube:hover {
-      background: rgba(48, 50, 6, 0.6); }
+      background: rgba(0, 0, 0, 0.9); }
 
 .homepage-latest {
   position: relative;

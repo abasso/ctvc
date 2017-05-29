@@ -45,7 +45,6 @@ exports = module.exports = function (req, res) {
 			})
 			locals.data.carousel = _.sortBy(locals.data.carousel, 'carouselPosition')
 			locals.data.work = _.take(results, 3);
-			console.log(locals.data.work)
 			next(err)
 		})
 	})

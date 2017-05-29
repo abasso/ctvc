@@ -21,6 +21,11 @@ Work.add({
 	broadcastDate: { type: Types.Date },
 	thumbnail: { type: Types.CloudinaryImage },
 	images: { type: Types.CloudinaryImages },
+	includeVideo: { type: Boolean },
+	video: {
+		url: { type: Types.Url, note: 'If no image is provided the first item image will be used.', dependsOn: { includeVideo: true }},
+		image: { type: Types.CloudinaryImage, dependsOn: { includeVideo: true }},
+	},
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },
@@ -80,11 +85,6 @@ Work.add({
 Work.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;
 });
-//
-// Work.schema.pre('save', function(next) {
-// 		console.log('pre save', this);
-//     next();
-// });
 
 Work.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
 Work.register();
