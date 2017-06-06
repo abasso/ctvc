@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <section id="timeline">
+        {{# each data.awards.results}}
+        <div class="timeline-block">
+          <div class="timeline-pip timeline-pip-{{categoryClasses categories}}">
+          </div>
+          <div class="timeline-content {{categoryClasses categories}}">
+            {{#if thumbnail.url}}
+              <img src="{{{cloudinaryUrl thumbnail width=350 height=196 crop='fit' }}}" class="img pull-right">
+            {{/if}}
+            <h2>{{{title}}}</h2>
+            {{{description}}}
+            <a href="{{work}}" class="read-more">View Work</a>
+            <span class="date">{{receivedDate}}</span>
+          </div>
+        </div>
+        {{/each}}
+      </section>
+    </div>
+  </div>
+</div>
