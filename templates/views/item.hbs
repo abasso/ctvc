@@ -2,25 +2,21 @@
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 			{{#each data.item.carousel}}
-			<div class="swiper-slide">
-				{{#if this.video}}
-				<video id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
-				poster="{{{cloudinaryUrl this.image.url width=1600 height=900 crop='fit' }}}" data-setup="{}">
-				<source src="{{this.url}}" type="video/mp4">
-					<p class="vjs-no-js">
-						To view this video please enable JavaScript, and consider upgrading to a web browser that
-						<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-					</p>
-				</video>
-				{{else}}
-				<img src="{{{cloudinaryUrl this width=1600 height=900 crop='fit' }}}" class="img-responsive">
+			<div class="swiper-slide {{#if this.showVideoControl}}video-slide{{/if}}">
+				<span class="image-wrapper">
+					<span class="overlay"></span>
+				{{#if this.showVideoControl}}
+				<a class="btn-play-video" data-src="{{../data.item.video}}">
+				</a>
 				{{/if}}
+				<img src="{{{cloudinaryUrl this width=1600 height=900 crop='fit' }}}" class="img-responsive">
+			</span>
 			</div>
 			{{/each}}
 		</div>
 		<div class="swiper-pagination"></div>
-		<!-- <div class="swiper-button-prev"></div>
-		<div class="swiper-button-next"></div> -->
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
 
 	</div>
 
@@ -42,7 +38,7 @@
 					</header>
 					{{{data.item.content.extended}}}
 					{{#if data.item.press}}
-					<div class="item-info-block">
+					<div class="item-info-block hidden-lg-down">
 						<h5>Press Links</h5>
 						{{#each data.item.press}}
 						<div class="item-info-block_item">
@@ -60,6 +56,19 @@
 					<blockquote>
 						{{{data.item.content.quote}}}
 					</blockquote>
+					{{/if}}
+					{{#if data.item.press}}
+					<div class="item-info-block hidden-lg-up">
+						<h5>Press Links</h5>
+						{{#each data.item.press}}
+						<div class="item-info-block_item">
+							{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+							{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+							{{#ifEquals type 'link'}}<a href="{{{../link}}}" {{#if ../newWindow}}target="_blank"{{/if}}  class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+							</a>{{/ifEquals}}
+						</div>
+						{{/each}}
+					</div>
 					{{/if}}
 					{{#if data.item.broadcastDetails}}
 					<div class="item-info-block">
@@ -105,4 +114,5 @@
 			</div>
 		</div>
 	</article>
+</div>
 </div>

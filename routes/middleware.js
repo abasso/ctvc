@@ -22,13 +22,13 @@ exports.initLocals = function (req, res, next) {
 		{ label: 'Work', key: 'work', href: '/work' },
 		{ label: 'Awards', key: 'awards', href: '/awards' },
 		{ label: 'About', key: 'about', href: '/about' },
-		{ label: 'Show Reel', key: 'show-reel', href: '/show-reel' },
+		{ label: 'Show Reel', key: 'show-reel', href: '/show-reel', class: "header-show-reel" },
 		{ label: 'People', key: 'people', href: '/people' },
 		{ label: 'Contact', key: 'contact', href: '/contact' },
 	];
 	res.locals.socialLinks = [
-		{ label: '', key: 'facebook', href: '/contact', class: 'social facebook' },
-		{ label: '', key: 'twitter', href: '/twitter', class: 'social twitter' },
+		{ label: '', key: 'facebook', href: 'https://www.facebook.com/ctvcUK', class: 'social facebook' },
+		{ label: '', key: 'twitter', href: 'https://twitter.com/ctvc', class: 'social twitter' },
 	]
 	res.locals.user = req.user;
 	next();

@@ -27,24 +27,24 @@ exports = module.exports = function (req, res) {
 		q.exec(function (err, result) {
 			result.carousel = []
 			// Add the video into the carousel if there is one
-			if (result.video) {
-				result.video.resource_type = "video"
-				result.video.video = true
-				if(_.isUndefined(result.video.image) || result.video.image.url === '') {
-					result.video.image = result.images[0]
-				}
-				result.carousel.push(result.video)
-			}
+			// if (result.video) {
+			// 	result.video.resource_type = "video"
+			// 	result.video.video = true
+			// 	result.carousel.push(result.video)
+			// }
 			// Add the images to the carousel if there are more than one
 			if (result.images) {
-				_.each(result.images, (image) => {
+				_.each(result.images, (image, index) => {
+					if(index === 0 && result.video) {
+						image.showVideoControl = true
+					}
 					result.carousel.push(image)
 				})
 			}
-			_.each(result.carousel, (carouselItem) => {
-				console.log("---------------------")
-				console.log(carouselItem);
-			})
+			// _.each(result.carousel, (carouselItem) => {
+			// 	console.log("---------------------")
+			// 	console.log(carouselItem);
+			// })
 			locals.data.item = result
 			next(err)
 		})

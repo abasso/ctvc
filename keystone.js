@@ -57,7 +57,7 @@ keystone.set('signin logo', '/images/logo.svg');
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
 	Work: ['works', 'work-categories'],
-	galleries: 'galleries',
+	Awards: 'awards',
 	enquiries: 'enquiries',
 	users: 'users',
 });

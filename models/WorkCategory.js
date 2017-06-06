@@ -16,10 +16,9 @@ WorkCategory.add({
 	image: { type: Types.CloudinaryImage },
 	name: { type: String, required: true },
 	order: { type: Types.Select, numeric: true, options: [{ value: 1, label: 'One' }, { value: 2, label: 'Two' }, { value: 3, label: 'Three' }, { value: 4, label: 'Four' } ] }
-
-
 });
 
 WorkCategory.relationship({ ref: 'Work', path: 'works', refPath: 'categories' });
+WorkCategory.relationship({ ref: 'Award', path: 'awards', refPath: 'categories' });
 
 WorkCategory.register();

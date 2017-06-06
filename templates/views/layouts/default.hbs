@@ -8,6 +8,7 @@
 		<link rel="shortcut icon" href="/images/icon_grayscale_2@2x.png" type="image/x-icon">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Dosis:500,600,700|Open+Sans:300,400" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
 		<link href="http://vjs.zencdn.net/5.19.2/video-js.css" rel="stylesheet">
 
 		<link href="/styles/site.css" rel="stylesheet">
@@ -39,7 +40,7 @@
 								{{/each}}
 								<div class="social-links">
 								{{# each socialLinks}}
-									<a {{#ifeq ../section key}}class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}">{{ label }}</a>
+									<a {{#ifeq ../section key}} class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}" target="_blank" >{{ label }}</a>
 									{{/each}}
 								</div>
 							</nav>
@@ -107,6 +108,12 @@
 			</div>
 			<div class="copyright"></div>
 		</div>
+		<div class="modal-player">
+			<div class="dog"></div>
+			<div class="video-close"></div>
+			<video controls autoplay preload="auto" class="video-js" id="modal-video">
+			</video>
+		</div>
 		<script src="/js/isotope/isotope.pkgd.min.js"></script>
 		<script src="/js/jquery/jquery-2.1.4.min.js"></script>
 		<script src="/js/bootstrap/bootstrap.min.js"></script>
@@ -117,47 +124,121 @@
 		<script>
 
 			$(function() {
+				// $("body").on({
+				// 	"mouseenter": function() {
+				// 		$("body").addClass("video-active")
+				// 	},
+				// 	"mouseleave": function() {
+				// 		$("body").removeClass("video-active")
+				// 	}
+				// }, ".vjs-big-play-button")
+
+				// let player = document.getElementsByTagName('video')[0]
+				// if (player !== undefined) {
+				// 	player.addEventListener('play', function(data) {
+				// 		$("body").addClass("video-active")
+				// 	}, true)
+				// }
+				var myPlayer = videojs("modal-video")
+
 				$(".burger-menu-toggle").on({
 					"click": function() {
 						if ($(this).hasClass("is-active")) {
-							$(this).removeClass("is-active");
-							$(".nav").removeClass("show");
+							$(this).removeClass("is-active")
+							$(".nav").removeClass("show")
 						} else {
-							$(this).addClass("is-active");
-							$(".nav").addClass("show");
+							$(this).addClass("is-active")
+							$(".nav").addClass("show")
 						}
 					}
-				});
+				})
+
+				$(".video-close").on({
+					"click": function() {
+						myPlayer.pause()
+						$(".modal-player").fadeOut()
+					}
+				})
+
+				$(".filter-toggle").on({
+					"click": function() {
+						if ($(this).hasClass('open')) {
+							$(this).removeClass("open")
+							$(".work-filter").removeClass('show')
+
+						} else {
+							$(this).addClass("open")
+							$(".work-filter").addClass('show')
+						}
+					}
+				})
+
+
+
+				$("body").on({
+					"click": function() {
+						myPlayer.src($(this).attr("data-src"))
+						myPlayer.ready(function() {
+						  myPlayer.play()
+						})
+						$(".modal-player").fadeIn()
+					},
+					"mouseenter": function() {
+					$(this).parent().addClass("focus").removeClass("blur")
+					},
+					"mouseleave": function() {
+						$(this).parent().addClass("blur").removeClass("focus")
+					}
+				}, ".btn-play-video")
+
+				$("body").on({
+					"click": function(e) {
+						e.preventDefault()
+						myPlayer.src($(this).attr("data-src"))
+						myPlayer.ready(function() {
+							myPlayer.play()
+						})
+						$(".modal-player").fadeIn()
+					},
+					"mouseenter": function() {
+					$(this).parent().addClass("focus").removeClass("blur")
+					},
+					"mouseleave": function() {
+						$(this).parent().addClass("blur").removeClass("focus")
+					}
+				}, ".header-show-reel")
+
 				$(".work .list-item").on({
 						"mouseenter": function() {
-						$(this).addClass("focus").removeClass("blur");
+						$(this).addClass("focus").removeClass("blur")
 					},
 						"mouseleave": function() {
-							$(this).addClass("blur").removeClass("focus");
+							$(this).addClass("blur").removeClass("focus")
 						}
-				});
+				})
 				if($(".grid-row").length) {
-					var elem = document.querySelector(".grid-row");
+					var elem = document.querySelector(".grid-row")
 					var iso = new Isotope( ".grid-row", {
 						itemSelector: '.list-item',
 						layoutMode: 'fitRows',
-					});
+					})
 				}
 				if($("body").hasClass("item") && $(".swiper-slide").length > 1) {
 					var mySwiper = new Swiper ('.swiper-container', {
 						loop: true,
 						pagination: '.swiper-pagination',
 						nextButton: '.swiper-button-next',
-						prevButton: '.swiper-button-prev'
+						prevButton: '.swiper-button-prev',
+						paginationClickable: true
 					})
 				}
 				if($("body").hasClass("homepage")) {
 					if($(window).width() > 1200) {
-						var swiper = $(".swiper-wrapper");
-						var offset = swiper.height();
+						var swiper = $(".swiper-wrapper")
+						var offset = swiper.height()
 						$(".offset").each( function(index, item) {
-							$(item).css('top', offset);
-							console.log($(item).outerHeight());
+							$(item).css('top', offset)
+							console.log($(item).outerHeight())
 						})
 					}
 
@@ -165,37 +246,35 @@
 						loop: true,
 						pagination: '.swiper-pagination',
 						nextButton: '.swiper-button-next',
-						prevButton: '.swiper-button-prev'
+						prevButton: '.swiper-button-prev',
+						paginationClickable: true
+
 					})
 
 
 					$(window).resize(function() {
 						if($(window).width() > 1200) {
-							var swiper = $(".swiper-wrapper");
-							var offset = swiper.height();
+							var swiper = $(".swiper-wrapper")
+							var offset = swiper.height()
 							$(".offset").each( function(index, item) {
-								$(item).css('top', offset);
-								console.log($(item).outerHeight());
+								$(item).css('top', offset)
 							})
 						} else {
-							$(".offset").removeAttr("style");
+							$(".offset").removeAttr("style")
 						}
-					});
+					})
 
 				}
 
-				var filterArray = [];
+				var filterArray = []
 				if($("body").hasClass("work")) {
-
-					console.log(window.location);
-
 					if(window.location.pathname !== "/work") {
-						let pathArray = window.location.pathname.split("/");
+						let pathArray = window.location.pathname.split("/")
 						iso.arrange({
 							filter: "." + pathArray[pathArray.length -1]
-						});
-						$(".work-filter.type a").removeClass("active");
-						$(".work-filter.type a[data-filter=" + pathArray[pathArray.length -1] + "]").addClass("active");
+						})
+						$(".work-filter.type a").removeClass("active")
+						$(".work-filter.type a[data-filter=" + pathArray[pathArray.length -1] + "]").addClass("active")
 					}
 
 					$(".work-filter a").on("click", function(e) {
@@ -203,44 +282,45 @@
 							_.each(filterArray, (arrayItem, index) => {
 								_.each($(this).siblings(), function(sibling) {
 								if (arrayItem === "." + $(sibling).attr("data-filter")) {
-										filterArray.splice(index, 1);
+										filterArray.splice(index, 1)
 									}
 								})
 							})
 
 						if ($(this).hasClass("active") && !$(this).hasClass("all")) {
-							$(this).removeClass("active");
-							var filterKey = "all";
-							$(this).siblings(".work-filter a[data-filter=all]").addClass("active");
+							$(this).removeClass("active")
+							var filterKey = "all"
+							$(this).siblings(".work-filter a[data-filter=all]").addClass("active")
 							_.each(filterArray, (arrayItem, index) => {
-								history.pushState({}, null, "/work");
+								history.pushState({}, null, "/work")
 								if (arrayItem === "." + $(this).attr("data-filter")) {
-									filterArray.splice(index, 1);
+									filterArray.splice(index, 1)
 								}
-							});
+							})
 						} else {
 							if ($(this).parent().hasClass("type")) {
 								if ($(this).hasClass("all")) {
-									history.pushState({}, null, "/work");
+									history.pushState({}, null, "/work")
 								} else {
-									history.pushState({}, null, "/work/" + $(this).attr("data-filter"));
+									history.pushState({}, null, "/work/" + $(this).attr("data-filter"))
 								}
 							}
-							$(this).siblings().removeClass("active");
-							$(this).addClass("active");
-							filterArray.push("." + $(this).attr("data-filter"));
+							$(this).siblings().removeClass("active")
+							$(this).addClass("active")
+							filterArray.push("." + $(this).attr("data-filter"))
 						}
 						iso.arrange({
 							filter: filterArray.join("")
-						});
+						})
 						if ($(".grid-row.work").css('height') === '0px') {
-							$(".no-results").removeClass("hidden-xs-up");
+							$(".no-results").removeClass("hidden-xs-up")
 						} else {
-							$(".no-results").addClass("hidden-xs-up");
-						};
+							$(".no-results").addClass("hidden-xs-up")
+						}
 					})
 				}
-			});
+
+			})
 
 
 		  </script>

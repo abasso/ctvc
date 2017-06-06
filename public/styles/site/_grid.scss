@@ -232,76 +232,125 @@
 }
 .filters {
   display: flex;
-  // @media (max-width: $breakpoint-lg) {
-  //   display: none;
-  // }
+
+  flex-grow: 1;
+  @media (max-width: $breakpoint-lg) {
+    flex-direction: column;
+  }
   .work-filter {
     display: flex;
     margin-bottom: 1rem;
     transition: all 500ms ease;
-    a {
-      font-family: 'Dosis', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 500;
-      line-height: 38px;
-      display: flex;
-      height: 40px;
-      margin-right: .5rem;
-      padding: 0 1.25rem;
-      transition: all 500ms ease-out;
-      text-decoration: none;
-      color: #4a4a4a;
-      border: solid 1px rgba(151,151,151,.1);
-      border-radius: 40px;
-
-      align-self: center;
-      &:hover, &.active {
-        border-color: rgba(74,74,74,0);
-        background: rgba(74,74,74,.1);
-      }
-      &.tv {
-        color: rgba(20,169,229,1);
-        &:hover, &.active {
-          color: white;
-          background: rgba(20,169,229,1);
-        }
-      }
-      &.audio {
-        color: rgba(0,168,157,1);
-        &:hover, &.active {
-          color: white;
-          background: rgba(0,168,157,1);
-        }
-      }
-      &.digital {
-        color: rgba(217,17,91,1);
-        &:hover, &.active {
-          color: white;
-          background: rgba(217,17,91,1);
-        }
-      }
-      &.true-tube {
-        color: rgba(215,225,0,1);
-        &:hover, &.active {
-          color: white;
-          background: rgba(215,225,0,1);
-        }
-      }
-    }
-    &.date {
-      margin-left: auto;
-      a {
-        margin: 0 0 0 .5rem;
-      }
-    }
-    @media (max-width: $breakpoint-sm) {
+    @media (max-width: 1024px) {
       flex-direction: column;
 
       flex-grow: 1;
     }
+    &.show {
+      display: flex;
+    }
+    @media (min-width: 1024px) {
+      &.date {
+        margin-left: auto;
+        a {
+          margin: 0 0 0 .5rem;
+          @media(max-width:1024px) {
+            width: 100%;
+            margin: 0  0 .25rem .5rem;
+          }
+        }
+      }
+    }
+  }
+
+  a, button {
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 38px;
+    display: flex;
+    height: 40px;
+    margin-right: .5rem;
+    padding: 0 1.25rem;
+    cursor: pointer;
+    transition: all 500ms ease-out;
+    text-align: center;
+    text-decoration: none;
+    color: #4a4a4a;
+    color: #333 !important;
+    border: solid 1px rgba(151,151,151,.1);
+    border-radius: 40px;
+
+    align-content: center;
+    align-self: center;
+    justify-content: center;
+    &:hover, &.active {
+      border-color: rgba(74,74,74,0);
+      background: rgba(74,74,74,.1);
+    }
+    &.tv {
+      color: rgba(20,169,229,1);
+      &:hover, &.active {
+        color: white;
+        background: rgba(20,169,229,1);
+      }
+    }
+    &.audio {
+      color: rgba(0,168,157,1);
+      &:hover, &.active {
+        color: white;
+        background: rgba(0,168,157,1);
+      }
+    }
+    &.digital {
+      color: rgba(217,17,91,1);
+      &:hover, &.active {
+        color: white;
+        background: rgba(217,17,91,1);
+      }
+    }
+    &.true-tube {
+      color: rgba(215,225,0,1);
+      &:hover, &.active {
+        color: white;
+        background: rgba(215,225,0,1);
+      }
+    }
+  }
+  button {
+    position: relative;
+    display: none;
+    margin: 0;
+    background: #eee;
+    &:before {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 12px;
+      height: 7px;
+      content: '';
+      background: url('/images/icons/chevron-down.svg');
+    }
+  }
+
+
+  @media(max-width:1024px) {
+    .work-filter {
+      display: none;
+    }
+    a {
+      width: 100%;
+      margin: 0  0 .25rem 0;
+    }
+    button {
+      display: flex;
+      width: 100%;
+      margin-bottom: .5rem;
+
+      justify-content: flex-start;
+    }
   }
 }
-
 
 @-webkit-keyframes blur {
   0% {
