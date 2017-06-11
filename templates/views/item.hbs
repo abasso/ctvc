@@ -25,16 +25,11 @@
 <div class="container offset">
 
 	<article>
-
 		<div class="post">
 			<div class="row">
 				<div class="col-sm-12 col-lg-7">
 					<header>
 						<h1>{{data.item.title}}</h1>
-						<h5>
-							{{{categoryList data.post.categories prefix="Posted in "}}}
-							{{#if author.name.first}}by {{author.name.first}}{{/if}}
-						</h5>
 					</header>
 					{{{data.item.content.extended}}}
 					{{#if data.item.press}}
@@ -106,6 +101,37 @@
 							{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
 							</a>{{/ifEquals}}
 						</div>
+						{{/each}}
+					</div>
+					{{/if}}
+
+					{{#if data.item.awards}}
+					<div class="item-info-block item-info-block-awards">
+						<h5>Awards</h5>
+						{{#each data.item.awards}}
+						<div class="item-info-block_item {{#if award.image}}award-image{{/if}}">
+							{{#if award.image}}
+							<div class="info-block-image">
+								{{#if links}}
+
+									<a href="{{links.0.link}}" {{#if links.0.link}}target="_blank"{{/if}}>
+										<img src="{{{award.image.url}}}"/>
+									</a>
+								{{else}}
+									<img src="{{{award.image.url}}}"/>
+								{{/if}}
+							</div>
+							{{/if}}
+							<div class="info-block-copy">
+								{{#if links}}
+								<a href="{{links.0.link}}" {{#if links.0.link}}target="_blank"{{/if}}>
+								{{/if}}
+								<strong class="item-info-block_title">{{{award.name}}} {{year}}</strong>
+								{{#if links}}</a>{{/if}}
+								<span class="item-info-block_text">{{{description}}}</span>
+							</div>
+						</div>
+
 						{{/each}}
 					</div>
 					{{/if}}

@@ -192,8 +192,9 @@ module.exports = function () {
 	// the routes by keynames to reduce the maintenance of changing urls
 
 	// Direct url link to a specific post
-	_helpers.postUrl = function (postSlug, options) {
-		return ('/work/item/' + postSlug);
+	_helpers.workUrl = function (workSlug, workType, options) {
+		console.log("work type", workType);
+		return ('/work/' + workType + "/" + workSlug);
 	};
 
 	// might be a ghost helper

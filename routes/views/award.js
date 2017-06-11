@@ -19,44 +19,32 @@ exports = module.exports = function (req, res) {
 		years: []
 	}
 
-	// Load all categories
+	locals.media = []
+
+	// Load other posts
+	view.on('init', function (next) {
+
+		var q = keystone.list('Media').model.find()
+
+		q.exec(function (err, results) {
+			locals.media = results
+			next(err)
+		})
+
+	})
+
 	view.on('init', function (next) {
 
 		keystone.list('WorkCategory').model.find().sort('name').exec(function (err, results) {
 			if (err || !results.length) {
 				return next(err)
 			}
-
-			locals.data.categories = _.sortBy(results, 'order');
-
-			// Load the counts for each category
-			async.each(locals.data.categories, function (category, next) {
-
-				keystone.list('Award').model.count().where('categories').in([category.id]).exec(function (err, count) {
-					category.postCount = count
-					next(err)
-				})
-
-			}, function (err) {
-				next(err)
-			})
+			locals.data.categories = results;
+			next(err)
 		})
 	})
 
-	// // Load the current category filter
-	// view.on('init', function (next) {
-	//
-	// 	if (req.params.category) {
-	// 		keystone.list('WorkCategory').model.findOne({ key: locals.filters.category }).exec(function (err, result) {
-	// 			locals.data.category = result
-	// 			next(err)
-	// 		})
-	// 	} else {
-	// 		next()
-	// 	}
-	// })
-
-	// Load the work
+	// Load the awards
 	view.on('init', function (next) {
 
 		var q = keystone.list('Award').paginate({
@@ -66,31 +54,40 @@ exports = module.exports = function (req, res) {
 			filters: {
 				state: 'published',
 			},
-		})
-			.sort('-publishedDate')
-			.populate('author categories').lean()
-
-		if (locals.data.category) {
-			q.where('categories').in([locals.data.category])
-		}
+		}).sort('-publishedDate')
+			.populate('work workType award').lean()
 
 		q.exec(function (err, results) {
-      console.log("THE IMAGE", results.thumbnail);
 			let yearsObject = {}
 			_.each(results.results, (data) => {
+				if(data.work) {
+					data.workType = _.find(locals.data.categories, {_id: data.work.workType});
+					// console.log("THE WORK TYPE", workType);
+				}
 				if (_.isUndefined(data.receivedDate)) {
+					return
+				}
+
+				if (_.isUndefined(data.award)) {
 					return
 				}
 				let receivedDate = moment(data.receivedDate);
 				data.receivedDate = receivedDate.format("MMMM YYYY")
 				data.receivedYear = receivedDate.format("YYYY")
-        console.log(data.receivedDate);
 				if (_.isUndefined(_.find(locals.data.years, data.receivedDate))) {
 					locals.data.years.push(data.receivedYear)
 				}
 			})
+			let groupedAwardsObject = _.groupBy(results.results, "receivedYear");
+			let groupedAwards = []
+			_.each(groupedAwardsObject, (value, key) => {
+				groupedAwards.push({
+					year: key,
+					items : value
+				})
+			})
 			locals.data.years = _.uniq(locals.data.years);
-			locals.data.awards = results
+			locals.data.awards = _.sortBy(groupedAwards, "receivedDate").reverse();
 			next(err)
 		})
 	})

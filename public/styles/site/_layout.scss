@@ -1,5 +1,5 @@
 h1, h2, h3, h4, h5 {
-  font-family: 'Dosis', sans-serif;
+  font-family: $font-face, sans-serif;
 }
 
 h1 {
@@ -29,9 +29,9 @@ a {
   }
 }
 
-.award {
-  background-color: #eee;
-}
+// .award {
+//   background-color: #333;
+// }
 
 #header {
   position: relative;
@@ -97,14 +97,14 @@ a {
     width: 100%;
     height: 6px;
     content: '';
-    opacity: .9;
+    opacity: 1;
     background: linear-gradient(to right, #14a9e5 0%,#14a9e5 25%,#00a89d 25%,#00a89d 50%,#db115b 50%,#db115b 75%,#d8e100 75%);
     background-color: #d8e100;
-    // background-image: linear-gradient(-90deg, #14a9e5 0%, #00a89d 26%, #db115b 73%, #d8e100 100%);
+    background-image: linear-gradient(-90deg, #14a9e5 0%, #00a89d 26%, #db115b 73%, #d8e100 100%);
   }
 
   .navbar {
-    font-family: 'Dosis', sans-serif;
+    font-family: $font-face, sans-serif;
     z-index: 9;
     display: flex;
     flex-direction: row;
@@ -120,11 +120,11 @@ a {
   }
 
   .navbar-header {
-    font-family: 'Dosis', sans-serif;
+    font-family: $font-face, sans-serif;
     z-index: 9;
     display: flex;
     flex-direction: row;
-    padding: .875rem 0rem;
+    padding: 1rem 0rem;
 
     align-items: center;
     @media (max-width: $breakpoint-xl) {
@@ -148,17 +148,17 @@ a {
       margin: 0 0 0 1.5rem;
       white-space: nowrap;
       text-decoration: none;
+      // letter-spacing: -1px;
       color: #333;
-
       &:before {
         position: absolute;
-        bottom: -1px;
+        bottom: 0;
         left: 0;
         width: 100%;
-        height: 3px;
+        height: 2px;
         content: '';
         transition: 500ms all ease-out;
-        border-radius: 3px;
+        border-radius: 2px;
         background: rgba(51,51,51,0);
       }
       &:hover {
@@ -409,8 +409,9 @@ a {
     align-items: center;
     justify-content: center;
     h2 {
-      font-family: 'Dosis', sans-serif;
+      font-family: $font-face, sans-serif;
       font-size: 2rem;
+      font-weight: 400;
       position: relative;
       color: white;
       text-shadow: 3px 3px 0 rgba(0,0,0,.3);
@@ -655,7 +656,7 @@ a {
 }
 
 .btn-showreel {
-  font-family: 'Dosis', sans-serif;
+  font-family: $font-face, sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
   position: relative;
@@ -817,7 +818,7 @@ a {
     display: block;
     width: 100%;
     a {
-      font-family: 'Dosis', sans-serif;
+      font-family: $font-face, sans-serif;
       font-size: 1.15rem;
       font-weight: 500;
       line-height: 40px;
@@ -869,17 +870,17 @@ a {
     font-weight: 200;
     display: flex;
     flex-direction: column;
+    margin-right: auto;
 
     align-items: center;
+    flex-grow: 1;
     img {
       height: 45px;
-      margin-bottom: 1rem;
     }
 
     @media (min-width: $breakpoint-md) {
       flex-direction: row;
       img {
-        margin: 0 0 0 auto;
         margin-right: 2rem;
       }
     }
@@ -890,7 +891,7 @@ a {
       text-align: center;
 
       align-items: center;
-      justify-content: center;
+      flex-grow: 1;
       @media (min-width: $breakpoint-md) {
         flex-direction: row;
       }
@@ -952,7 +953,7 @@ a {
   }
 
   h1 {
-    font-family: 'Dosis', sans-serif;
+    font-family: $font-face, sans-serif;
     font-size: 3rem;
     position: relative;
     margin-right: auto;
@@ -985,7 +986,7 @@ a {
     display: flex;
     flex-direction: column;
     blockquote {
-      font-family: 'Dosis', sans-serif;
+      font-family: $font-face, sans-serif;
       font-size: 1.25rem;
       line-height: 1.875rem;
       position: relative;
@@ -1021,7 +1022,7 @@ a {
       display: flex;
       flex-direction: column;
       margin: 2rem 0;
-      padding: 2rem 0;
+      padding: 2rem 0 0;
       border-top: solid 2px rgba(0,0,0,.1);
       h5 {
         font-size: 2rem;
@@ -1041,6 +1042,40 @@ a {
         border-bottom: solid 1px #eee;
         &:hover {
           border-bottom-color: #ccc;
+        }
+      }
+      &.item-info-block-awards {
+        .item-info-block_item {
+          padding: 1rem 0;
+          border-top: solid 1px #eee;
+          .item-info-block_title {
+            margin: 1rem 0;
+          }
+          &.award-image {
+            .info-block-image {
+              display: flex;
+              width: 30%;
+
+              align-items: center;
+              justify-content: center;
+              img {
+                width: 100%;
+                height: auto;
+              }
+            }
+            .info-block-copy {
+              width: 70%;
+              padding-left: 1rem;
+              p {
+                font-size: .875rem;
+                margin: 0;
+              }
+              a {
+                display: inline-block;
+                margin-bottom: .5rem;
+              }
+            }
+          }
         }
       }
     }
@@ -1172,7 +1207,7 @@ body {
   height: 41px;
   cursor: pointer;
   transition: all 200ms ease-in;
-  opacity: .5;
+  opacity: .2;
   border: none;
   background: no-repeat url('/images/icons/close_white.svg');
   background-size: contain;
@@ -1193,7 +1228,7 @@ body {
   width: 150px;
   height: 60px;
   transition: all 200ms ease-in;
-  opacity: .5;
+  opacity: .2;
   background: no-repeat url('/images/logo_white.svg');
   background-size: contain;
   @media(max-width:480px) {
@@ -1272,4 +1307,8 @@ body {
     width: 100%;
     height: 100%;
   }
+}
+
+.awards-container {
+  border-bottom: solid 3px red;
 }

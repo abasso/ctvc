@@ -15,8 +15,6 @@ Work.add({
 	title: { type: String, required: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	author: { type: Types.Relationship, ref: 'User', index: true },
-	carousel: { type: Types.Boolean },
-	carouselPosition: { type: Types.Select, numeric: true, options: [{ value: 1, label: 'One' }, { value: 2, label: 'Two' }, { value: 3, label: 'Three' }, { value: 4, label: 'Four' } ], dependsOn: { carousel: true} },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	broadcastDate: { type: Types.Date },
 	thumbnail: { type: Types.CloudinaryImage },
@@ -27,8 +25,7 @@ Work.add({
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },
 		quote: {type: Types.Html, wysiwyg: true, height: 150},
 	},
-	categories: { type: Types.Relationship, ref: 'WorkCategory', many: true },
-	logos: { type: Types.Relationship, ref: 'Logo', many: true },
+	workType: { type: Types.Relationship, ref: 'WorkCategory', many: false },
 	press: {
 		type: Types.List, fields: {
 		label: {type: String},
@@ -75,6 +72,15 @@ Work.add({
 		text: {type: String},
 		link: {type: Types.Url, dependsOn: { type: ['link'] }},
 		newWindow: {type: Boolean, dependsOn: { type: ['link'] }},
+		media: { type: Types.Relationship, ref: 'Media', many: true },
+	}},
+	awards: {
+		type: Types.List, fields: {
+		name: {type: String},
+		description: {type: String},
+		useImage: {type: Boolean, default: false},
+		media: { type: Types.Relationship, ref: 'Media', many: false, dependsOn: { useImage: true }},
+		link: {type: Types.Url, dependsOn: { useImage: false }},
 	}},
 });
 

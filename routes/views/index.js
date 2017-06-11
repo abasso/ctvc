@@ -12,8 +12,10 @@ exports = module.exports = function (req, res) {
 		work: [],
 		categories: [],
 		carousel: [],
-		copy: {}
+		copy: {},
+		showreel: ''
 	}
+
 
 	// Load the current category filter
 	view.on('init', function (next) {
@@ -24,6 +26,35 @@ exports = module.exports = function (req, res) {
 			});
 	})
 
+	// Load other posts
+	view.on('init', function (next) {
+
+		var q = keystone.list('Media').model.find()
+
+		q.exec(function (err, results) {
+			locals.data.showreel = _.find(results, {key: 'showreel'}).videoUrl
+			next(err)
+		})
+
+	})
+
+	view.on('init', function (next) {
+			var q = keystone.list('Carousel').model.find({}).populate('work page').lean()
+			q.exec(function (err, results) {
+				_.each(results, (result) => {
+					if(result.work) {
+						result.work.workType = _.find(locals.data.categories, {'_id': result.work.workType})
+						// if(result.title) result.work.title = result.title
+						// if(result.image) result.work.images[0] = result.image
+					}
+				})
+				results = _.sortBy(results, 'sortOrder')
+				console.log("CAROUSEL", results);
+				locals.data.carousel = results
+				next(err)
+			})
+	})
+
 	view.on('init', function (next) {
 			keystone.list('Page').model.find({}).exec(function (err, result) {
 				locals.data.copy = _.find(result, {slug: 'homepage'})
@@ -32,18 +63,9 @@ exports = module.exports = function (req, res) {
 	})
 
 	view.on('init', function (next) {
-		var q = keystone.list('Work').model.find({}).lean()
+		var q = keystone.list('Work').model.find({}).populate('workType').lean()
 
 		q.exec(function (err, results) {
-			let yearsObject = {}
-			_.each(results, (data) => {
-					if (data.carousel === true) {
-						data.class = _.find(locals.data.categories, {_id: data.categories[0]}).key
-						locals.data.carousel.push(data)
-					}
-					data.category = _.filter(locals.data.categories, {_id: data.categories[0]})
-			})
-			locals.data.carousel = _.sortBy(locals.data.carousel, 'carouselPosition')
 			locals.data.work = _.take(results, 3);
 			next(err)
 		})

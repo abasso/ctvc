@@ -7,8 +7,8 @@
  * you have more middleware you may want to group it as separate
  * modules in your project's /lib directory.
  */
-var _ = require('lodash');
-
+const _ = require('lodash')
+const keystone = require('keystone')
 
 /**
 	Initialises the standard view locals
@@ -18,20 +18,23 @@ var _ = require('lodash');
 	or replace it with your own templates / logic.
 */
 exports.initLocals = function (req, res, next) {
-	res.locals.navLinks = [
-		{ label: 'Work', key: 'work', href: '/work' },
-		{ label: 'Awards', key: 'awards', href: '/awards' },
-		{ label: 'About', key: 'about', href: '/about' },
-		{ label: 'Show Reel', key: 'show-reel', href: '/show-reel', class: "header-show-reel" },
-		{ label: 'People', key: 'people', href: '/people' },
-		{ label: 'Contact', key: 'contact', href: '/contact' },
-	];
-	res.locals.socialLinks = [
-		{ label: '', key: 'facebook', href: 'https://www.facebook.com/ctvcUK', class: 'social facebook' },
-		{ label: '', key: 'twitter', href: 'https://twitter.com/ctvc', class: 'social twitter' },
-	]
-	res.locals.user = req.user;
-	next();
+		var q = keystone.list('Media').model.find()
+		q.exec(function (err, results) {
+			res.locals.navLinks = [
+				{ label: 'Work', key: 'work', href: '/work' },
+				{ label: 'Awards', key: 'award', href: '/awards' },
+				{ label: 'About', key: 'about', href: '/about' },
+				{ label: 'Show Reel', key: 'show-reel', href: '#', class: "watch-show-reel", src: _.find(results, {key: 'showreel'}).videoUrl },
+				{ label: 'People', key: 'people', href: '/people' },
+				{ label: 'Contact', key: 'contact', href: '/contact' },
+			];
+			res.locals.socialLinks = [
+				{ label: '', key: 'facebook', href: 'https://www.facebook.com/ctvcUK', class: 'social facebook' },
+				{ label: '', key: 'twitter', href: 'https://twitter.com/ctvc', class: 'social twitter' },
+			]
+			res.locals.user = req.user;
+			next();
+		})
 };
 
 

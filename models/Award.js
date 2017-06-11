@@ -12,17 +12,26 @@ var Award = new keystone.List('Award', {
 });
 
 Award.add({
-	title: { type: String, required: true },
+	title: { type: String},
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	receivedDate: { type: Types.Date },
-	thumbnail: { type: Types.CloudinaryImage },
+	award: { type: Types.Relationship, ref: 'Media', many: false, filter: { imageCategory: 'Award' }},
 	description: { type: Types.Html, wysiwyg: true, height: 150 },
-	categories: { type: Types.Relationship, ref: 'WorkCategory', many: true },
+	work: { type: Types.Relationship, ref: 'Work', many: false },
+	workType: { type: Types.Relationship, ref: 'WorkCategory', note: 'If a piece of work is referenced this will be inferred from it.' },
+	links: {
+		type: Types.List, fields: {
+		showLabel: { type: Types.Boolean, default: true },
+		label: {type: String, dependsOn: { showLabel: true }},
+		// html: {type: Types.Html, wysiwyg: true, height: 30, dependsOn: { type: 'html' }},
+		link: {type: Types.Url},
+		newWindow: {type: Boolean},
+	}},
 });
 
 Award.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;
 });
 
-Award.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
+Award.defaultColumns = 'title, award, work, state|20%';
 Award.register();

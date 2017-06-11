@@ -1,23 +1,52 @@
+<!-- <div class="awards-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+      </div>
+    </div>
+  </div>
+</div> -->
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
+      <div class="timeline-container">
+      {{# each data.awards}}
+      <div class="timeline-year">{{year}}</div>
       <section id="timeline">
-        {{# each data.awards.results}}
+        {{# each items}}
         <div class="timeline-block">
-          <div class="timeline-pip timeline-pip-{{categoryClasses categories}}">
+          <div class="timeline-pip timeline-pip-{{workType.key}}">
           </div>
-          <div class="timeline-content {{categoryClasses categories}}">
+          <div class="timeline-content {{workType.key}}">
             {{#if thumbnail.url}}
               <img src="{{{cloudinaryUrl thumbnail width=350 height=196 crop='fit' }}}" class="img pull-right">
             {{/if}}
+            {{# if work}}
+            <h2>{{{work.title}}}</h2>
+            {{else}}
             <h2>{{{title}}}</h2>
+            {{/if}}
+            <h3>{{{award.name}}}</h3>
             {{{description}}}
-            <a href="{{work}}" class="read-more">View Work</a>
-            <span class="date">{{receivedDate}}</span>
+            <div class="timeline-button-wrapper">
+            {{# if work}}
+            <a href="{{workUrl work.slug workType.key}}" class="read-more">View work</a>
+            {{/if}}
+            {{#each links}}
+              {{#if showLabel}}
+                <a href="{{link}}" {{#if newWindow}}target="_blank"{{/if}} class="read-more">{{{label}}}</a>
+              {{else}}
+              <a href="{{link}}" {{#if newWindow}}target="_blank"{{/if}} class="read-more">{{{link}}}</a>
+              {{/if}}
+            {{/each}}
+          </div>
+            <!-- <span class="date">{{receivedDate}}</span> -->
           </div>
         </div>
         {{/each}}
       </section>
+      {{/each}}
+    </div>
     </div>
   </div>
 </div>

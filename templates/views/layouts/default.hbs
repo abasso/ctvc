@@ -8,8 +8,9 @@
 		<link rel="shortcut icon" href="/images/icon_grayscale_2@2x.png" type="image/x-icon">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Dosis:500,600,700|Open+Sans:300,400" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
 		<link href="http://vjs.zencdn.net/5.19.2/video-js.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
 
 		<link href="/styles/site.css" rel="stylesheet">
 		{{!-- This file provides the default styling for the KeystoneJS Content Editor
@@ -24,7 +25,7 @@
 		<![endif]-->
 
 	</head>
-	<body class="{{section}} {{data.item.categories.0.key}}">
+	<body class="{{section}} {{data.item.workType.key}}">
 		<div id="header">
 			<div class="container">
 				<div role="navigation" class="navbar navbar-default">
@@ -36,7 +37,7 @@
 						<a class="burger-menu-toggle hidden-lg-up"><span>Menu</span></a>
 							<nav class="nav">
 									{{# each navLinks}}
-										<a {{#ifeq ../section key}}class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}">{{ label }}</a>
+										<a {{#ifeq ../section key}}class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}" {{#if src}}data-src="{{src}}"{{/if}}>{{ label }}</a>
 								{{/each}}
 								<div class="social-links">
 								{{# each socialLinks}}
@@ -206,7 +207,7 @@
 					"mouseleave": function() {
 						$(this).parent().addClass("blur").removeClass("focus")
 					}
-				}, ".header-show-reel")
+				}, ".watch-show-reel")
 
 				$(".work .list-item").on({
 						"mouseenter": function() {

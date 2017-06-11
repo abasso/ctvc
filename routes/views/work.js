@@ -43,19 +43,6 @@ exports = module.exports = function (req, res) {
 		})
 	})
 
-	// // Load the current category filter
-	// view.on('init', function (next) {
-	//
-	// 	if (req.params.category) {
-	// 		keystone.list('WorkCategory').model.findOne({ key: locals.filters.category }).exec(function (err, result) {
-	// 			locals.data.category = result
-	// 			next(err)
-	// 		})
-	// 	} else {
-	// 		next()
-	// 	}
-	// })
-
 	// Load the work
 	view.on('init', function (next) {
 
@@ -68,10 +55,10 @@ exports = module.exports = function (req, res) {
 			},
 		})
 			.sort('-publishedDate')
-			.populate('author categories')
+			.populate('author workType')
 
 		if (locals.data.category) {
-			q.where('categories').in([locals.data.category])
+			q.where('workType').in([locals.data.category])
 		}
 
 		q.exec(function (err, results) {

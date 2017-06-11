@@ -37,6 +37,10 @@ exports = module.exports = function (app) {
 	app.get('/', routes.views.index);
 	app.get('/work/:category?', routes.views.work);
 	app.get('/work/item/:item', routes.views.item);
+	app.get('/work/tv/:item', routes.views.item);
+	app.get('/work/audio/:item', routes.views.item);
+	app.get('/work/digital/:item', routes.views.item);
+	app.get('/work/true-tube/:item', routes.views.item);
 	app.get('/awards', routes.views.award);
 	app.all('/contact', routes.views.contact);
 

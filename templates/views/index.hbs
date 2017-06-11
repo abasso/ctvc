@@ -1,12 +1,30 @@
 <div class="swiper-container">
 	<div class="swiper-wrapper">
 		{{# each data.carousel }}
-		<div class="swiper-slide swiper-slide-{{this.class}}">
-			<a href="/work/item/{{this.slug}}">
-				{{#if image}}<span class="image-wrapper"><img src="{{{cloudinaryUrl image width=1400 height=900 crop='fit' }}}" class="img pull-right"></span>{{/if}}
-
-				<span class="slide-title"><h2><span>{{this.title}}</span></h2></span>
+		<div class="swiper-slide swiper-slide-{{#if this.work}}{{this.work.workType.key}}{{/if}}">
+			{{#if this.work}}
+				<a href="{{workUrl this.work.slug this.work.workType.key}}">
+					<span class="image-wrapper">
+						{{#if this.image.url}}
+						<img src="{{{cloudinaryUrl this.image width=1400 height=900 crop='fit' }}}" />
+						{{else if this.work.image}}
+						<img src="{{{cloudinaryUrl this.work.image width=1400 height=900 crop='fit' }}}" />
+					{{/if}}
+					</span>
+					<span class="slide-title"><h2><span>
+						{{#if this.title}}
+							{{this.title}}
+						{{else}}
+							{{this.work.title}}
+						{{/if}}
+					</span></h2></span>
 				</a>
+				{{else if this.page}}
+				<a href="{{workUrl this.page.slug this.work.pageType.key}}">
+					{{#if this.page.image}}<span class="image-wrapper"><img src="{{{cloudinaryUrl this.page.image width=1400 height=900 crop='fit' }}}" /></span>{{/if}}
+					<span class="slide-title"><h2><span>{{this.page.title}}</span></h2></span>
+				</a>
+			{{/if}}
 			</div>
 			{{/each}}
 		</div>
@@ -19,7 +37,7 @@
 			<div class="container">
 			<h1>{{{toTitle data.copy.content.brief}}}</h1>
 			<p>{{{data.copy.content.extended}}}</p>
-			<a class="btn-showreel" href="/showreel"><span>Watch our show reel</span></a>
+			<a class="btn-showreel watch-show-reel" href="#" data-src={{data.showreel}}><span>Watch our show reel</span></a>
 		</div>
 	</div>
 		<div class="homepage-categories offset">
@@ -46,8 +64,8 @@
 					<div class="col-sm-12">
 						<div class="grid-row work">
 							{{# each data.work}}
-							<div class="list-item all {{categoryClasses category}} _{{broadCastYear}}">
-								<a href="{{postUrl slug}}">
+							<div class="list-item all cats {{workType.key}} _{{broadCastYear}}">
+								<a href="{{workUrl slug workType.key}}">
 								{{#if thumbnail}}<img src="{{{cloudinaryUrl thumbnail width=350 height=196 crop='fit' }}}" class="img pull-right">{{/if}}
 								<div class="list-item-overlay">
 									<div class="list-item-title">
