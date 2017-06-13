@@ -33,7 +33,6 @@
   }
   &.work {
     .list-item {
-      display: flex;
       .list-item-overlay {
         position: absolute;
         bottom: 0;
@@ -229,6 +228,47 @@
       }
     }
   }
+  &.people {
+    img {
+      width: 100%;
+    }
+    h2 {
+      margin: 1rem 0 0;
+      padding-bottom: .5rem;
+      border-bottom: solid 1px #eee;
+    }
+    h3 {
+      font-size: 1.25rem;
+      margin-top: 0rem;
+      margin-bottom: 1rem;
+      padding-top: .5rem;
+      color: #444;
+    }
+    p {
+      font-size: .875rem;
+      color: #444;
+    }
+    .people-copy {
+      overflow: hidden;
+      height: 0;
+    }
+    .list-item-title {
+      width: 100%;
+    }
+    a {
+      font-size: .875rem;
+      display: flex;
+      width: auto;
+      margin-right: auto;
+      margin-bottom: 1rem;
+      text-decoration: none;
+      color: #333;
+      border-bottom: solid 1px #eee;
+      &:hover {
+        border-bottom-color: #333;
+      }
+    }
+  }
 }
 .filters {
   display: flex;
@@ -265,7 +305,7 @@
 
   a, button {
     font-family: $font-face, sans-serif;
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 300;
     line-height: 36px;
     display: flex;

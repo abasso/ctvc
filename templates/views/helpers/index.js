@@ -327,6 +327,12 @@ module.exports = function () {
 		return obj._[underscoreMethod].format();
 	};
 
+	_helpers.isActivePage = (page, link) => {
+		console.log(page)
+		console.log(link)
+		if(page === link) return 'active'
+	};
+
 	_helpers.categoryClasses = (obj) => {
 		let block = '';
 		_.each(obj, (value, key) => {

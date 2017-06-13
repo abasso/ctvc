@@ -40,7 +40,6 @@ exports = module.exports = function (req, res) {
 					let receivedDate = moment(result.receivedDate)
 					result.year = receivedDate.format("YYYY")
 					result.award = _.find(locals.media, {_id: result.award});
-					console.log(result.links)
 				})
 				locals.awards = results
 				next(err)

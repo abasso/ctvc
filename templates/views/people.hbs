@@ -1,0 +1,23 @@
+<div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="grid-row people">
+      {{# each data.people}}
+      <div class="list-item all {{workType.key}} _{{broadCastYear}}">
+        {{#if image}}<img src="{{{cloudinaryUrl image.image width=610 height=407 crop='fit' }}}" class="img">{{/if}}
+          <div class="list-item-title">
+            <h2>{{{name}}}</h2>
+            <h3>{{{position}}}</h3>
+
+          </div>
+          <div class="people-copy">
+            {{{content.extended}}}
+          </div>
+          <a href="#">more info</a>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+</div>
+</div>

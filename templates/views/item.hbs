@@ -1,3 +1,4 @@
+{{#unless data.item.useCompactLayout}}
 <div class="item-header">
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
@@ -17,17 +18,38 @@
 		<div class="swiper-pagination"></div>
 		<div class="swiper-button-prev"></div>
 		<div class="swiper-button-next"></div>
-
 	</div>
-
-
 </div>
+{{/unless}}
 <div class="container offset">
 
 	<article>
 		<div class="post">
 			<div class="row">
 				<div class="col-sm-12 col-lg-7">
+					{{#if data.item.useCompactLayout}}
+					<div class="item-header">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								{{#each data.item.carousel}}
+								<div class="swiper-slide {{#if this.showVideoControl}}video-slide{{/if}}">
+									<span class="image-wrapper">
+										<span class="overlay"></span>
+									{{#if this.showVideoControl}}
+									<a class="btn-play-video" data-src="{{../data.item.video}}">
+									</a>
+									{{/if}}
+									<img src="{{{cloudinaryUrl this width=1600 height=900 crop='fit' }}}" class="img-responsive">
+								</span>
+								</div>
+								{{/each}}
+							</div>
+							<div class="swiper-pagination"></div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						</div>
+					</div>
+					{{/if}}
 					<header>
 						<h1>{{data.item.title}}</h1>
 					</header>

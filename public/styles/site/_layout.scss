@@ -15,9 +15,38 @@ body {
 
 a {
   transition: all 100ms ease-in;
+  &.new-window {
+    padding-right: 1rem;
+  }
 }
 
-.work, .award {
+p {
+  color: #444;
+  a {
+    color: #333;
+    border-bottom: solid 1px #ccc;
+    &:hover {
+      text-decoration: none;
+      color: #333;
+      border-bottom-color: #666;
+    }
+    &.link-external {
+      margin-right: .25rem;
+      &:before {
+        top: 7px;
+        right: 2px;
+      }
+    }
+  }
+}
+
+.container {
+  @media(max-width:$breakpoint-md) {
+    padding: 0;
+  }
+}
+
+.work, .award, .page, .about, .people, .compact-item, .contact {
   #header {
     background: #333;
   }
@@ -26,6 +55,22 @@ a {
     @media (min-width:$breakpoint-xl) {
       margin-top: 130px;
     }
+  }
+}
+
+.about {
+  .content-wrapper {
+    margin-bottom: 2rem;
+  }
+}
+
+p {
+  font-size: .875rem;
+}
+
+.about {
+  h1 {
+    margin-bottom: 1rem;
   }
 }
 
@@ -141,11 +186,10 @@ a {
 
     align-items: center;
     a {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 500;
       position: relative;
       display: flex;
-      margin: 0 0 0 1.5rem;
       white-space: nowrap;
       text-decoration: none;
       // letter-spacing: -1px;
@@ -185,8 +229,8 @@ a {
         align-items: center;
         justify-content: center;
         &.facebook {
-          border-color: #4267b2;
-          background-color: #4267b2;
+          // border-color: #4267b2;
+          // background-color: #4267b2;
           &:before {
             position: absolute;
             top: 0;
@@ -194,7 +238,7 @@ a {
             width: 36px;
             height: 36px;
             content: '';
-            background: no-repeat 9px 9px url(/images/icons/facebook_white.svg);
+            background: no-repeat 9px 9px url(/images/icons/facebook.svg);
             background-size: 16px;
           }
           &:hover {
@@ -207,8 +251,8 @@ a {
           }
         }
         &.twitter {
-          border-color: #0084b4;
-          background-color: #0084b4;
+          // border-color: #0084b4;
+          // background-color: #0084b4;
           &:before {
             position: absolute;
             top: 0;
@@ -216,7 +260,7 @@ a {
             width: 36px;
             height: 36px;
             content: '';
-            background: no-repeat 9px 9px url(/images/icons/twitter_white.svg);
+            background: no-repeat 9px 9px url(/images/icons/twitter.svg);
             background-size: 16px;
           }
           &:hover {
@@ -755,6 +799,9 @@ a {
     &:hover {
       color: white;
       background: #333;
+      p {
+        color: white;
+      }
     }
     &.tv {
       h5 {
@@ -863,7 +910,7 @@ a {
   }
 }
 
-.contact {
+.contact-footer {
   padding: 2rem 0;
   background: #f7f7f7;
   .container {
@@ -987,13 +1034,15 @@ a {
     flex-direction: column;
     blockquote {
       font-family: $font-face, sans-serif;
-      font-size: 1.25rem;
       line-height: 1.875rem;
       position: relative;
       margin-top: 2rem;
       padding: 2rem 2rem 1rem 5rem;
       color: white;
-      background: red;
+      p {
+        font-size: 1.25rem;
+        color: white;
+      }
       &:before {
         font-size: 5rem;
         position: absolute;
@@ -1311,4 +1360,136 @@ body {
 
 .awards-container {
   border-bottom: solid 3px red;
+}
+
+.page-menu {
+  display: flex;
+  flex-direction: column;
+  a {
+    padding: 1rem;
+    color: #666;
+    border-bottom: solid 1px #eee;
+    &:hover, &.active {
+      text-decoration: none;
+      color: #333;
+    }
+  }
+}
+
+
+#header .sub-menu {
+  position: absolute;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 0;
+  padding: .75rem 1.25rem;
+  transition: all 100ms ease-in;
+  opacity: 0;
+  color: white;
+  background: #333;
+
+  align-items: center;
+  justify-content: center;
+  &:after {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    content: '';
+  }
+  &:before {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -8px;
+    content: '';
+    border-width: 0 8px 8px 8px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
+  }
+  a {
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0;
+    color: #ccc;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+#header {
+  .nav-item {
+    display: flex;
+    margin: 0 0 0 1.5rem;
+
+    justify-content: Center;
+    &:hover {
+      @media(min-width: $breakpoint-lg) {
+        .sub-menu {
+          display: flex;
+          height: auto;
+          opacity: 1;
+          a {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    @media(min-width: $breakpoint-lg) {
+      &.hidden-large {
+        display: none;
+      }
+    }
+  }
+}
+
+.compact-item {
+  blockquote {
+    margin-top: 0 !important;
+  }
+  .item-header {
+    padding-bottom: 56.25%;
+  }
+}
+.contact {
+  .btn {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 500;
+    line-height: 38px;
+    display: flex;
+    height: 40px;
+    margin: .5rem .25rem 0;
+    padding: 0 1.25rem;
+    cursor: pointer;
+    transition: all 500ms ease-out;
+    text-align: center;
+    text-decoration: none;
+    color: #4a4a4a;
+    color: #333 !important;
+    border: solid 1px rgba(151,151,151,.1);
+    border-radius: 40px;
+
+    align-content: center;
+    align-self: center;
+    justify-content: center;
+    &:hover, &.active {
+      border-color: rgba(74,74,74,0);
+      background: rgba(74,74,74,.1);
+    }
+  }
+  form {
+    margin-bottom: 2rem;
+  }
+}
+.contact-address {
+  margin-bottom: 2rem;
+  img {
+    margin: 2rem 0 2rem;
+  }
 }

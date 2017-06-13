@@ -19,6 +19,7 @@ Work.add({
 	broadcastDate: { type: Types.Date },
 	thumbnail: { type: Types.CloudinaryImage },
 	images: { type: Types.CloudinaryImages },
+	useCompactLayout: {type: Boolean, default: false},
 	video: { type: Types.Url},
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },

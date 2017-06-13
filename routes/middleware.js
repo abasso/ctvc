@@ -21,10 +21,16 @@ exports.initLocals = function (req, res, next) {
 		var q = keystone.list('Media').model.find()
 		q.exec(function (err, results) {
 			res.locals.navLinks = [
-				{ label: 'Work', key: 'work', href: '/work' },
-				{ label: 'Awards', key: 'award', href: '/awards' },
+				{ label: 'Work', key: 'work', href: '/work',
+					subItems: [
+						{ label: 'Our Work', key: 'work', href: '/work' },
+						{ label: 'Awards', key: 'award', href: '/awards' },
+						{ label: 'Show Reel', key: 'show-reel', href: '#', class: 'watch-show-reel', src: _.find(results, {key: 'showreel'}).videoUrl },
+					]
+			 	},
+				{ label: 'Awards', key: 'award', href: '/awards', class: 'hidden-large' },
 				{ label: 'About', key: 'about', href: '/about' },
-				{ label: 'Show Reel', key: 'show-reel', href: '#', class: "watch-show-reel", src: _.find(results, {key: 'showreel'}).videoUrl },
+				{ label: 'Show Reel', key: 'show-reel', href: '#', class: 'watch-show-reel hidden-large', src: _.find(results, {key: 'showreel'}).videoUrl, hiddenLarge: true },
 				{ label: 'People', key: 'people', href: '/people' },
 				{ label: 'Contact', key: 'contact', href: '/contact' },
 			];

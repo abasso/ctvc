@@ -136,7 +136,6 @@ Modules - reusable parts of our design
   display: flex;
   flex-direction: column;
   margin-left: 3rem;
-  padding: 1em;
   text-align: center;
   border: solid 1px #eee;
   background: white;
@@ -149,24 +148,22 @@ Modules - reusable parts of our design
   }
   h2 {
     font-family: 'Dosis', sans-serif;
+    font-size: 1.25rem;
     font-weight: 500;
     position: relative;
-    width: 100%;
-    margin: 0;
-    padding-bottom: 1rem;
+    display: flex;
+    margin: 0 1rem;
+    padding: 0 0 .5rem;
     text-align: center;
-    color: white;
+
+    justify-content: center;
     &:after {
       position: absolute;
-      bottom: -5px;
+      bottom: -3px;
       left: 0;
       width: 100%;
-      height: 3px;
+      height: 1px;
       content: '';
-      border-radius: 3px;
-    }
-    @media (max-width:768px) {
-      font-size: 1.5rem;
     }
   }
   &.tv {
@@ -213,15 +210,27 @@ h3 {
 //   content: '';
 // }
 
-.timeline-content h2 {
-  margin-top: 1rem;
-  color: #303e49;
+.timeline-image-block {
+  padding: 1rem 0;
+  img {
+    max-height: 200px;
+  }
 }
+
+.timeline-copy-block {
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+
+
+
 .timeline-content .read-more, .timeline-content .date {
   display: inline-block;
   pointer-events: auto;
 }
 .timeline-content p {
+  font-size: .875rem;
   margin: 1rem 1rem 1rem;
   @media (max-width:768px) {
     font-size: .875rem;
@@ -231,8 +240,22 @@ h3 {
 
 .timeline-button-wrapper {
   display: flex;
+
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
   a {
     margin: 0 .25rem;
+  }
+  .link-external {
+    padding-right: 2rem !important;
+    &:before {
+      top: 15px;
+      right: 16px;
+    }
+  }
+  @media (max-width:768px) {
+    margin: 1rem;
   }
 }
 
@@ -326,7 +349,6 @@ h3 {
   .timeline-content {
     width: 45%;
     margin-left: 0;
-    padding: 1.6em;
   }
   .timeline-content::before {
     top: 24px;

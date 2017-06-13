@@ -1,0 +1,16 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-3">
+      <div class="page-menu">
+      {{#each data.pages}}
+        <a href="/{{type}}/{{slug}}" class="{{isActivePage ../data.page.slug slug}}">{{title}}</a>
+      {{/each}}
+    </div>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-9">
+      <h1>{{data.page.title}}</h1>
+      {{{data.page.content.extended}}}
+    </div>
+  </div>
+</div>

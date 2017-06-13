@@ -25,7 +25,7 @@
 		<![endif]-->
 
 	</head>
-	<body class="{{section}} {{data.item.workType.key}}">
+	<body class="{{section}} {{data.item.workType.key}} {{#if data.item.useCompactLayout}}compact-item{{/if}}">
 		<div id="header">
 			<div class="container">
 				<div role="navigation" class="navbar navbar-default">
@@ -37,7 +37,16 @@
 						<a class="burger-menu-toggle hidden-lg-up"><span>Menu</span></a>
 							<nav class="nav">
 									{{# each navLinks}}
-										<a {{#ifeq ../section key}}class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}" {{#if src}}data-src="{{src}}"{{/if}}>{{ label }}</a>
+									<div class="nav-item {{ class }}">
+										<a {{#ifeq ../section key}}class="active {{#if subItems}}sub-menu-trigger{{/if}}" {{else}}class=" {{#if subItems}}sub-menu-trigger{{/if}}"{{/ifeq}} href="{{ href }}" {{#if src}}data-src="{{src}}"{{/if}}>{{ label }}</a>
+										{{#if subItems}}
+										<div class="sub-menu">
+											{{#each subItems}}
+												<a {{#ifeq ../section key}}class="active {{#if subItems}}sub-menu{{/if}} {{ class }}"{{else}}class=" {{#if subItems}}sub-menu{{/if}}{{ class }}"{{/ifeq}} href="{{ href }}" {{#if src}}data-src="{{src}}"{{/if}}>{{ label }}</a>
+											{{/each}}
+										</div>
+										{{/if}}
+									</div>
 								{{/each}}
 								<div class="social-links">
 								{{# each socialLinks}}
@@ -99,10 +108,10 @@
 					<a href="#"><img src="/images/logos/channel4.png"/></a>
 				</div>
 			</div>
-			<div class="contact">
+			<div class="contact-footer">
 				<div class="container">
 				<span class="address">
-					<img src="/images/logo-colour.svg"/>
+					<img src="/images/logo.svg"/>
 					CTVC Ltd. First Floor, McBeath House, 310 Goswell Road, London, EC1V 7LW</span>
 				<span class="deets">Tel + 44 (0)20 7940 8480 <a href="mailto:info@ctvc.co.uk">info@ctvc.co.uk</a></span>
 			</div>
@@ -123,7 +132,11 @@
 		<script src="/js/lodash/lodash.min.js"></script>
 		{{{isAdminEditorJS user}}}
 		<script>
-
+		$.each($("a"), function() {
+			if($(this).attr("target") !== undefined) {
+				$(this).addClass("link-external");
+			}
+		})
 			$(function() {
 				// $("body").on({
 				// 	"mouseenter": function() {
@@ -266,6 +279,7 @@
 					})
 
 				}
+
 
 				var filterArray = []
 				if($("body").hasClass("work")) {

@@ -59,6 +59,7 @@ keystone.set('nav', {
 	Work: ['works', 'work-categories'],
 	Award: 'awards',
 	Media: 'media',
+	People: 'people',
 	Page: 'pages',
 	Carousel: 'carousels',
 	enquiries: 'enquiries',
