@@ -102,10 +102,14 @@
 		<div class="footer offset">
 			<div class="partners">
 				<div class="container">
-					<a href="#"><img src="/images/logos/bbc.png"/></a>
+					<!-- <a href="#"><img src="/images/logos/bbc.png"/></a>
 					<a href="#"><img src="/images/logos/sky.png"/></a>
 					<a href="#"><img src="/images/logos/mtv.png"/></a>
 					<a href="#"><img src="/images/logos/channel4.png"/></a>
+ -->
+					{{#each data.partners}}
+						<a href="{{link}}"><img src="{{image.url}}"/></a>
+					{{/each}}
 				</div>
 			</div>
 			<div class="contact-footer">
@@ -163,6 +167,19 @@
 						} else {
 							$(this).addClass("is-active")
 							$(".nav").addClass("show")
+						}
+					}
+				})
+
+				$(".people-more-toggle").on({
+					"click": function(e) {
+						e.preventDefault();
+						if ($(this).parent().children(".people-copy").hasClass("is-open")) {
+							$(this).removeClass("active").html("Show biography");
+							$(this).parent().children(".people-copy").removeClass("is-open")
+						} else {
+							$(this).addClass("active").html("Hide biography");
+							$(this).parent().children(".people-copy").addClass("is-open")
 						}
 					}
 				})
@@ -230,7 +247,7 @@
 							$(this).addClass("blur").removeClass("focus")
 						}
 				})
-				if($(".grid-row").length) {
+				if($(".grid-row.work").length) {
 					var elem = document.querySelector(".grid-row")
 					var iso = new Isotope( ".grid-row", {
 						itemSelector: '.list-item',

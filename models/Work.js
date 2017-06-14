@@ -9,6 +9,7 @@ var Types = keystone.Field.Types;
 var Work = new keystone.List('Work', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
+	sortable: true
 });
 
 Work.add({
@@ -30,8 +31,8 @@ Work.add({
 	press: {
 		type: Types.List, fields: {
 		label: {type: String},
-		showLabel: { type: Types.Boolean, default: true },
-		type: {type: Types.Select, options: 'text, link' },
+		showLabel: { type: Boolean, default: true },
+		type: {type: Types.Select, options: 'text, link', default: 'text', },
 		text: {type: String},
 		// html: {type: Types.Html, wysiwyg: true, height: 30, dependsOn: { type: 'html' }},
 		link: {type: Types.Url, dependsOn: { type: ['link'] }},
@@ -40,8 +41,8 @@ Work.add({
 	credits: {
 		type: Types.List, fields: {
 		label: {type: String},
-		showLabel: { type: Types.Boolean, default: true },
-		type: {type: Types.Select, options: 'text, link' },
+		showLabel: { type: Boolean, default: true },
+		type: {type: Types.Select, options: 'text, link', default: 'text', },
 		text: {type: String},
 		// html: {type: Types.Html, wysiwyg: true, height: 30, dependsOn: { type: 'html' }},
 		link: {type: Types.Url, dependsOn: { type: ['link'] }},
@@ -49,27 +50,31 @@ Work.add({
 	}},
 	broadcastDetails: {
 		type: Types.List, fields: {
+		blockType: {type: Types.Select, options: 'header, item' },
+		logo: { type: Types.Relationship, ref: 'Media', many: false, dependsOn: { blockType: ['header']}},
 		label: {type: String},
-		showLabel: { type: Types.Boolean, default: true },
-		type: {type: Types.Select, options: 'text, link' },
-		text: {type: String},
-		link: {type: Types.Url, dependsOn: { type: ['link'] }},
-		newWindow: {type: Boolean, dependsOn: { type: ['link'] }},
+		showLabel: { type: Boolean, default: true, dependsOn: { blockType: ['item']}},
+		type: {type: Types.Select, options: 'text, link', default: 'text', dependsOn: { blockType: ['item'] }},
+		text: {type: String, dependsOn: { blockType: ['item']}},
+		link: {type: Types.Url, dependsOn: { type: ['link'], blockType: ['item']  }},
+		newWindow: {type: Boolean, dependsOn: { type: ['link'], blockType: ['item'] }},
 	}},
 	producedBy: {
 		type: Types.List, fields: {
+		logo: { type: Types.Relationship, ref: 'Media', many: false, dependsOn: { blockType: ['header']}},
 		label: {type: String},
-		showLabel: { type: Types.Boolean, default: true },
-		type: {type: Types.Select, options: 'text, link' },
+		showLabel: { type: Boolean, default: true },
+		type: {type: Types.Select, options: 'text, link', default: 'text', },
 		text: {type: String},
 		link: {type: Types.Url, dependsOn: { type: ['link'] }},
 		newWindow: {type: Boolean, dependsOn: { type: ['link'] }},
 	}},
 	inAssociationWith: {
 		type: Types.List, fields: {
+		logo: { type: Types.Relationship, ref: 'Media', many: false, dependsOn: { blockType: ['header']}},
 		label: {type: String},
-		showLabel: { type: Types.Boolean, default: true },
-		type: {type: Types.Select, options: 'text, link' },
+		showLabel: { type: Boolean, default: true },
+		type: {type: Types.Select, options: 'text, link', default: 'text', },
 		text: {type: String},
 		link: {type: Types.Url, dependsOn: { type: ['link'] }},
 		newWindow: {type: Boolean, dependsOn: { type: ['link'] }},

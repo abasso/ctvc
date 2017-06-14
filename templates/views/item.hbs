@@ -92,6 +92,24 @@
 						<h5>Broadcast Details</h5>
 						{{#each data.item.broadcastDetails}}
 						<div class="item-info-block_item">
+							{{#if logo.image.url}}
+							<div class="item-info-block_logo">
+								<img src="{{{cloudinaryUrl logo.image height=30 crop='fit' }}}" class="img-responsive">
+							</div>
+							{{/if}}
+							{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
+							{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
+							{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}
+							</a>{{/ifEquals}}
+						</div>
+						{{/each}}
+					</div>
+					{{/if}}
+					{{#if data.item.credits}}
+					<div class="item-info-block">
+						<h5>Credits</h5>
+						{{#each data.item.credits}}
+						<div class="item-info-block_item">
 							{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
 							{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
 							{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}

@@ -250,22 +250,52 @@
     }
     .people-copy {
       overflow: hidden;
-      height: 0;
+      max-height: 0;
+      transition: all 300ms ease-in;
+      &.is-open {
+        max-height: 1000px;
+      }
     }
     .list-item-title {
       width: 100%;
     }
     a {
       font-size: .875rem;
+      position: relative;
       display: flex;
       width: auto;
       margin-right: auto;
       margin-bottom: 1rem;
+      margin-left: 34px;
       text-decoration: none;
       color: #333;
       border-bottom: solid 1px #eee;
+
+      align-items: center;
       &:hover {
         border-bottom-color: #333;
+        &:before {
+          border: solid 1px #ccc;
+        }
+      }
+      &:before {
+        position: absolute;
+        top: 0;
+        left: -34px;
+        width: 24px;
+        height: 24px;
+        content: '';
+        transition: all 100ms ease-in;
+        border: solid 1px #eee;
+        border-radius: 24px;
+        background: no-repeat center center url('/images/icons/chevron-down.svg');
+        background-size: 10px 10px;
+      }
+      &.active {
+        &:before {
+          background: no-repeat center center url('/images/icons/chevron-up.svg');
+          background-size: 10px 10px;
+        }
       }
     }
   }

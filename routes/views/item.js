@@ -51,7 +51,7 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('Work').model.findOne({
 			state: 'published',
 			slug: locals.filters.item,
-		}).populate('author workType media').lean()
+		}).populate('author workType media broadcastDetails.logo').lean()
 
 		q.exec(function (err, result) {
 			result.carousel = []
@@ -65,7 +65,6 @@ exports = module.exports = function (req, res) {
 				})
 			}
 			locals.data.item = result
-			console.log(locals.data.item)
 			next(err)
 		})
 

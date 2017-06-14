@@ -3,7 +3,7 @@
   <div class="col-sm-12">
     <div class="grid-row people">
       {{# each data.people}}
-      <div class="list-item all {{workType.key}} _{{broadCastYear}}">
+      <div class="list-item">
         {{#if image}}<img src="{{{cloudinaryUrl image.image width=610 height=407 crop='fit' }}}" class="img">{{/if}}
           <div class="list-item-title">
             <h2>{{{name}}}</h2>
@@ -13,7 +13,7 @@
           <div class="people-copy">
             {{{content.extended}}}
           </div>
-          <a href="#">more info</a>
+          <a class="people-more-toggle" href="#">Show biography</a>
       </div>
       {{/each}}
     </div>

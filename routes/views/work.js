@@ -54,7 +54,7 @@ exports = module.exports = function (req, res) {
 				state: 'published',
 			},
 		})
-			.sort('-publishedDate')
+			.sort('-siteOrder')
 			.populate('author workType')
 
 		if (locals.data.category) {

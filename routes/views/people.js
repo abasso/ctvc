@@ -25,7 +25,9 @@ exports = module.exports = function (req, res) {
 
 	// Load other posts
 	view.on('init', function (next) {
-		var q = keystone.list('People').model.find().populate('image').lean()
+		var q = keystone.list('People').model.find({
+      state: 'published',
+    }).populate('image').lean()
 
 		q.exec(function (err, results) {
       console.log(err);

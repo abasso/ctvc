@@ -21,6 +21,7 @@ Media.add({
   alt: { type: String, dependsOn: {type: 'image'}},
   link: { type: Types.Url, dependsOn: {type: 'image'}},
 	newWindow: {type: Boolean, dependsOn: {type: 'image'}},
+	showInFooter: {type: Boolean, dependsOn: {imageCategory: 'Brand'}},
 });
 
 // Media.relationship({ ref: 'Work', path: 'works', refPath: 'media' });

@@ -9,6 +9,7 @@ exports = module.exports = function (req, res) {
 	locals.section = 'homepage';
 
 	locals.data = {
+		partners: [],
 		work: [],
 		categories: [],
 		carousel: [],
@@ -33,6 +34,7 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			locals.data.showreel = _.find(results, {key: 'showreel'}).videoUrl
+			locals.data.partners = _.filter(results, {showInFooter: true});
 			next(err)
 		})
 
