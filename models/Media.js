@@ -14,16 +14,14 @@ var Media = new keystone.List('Media', {
 Media.add({
   name: { type: String, required: true },
 	type: { type: Types.Select, options: 'image, video', default: 'image', index: true},
-	imageCategory: { type: Types.Select, options: 'Brand, Award, People', default: 'Brand', dependsOn: {type: 'image'}},
+	imageCategory: { type: Types.Select, options: 'Logo, Award, People', default: 'Logo', dependsOn: {type: 'image'}},
 	videoCategory: { type: Types.Select, options: 'Content, Showreel', default: 'Content', dependsOn: {type: 'video'}},
 	videoUrl: { type: String, dependsOn: {type: 'video'}},
 	image: { type: Types.CloudinaryImage, dependsOn: {type: 'image'}},
   alt: { type: String, dependsOn: {type: 'image'}},
   link: { type: Types.Url, dependsOn: {type: 'image'}},
 	newWindow: {type: Boolean, dependsOn: {type: 'image'}},
-	showInFooter: {type: Boolean, dependsOn: {imageCategory: 'Brand'}},
+	showInFooter: {type: Boolean, dependsOn: {imageCategory: 'Logo'}},
 });
-
-// Media.relationship({ ref: 'Work', path: 'works', refPath: 'media' });
 
 Media.register();

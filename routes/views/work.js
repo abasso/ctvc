@@ -74,7 +74,7 @@ exports = module.exports = function (req, res) {
 					locals.data.years.push(data.broadCastYear)
 				}
 			})
-			locals.data.years = _.uniq(locals.data.years);
+			locals.data.years = _.uniq(locals.data.years).reverse();
 			locals.data.work = results
 			next(err)
 		})
