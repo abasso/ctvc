@@ -19,7 +19,7 @@ keystone.init({
 	'favicon': 'public/favicon.ico',
 	'views': 'templates/views',
 	'view engine': '.hbs',
-	'mongo': process.env.MONGO_URI || "mongodb://localhost/ctvc",
+	'mongo': process.env.MONGO_URI || "mongodb://localhost:27017/ctvc",
 	'custom engine': handlebars.create({
 		layoutsDir: 'templates/views/layouts',
 		partialsDir: 'templates/views/partials',
