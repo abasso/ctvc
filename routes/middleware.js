@@ -20,12 +20,13 @@ const keystone = require('keystone')
 exports.initLocals = function (req, res, next) {
 		var q = keystone.list('Media').model.find()
 		q.exec(function (err, results) {
+			let showReelUrl = (results === undefined) ? "" : _.find(results, {key: 'showreel'}).videoUrl
 			res.locals.navLinks = [
 				{ label: 'Work', key: 'work', href: '/work',
 					subItems: [
 						{ label: 'Our Work', key: 'work', href: '/work' },
 						{ label: 'Awards', key: 'award', href: '/awards' },
-						{ label: 'Show Reel', key: 'show-reel', href: '#', class: 'watch-show-reel', src: _.find(results, {key: 'showreel'}).videoUrl },
+						{ label: 'Show Reel', key: 'show-reel', href: '#', class: 'watch-show-reel', src: showReelUrl },
 					]
 			 	},
 				{ label: 'Awards', key: 'award', href: '/awards', class: 'hidden-large' },
