@@ -13,7 +13,7 @@ var handlebars = require('express-handlebars');
 keystone.init({
 	'name': 'CTVC',
 	'brand': 'CTVC',
-
+	'port': process.env.PORT || 3000,
 	'sass': 'public',
 	'static': 'public',
 	'favicon': 'public/favicon.ico',
