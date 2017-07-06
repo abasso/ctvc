@@ -6791,6 +6791,8 @@ p {
     .item article .item-info-block h5 {
       font-size: 2rem;
       margin-bottom: 2rem; }
+    .item article .item-info-block .item-info-block-logo_title {
+      margin: .1rem 0 0 .75rem; }
     .item article .item-info-block .item-info-block_title {
       margin-right: 1rem; }
     .item article .item-info-block .item-info-block_item {

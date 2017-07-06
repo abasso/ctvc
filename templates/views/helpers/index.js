@@ -163,6 +163,7 @@ module.exports = function () {
 
 	_helpers.cloudinaryUrl = function (context, options) {
 		console.log("CLOUDINARY CONTEXT", context);
+		console.log("CLOUDINARY OPTIONS", options);
 		// if we dont pass in a context and just kwargs
 		// then `this` refers to our default scope block and kwargs
 		// are stored in context.hash
@@ -193,7 +194,6 @@ module.exports = function () {
 
 	// Direct url link to a specific post
 	_helpers.workUrl = function (workSlug, workType, options) {
-		console.log("work type", workType);
 		return ('/work/' + workType + "/" + workSlug);
 	};
 
@@ -328,8 +328,6 @@ module.exports = function () {
 	};
 
 	_helpers.isActivePage = (page, link) => {
-		console.log(page)
-		console.log(link)
 		if(page === link) return 'active'
 	};
 
