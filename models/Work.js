@@ -72,7 +72,7 @@ Work.add({
 	}},
 	inAssociationWith: {
 		type: Types.List, fields: {
-		logo: { type: Types.Relationship, ref: 'Media', many: false, dependsOn: { blockType: ['header']}},
+		logo: { type: Types.Relationship, ref: 'Media', many: false},
 		label: { type: String },
 		showLabel: { type: Boolean, default: true },
 		type: { type: Types.Select, options: 'text, link', default: 'text', },

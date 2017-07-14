@@ -6364,9 +6364,9 @@ p {
     background: rgba(30, 5, 14, 0.6); }
     .swiper-slide.swiper-slide-digital .slide-title h2:before {
       background: rgba(217, 17, 91, 0.9); }
-  .swiper-slide.swiper-slide-true-tube .slide-title {
+  .swiper-slide.swiper-slide-truetube .slide-title {
     background: rgba(48, 50, 6, 0.6); }
-    .swiper-slide.swiper-slide-true-tube .slide-title h2:before {
+    .swiper-slide.swiper-slide-truetube .slide-title h2:before {
       background: rgba(215, 225, 0, 0.9); }
 
 .swiper-pagination {
@@ -6596,9 +6596,9 @@ p {
       background: rgba(217, 17, 91, 0.9); }
     .homepage-categories .homepage-category.digital:hover {
       background: rgba(0, 0, 0, 0.9); }
-    .homepage-categories .homepage-category.true-tube h5:before {
+    .homepage-categories .homepage-category.truetube h5:before {
       background: rgba(215, 225, 0, 0.9); }
-    .homepage-categories .homepage-category.true-tube:hover {
+    .homepage-categories .homepage-category.truetube:hover {
       background: rgba(0, 0, 0, 0.9); }
 
 .homepage-latest {
@@ -6798,7 +6798,8 @@ p {
     .item article .item-info-block .item-info-block_item {
       display: flex;
       flex-direction: row;
-      margin-bottom: .5rem; }
+      margin-bottom: .5rem;
+      flex-wrap: wrap; }
     .item article .item-info-block a {
       text-decoration: none;
       color: #333;
@@ -6836,6 +6837,11 @@ p {
       margin-bottom: .5rem; }
       .item article .item-info-block .item-info-block_logo img {
         height: 30px; }
+    .item article .item-info-block .item-info-block_logo_100 {
+      margin-top: 1rem;
+      margin-bottom: .5rem; }
+      .item article .item-info-block .item-info-block_logo_100 img {
+        height: 100px; }
     .item article .item-info-block .item-info-block_item:nth-of-type(1) .item-info-block_logo {
       margin-top: 0; }
 
@@ -6866,12 +6872,12 @@ body.digital blockquote {
   body.digital blockquote:after {
     border-color: transparent rgba(217, 17, 91, 0.9) transparent transparent; }
 
-body.true-tube h1:before {
+body.truetube h1:before {
   background: rgba(215, 225, 0, 0.9); }
 
-body.true-tube blockquote {
+body.truetube blockquote {
   background: rgba(215, 225, 0, 0.9); }
-  body.true-tube blockquote:after {
+  body.truetube blockquote:after {
     border-color: transparent rgba(215, 225, 0, 0.9) transparent transparent; }
 
 .link-external {
@@ -7187,7 +7193,7 @@ body.true-tube blockquote {
     background: rgba(0, 168, 157, 0.5); }
   .grid-row.work .list-item.digital h2:after {
     background: rgba(217, 17, 91, 0.5); }
-  .grid-row.work .list-item.true-tube h2:after {
+  .grid-row.work .list-item.truetube h2:after {
     background: rgba(215, 225, 0, 0.5); }
   @media (min-width: 767px) {
     .grid-row.work .list-item.blur img {
@@ -7206,7 +7212,7 @@ body.true-tube blockquote {
       background: rgba(0, 168, 157, 0.7); }
     .grid-row.work .list-item.blur.digital h2:after {
       background: rgba(217, 17, 91, 0.7); }
-    .grid-row.work .list-item.blur.true-tube h2:after {
+    .grid-row.work .list-item.blur.truetube h2:after {
       background: rgba(215, 225, 0, 0.7); } }
   @media (min-width: 767px) {
     .grid-row.work .list-item.focus img {
@@ -7235,7 +7241,7 @@ body.true-tube blockquote {
       background: rgba(0, 168, 157, 0.7); }
     .grid-row.work .list-item.focus.digital h2:after {
       background: rgba(217, 17, 91, 0.7); }
-    .grid-row.work .list-item.focus.true-tube h2:after {
+    .grid-row.work .list-item.focus.truetube h2:after {
       background: rgba(215, 225, 0, 0.7); } }
   .grid-row.people img {
     width: 100%; }
@@ -7348,7 +7354,7 @@ body.true-tube blockquote {
     .filters a.digital:hover, .filters a.digital.active, .filters button.digital:hover, .filters button.digital.active {
       color: white;
       background: #d9115b; }
-    .filters a.true-tube:hover, .filters a.true-tube.active, .filters button.true-tube:hover, .filters button.true-tube.active {
+    .filters a.truetube:hover, .filters a.truetube.active, .filters button.truetube:hover, .filters button.truetube.active {
       color: white;
       background: #d7e100; }
   .filters button {
@@ -7557,7 +7563,7 @@ Modules - reusable parts of our design
   height: 10px;
   border-radius: 50%; }
 
-.timeline-pip-true-tube {
+.timeline-pip-truetube {
   background: #d7e100; }
 
 .timeline-pip-digital {
@@ -7613,7 +7619,7 @@ Modules - reusable parts of our design
     background: #00a89d; }
   .timeline-content.digital h2:after {
     background: #d9115b; }
-  .timeline-content.true-tube h2:after {
+  .timeline-content.truetube h2:after {
     background: #d7e100; }
 
 h3 {
@@ -7698,9 +7704,9 @@ h3 {
     .timeline-content .read-more.digital:hover, .timeline-content .read-more.digital.active {
       color: white;
       background: #d9115b; }
-  .timeline-content .read-more.true-tube {
+  .timeline-content .read-more.truetube {
     color: #d7e100; }
-    .timeline-content .read-more.true-tube:hover, .timeline-content .read-more.true-tube.active {
+    .timeline-content .read-more.truetube:hover, .timeline-content .read-more.truetube.active {
       color: white;
       background: #d7e100; }
 

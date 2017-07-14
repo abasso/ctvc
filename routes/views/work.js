@@ -4,6 +4,7 @@ const _ = require('lodash')
 const moment = require('moment')
 
 exports = module.exports = function (req, res) {
+	console.log("YYAYYYYYYYYY")
 
 	var view = new keystone.View(req, res)
 	var locals = res.locals
@@ -48,7 +49,7 @@ exports = module.exports = function (req, res) {
 
 		var q = keystone.list('Work').paginate({
 			page: req.query.page || 1,
-			perPage: 10,
+			perPage: 100,
 			maxPages: 10,
 			filters: {
 				state: 'published',
@@ -67,7 +68,8 @@ exports = module.exports = function (req, res) {
 				if (_.isUndefined(data.broadcastDate)) {
 					return
 				}
-				let broadCastDate = moment(data.broadcastDate);
+
+				let broadCastDate = moment(data.broadcastDate)
 				data.shortBroadcastDate = broadCastDate.format("MMMM YYYY")
 				data.broadCastYear = broadCastDate.format("YYYY")
 				if (_.isUndefined(_.find(locals.data.years, data.broadCastYear))) {

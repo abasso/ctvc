@@ -108,7 +108,7 @@
           }
         }
       }
-      &.true-tube {
+      &.truetube {
         h2 {
           &:after {
             background: rgba(215,225,0,.5);
@@ -155,7 +155,7 @@
               }
             }
           }
-          &.true-tube {
+          &.truetube {
             h2 {
               &:after {
                 background: rgba(215,225,0,.7);
@@ -217,7 +217,7 @@
               }
             }
           }
-          &.true-tube {
+          &.truetube {
             h2 {
               &:after {
                 background: rgba(215,225,0,.7);
@@ -379,7 +379,7 @@
         background: rgba(217,17,91,1);
       }
     }
-    &.true-tube {
+    &.truetube {
       //color: rgba(215,225,0,1);
       &:hover, &.active {
         color: white;

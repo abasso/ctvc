@@ -25,7 +25,7 @@
 				{{# each data.work.results}}
 				<div class="list-item all {{workType.key}} _{{broadCastYear}}">
 					<a href="{{workUrl slug workType.key}}">
-					{{#if thumbnail}}<img src="{{{cloudinaryUrl thumbnail width=350 height=196 crop='fit' }}}" class="img pull-right">{{/if}}
+					{{#if thumbnail}}<img src="{{{cloudinaryUrl thumbnail width=350 height=196 crop='lfill' }}}" class="img pull-right">{{/if}}
 					<div class="list-item-overlay">
 						<div class="list-item-title">
 							<h2>{{{title}}}</h2>

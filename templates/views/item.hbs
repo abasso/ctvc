@@ -10,7 +10,7 @@
 				<a class="btn-play-video" data-src="{{../data.item.video}}">
 				</a>
 				{{/if}}
-				<img src="{{{cloudinaryUrl this width=1600 height=900 crop='limit' }}}" class="img-responsive">
+				<img src="{{{cloudinaryUrl this width=1600 height=900 crop='lfill' }}}" class="img-responsive">
 			</span>
 			</div>
 			{{/each}}
@@ -39,7 +39,7 @@
 									<a class="btn-play-video" data-src="{{../data.item.video}}">
 									</a>
 									{{/if}}
-									<img src="{{{cloudinaryUrl this width=1600 height=900 crop='fit' }}}" class="img-responsive">
+									<img src="{{{cloudinaryUrl this width=1600 height=900 crop='lfill' }}}" class="img-responsive">
 								</span>
 								</div>
 								{{/each}}
@@ -136,9 +136,13 @@
 					{{/if}}
 					{{#if data.item.inAssociationWith}}
 					<div class="item-info-block">
-						<h5>In Association With</h5>
 						{{#each data.item.inAssociationWith}}
 						<div class="item-info-block_item">
+							{{#if logo.image.url}}
+							<div class="item-info-block_logo_100">
+								<img src="{{{cloudinaryUrl logo.image height=100 crop='limit' }}}" class="img-responsive">
+							</div>
+							{{/if}}
 							{{#if showLabel}}<strong class="item-info-block_title">{{{label}}}</strong> {{/if}}
 							{{#ifEquals type 'text'}}<span class="item-info-block_text">{{{../text}}}</span>{{/ifEquals}}
 							{{#ifEquals type 'link'}}<a href="{{{../link}}}" class="item-info-block_link {{#if ../newWindow}}link-external{{/if}}">{{{../text}}}

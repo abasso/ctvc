@@ -34,7 +34,7 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
-	'wysiwyg additional plugins': 'wordcount'
+	'wysiwyg additional plugins': 'wordcount, paste',
 });
 
 // Load your project's Models

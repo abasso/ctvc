@@ -162,8 +162,6 @@ module.exports = function () {
 	// Returns an src-string for a cloudinary image
 
 	_helpers.cloudinaryUrl = function (context, options) {
-		console.log("CLOUDINARY CONTEXT", context);
-		console.log("CLOUDINARY OPTIONS", options);
 		// if we dont pass in a context and just kwargs
 		// then `this` refers to our default scope block and kwargs
 		// are stored in context.hash

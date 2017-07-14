@@ -13,6 +13,12 @@ exports = module.exports = function (req, res) {
 	}
 	locals.data = {
 		items: [],
+		meta: {
+			title: "| CTVC",
+			description: "CTVC is an independent production company producing content that raises important ethical and moral issues, from the perspective of those of “all faiths and none”, for mainstream television and radio broadcasters.",
+			image: "",
+			url: "http://www.ctvc.co.uk"
+		}
 	}
 
 	locals.media = []
@@ -46,16 +52,25 @@ exports = module.exports = function (req, res) {
 			})
 		})
 
-	// Load the current post
+	// Load the current item
 	view.on('init', function (next) {
 		var q = keystone.list('Work').model.findOne({
 			state: 'published',
 			slug: locals.filters.item,
-		}).populate('author workType media broadcastDetails.logo').lean()
+		}).populate('author workType media broadcastDetails.logo inAssociationWith.logo').lean()
 
 		q.exec(function (err, result) {
+			locals.data.meta.title = result.title + ' ' + locals.data.meta.title
+			locals.data.meta.description = result.content.brief
+			locals.data.meta.image = result.thumbnail.url
 			result.carousel = []
 			result.awards = _.filter(locals.awards, {work: result._id})
+			if(result.inAssociationWith.length === 1 && result.inAssociationWith[0].type === 'text' && result.inAssociationWith[0].text === '')  {
+				delete result.inAssociationWith
+			}
+			if(result.producedBy.length === 1 && result.producedBy[0].type === 'text' && result.producedBy[0].text === '')  {
+				delete result.producedBy
+			}
 			if (result.images) {
 				_.each(result.images, (image, index) => {
 					if (index === 0 && result.video) {

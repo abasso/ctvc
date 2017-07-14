@@ -14,7 +14,13 @@ exports = module.exports = function (req, res) {
 		categories: [],
 		carousel: [],
 		copy: {},
-		showreel: ''
+		showreel: '',
+		meta: {
+			title: "Using media to educate, challenge and inspire since 1978 | CTVC",
+			description: "CTVC is an independent production company producing content that raises important ethical and moral issues, from the perspective of those of “all faiths and none”, for mainstream television and radio broadcasters.",
+			image: "",
+			url: "http://www.ctvc.co.uk"
+		}
 	}
 
 

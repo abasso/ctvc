@@ -108,7 +108,7 @@ Modules - reusable parts of our design
   border-radius: 50%;
 }
 
-.timeline-pip-true-tube {
+.timeline-pip-truetube {
   background: rgba(215, 225, 0, 1);
 }
 .timeline-pip-digital {
@@ -187,7 +187,7 @@ Modules - reusable parts of our design
       }
     }
   }
-  &.true-tube {
+  &.truetube {
     h2 {
       &:after {
         background: rgba(215,225,0,1);
@@ -304,7 +304,7 @@ h3 {
       background: rgba(217,17,91,1);
     }
   }
-  &.true-tube {
+  &.truetube {
     color: rgba(215,225,0,1);
     &:hover, &.active {
       color: white;
