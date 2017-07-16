@@ -16,7 +16,14 @@ exports = module.exports = function (req, res) {
 	locals.data = {
 		awards: [],
 		categories: [],
-		years: []
+		years: [],
+		meta: {
+			title: "Awards | CTVC",
+			description: "CTVC is an independent production company producing content that raises important ethical and moral issues, from the perspective of those of “all faiths and none”, for mainstream television and radio broadcasters.",
+			image: "",
+			url: "http://www.ctvc.co.uk"
+		}
+
 	}
 
 	locals.media = []
@@ -28,6 +35,7 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			locals.media = results
+			locals.data.partners = _.filter(results, {showInFooter: true});
 			next(err)
 		})
 
@@ -49,7 +57,7 @@ exports = module.exports = function (req, res) {
 
 		var q = keystone.list('Award').paginate({
 			page: req.query.page || 1,
-			perPage: 10,
+			perPage: 100,
 			maxPages: 10,
 			filters: {
 				state: 'published',
@@ -74,6 +82,7 @@ exports = module.exports = function (req, res) {
 				let receivedDate = moment(data.receivedDate);
 				data.receivedDate = receivedDate.format("MMMM YYYY")
 				data.receivedYear = receivedDate.format("YYYY")
+				data.receivedDateSort = receivedDate.format("X")
 				if (_.isUndefined(_.find(locals.data.years, data.receivedDate))) {
 					locals.data.years.push(data.receivedYear)
 				}
@@ -83,9 +92,10 @@ exports = module.exports = function (req, res) {
 			_.each(groupedAwardsObject, (value, key) => {
 				groupedAwards.push({
 					year: key,
-					items : value
+					items : _.sortBy(value, "receivedDateSort").reverse()
 				})
 			})
+
 			locals.data.years = _.uniq(locals.data.years);
 			locals.data.awards = _.sortBy(groupedAwards, "receivedDate").reverse();
 			next(err)

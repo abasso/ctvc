@@ -95,5 +95,5 @@ Work.schema.virtual('content.full').get(function () {
 	return this.content.extended || this.content.brief;
 });
 
-Work.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
+Work.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%, broadcastDate|20%';
 Work.register();

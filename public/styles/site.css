@@ -6644,7 +6644,11 @@ p {
     display: flex;
     justify-content: space-between; }
     .partners .container img {
-      height: 55px; }
+      height: 35px; }
+    .partners .container:after {
+      content: none; }
+    .partners .container a:before {
+      content: none; }
   @media (max-width: 992px) {
     .partners {
       padding: 2rem 0; }
@@ -6755,7 +6759,7 @@ p {
     font-family: "Dosis", sans-serif;
     line-height: 1.875rem;
     position: relative;
-    margin-top: 2rem;
+    margin: 2rem 0;
     padding: 2rem 2rem 1rem 5rem;
     color: white; }
     .item article blockquote p {
@@ -6785,7 +6789,7 @@ p {
     font-weight: 200;
     display: flex;
     flex-direction: column;
-    margin: 2rem 0;
+    margin: 0 0 2rem 0;
     padding: 2rem 0 0;
     border-top: solid 2px rgba(0, 0, 0, 0.1); }
     .item article .item-info-block h5 {
@@ -7112,10 +7116,16 @@ body.truetube blockquote {
     font-size: .875rem;
     margin: 1rem 0; }
 
+.blockquote-credit {
+  padding-bottom: 2rem; }
+
 .map-wrapper {
   width: 100%;
   height: 400px;
   margin-top: 1rem; }
+
+.press-links {
+  margin-top: 4rem !important; }
 
 .grid-row {
   display: flex;
@@ -7354,7 +7364,7 @@ body.truetube blockquote {
     .filters a.digital:hover, .filters a.digital.active, .filters button.digital:hover, .filters button.digital.active {
       color: white;
       background: #d9115b; }
-    .filters a.truetube:hover, .filters a.truetube.active, .filters button.truetube:hover, .filters button.truetube.active {
+    .filters a.true-tube:hover, .filters a.true-tube.active, .filters button.true-tube:hover, .filters button.true-tube.active {
       color: white;
       background: #d7e100; }
   .filters button {

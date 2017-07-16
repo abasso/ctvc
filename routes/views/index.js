@@ -57,7 +57,6 @@ exports = module.exports = function (req, res) {
 					}
 				})
 				results = _.sortBy(results, 'sortOrder')
-				console.log("CAROUSEL", results);
 				locals.data.carousel = results
 				next(err)
 			})

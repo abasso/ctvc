@@ -32,6 +32,8 @@ exports = module.exports = function (req, res) {
 			var q = keystone.list('Media').model.find()
 			q.exec(function (err, results) {
 				locals.media = results
+				locals.data.partners = _.filter(results, {showInFooter: true});
+
 				next(err)
 			})
 

@@ -10,7 +10,7 @@
 				<a class="btn-play-video" data-src="{{../data.item.video}}">
 				</a>
 				{{/if}}
-				<img src="{{{cloudinaryUrl this width=1600 height=900 crop='lfill' }}}" class="img-responsive">
+				<img src="{{{cloudinaryUrl this width=1600 height=900 gravity='face' crop='lfill' }}}" class="img-responsive">
 			</span>
 			</div>
 			{{/each}}
@@ -39,7 +39,7 @@
 									<a class="btn-play-video" data-src="{{../data.item.video}}">
 									</a>
 									{{/if}}
-									<img src="{{{cloudinaryUrl this width=1600 height=900 crop='lfill' }}}" class="img-responsive">
+									<img src="{{{cloudinaryUrl this width=1600 height=900 gravity='face' crop='lfill' }}}" class="img-responsive">
 								</span>
 								</div>
 								{{/each}}
@@ -55,7 +55,7 @@
 					</header>
 					{{{data.item.content.extended}}}
 					{{#if data.item.press}}
-					<div class="item-info-block hidden-lg-down">
+					<div class="item-info-block hidden-lg-down press-links">
 						<h5>Press Links</h5>
 						{{#each data.item.press}}
 						<div class="item-info-block_item">
@@ -68,14 +68,14 @@
 					</div>
 					{{/if}}
 				</div>
-				<div class="col-sm-12 col-lg-4 offset-lg-1">
+				<div class="col-sm-12 col-lg-4 offset-lg-1 blockquote-wrapper">
 					{{#if data.item.content.quote}}
 					<blockquote>
 						{{{data.item.content.quote}}}
 					</blockquote>
 					{{/if}}
 					{{#if data.item.content.quoteCredit}}
-						{{data.item.content.quoteCredit}}
+						<div class="blockquote-credit">{{data.item.content.quoteCredit}}</div>
 					{{/if}}
 					{{#if data.item.press}}
 					<div class="item-info-block hidden-lg-up">
@@ -92,7 +92,7 @@
 					{{/if}}
 					{{#if data.item.broadcastDetails}}
 					<div class="item-info-block">
-						<h5>Broadcast Details</h5>
+						<h5>Broadcaster</h5>
 						{{#each data.item.broadcastDetails}}
 						<div class="item-info-block_item">
 							{{#if logo.image.url}}

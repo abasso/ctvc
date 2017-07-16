@@ -115,7 +115,7 @@
 					<a href="#"><img src="/images/logos/channel4.png"/></a>
  -->
 					{{#each data.partners}}
-						<a href="{{link}}"><img src="{{image.url}}"/></a>
+						<a href="{{link}}" {{#if newWindow}}target="_blank"{{/if}} ><img src="{{image.url}}"/></a>
 					{{/each}}
 				</div>
 			</div>
@@ -278,7 +278,6 @@
 						var offset = swiper.height()
 						$(".offset").each( function(index, item) {
 							$(item).css('top', offset)
-							console.log($(item).outerHeight())
 						})
 					}
 
@@ -350,6 +349,7 @@
 							$(this).addClass("active")
 							filterArray.push("." + $(this).attr("data-filter"))
 						}
+						console.log(filterArray)
 						iso.arrange({
 							filter: filterArray.join("")
 						})

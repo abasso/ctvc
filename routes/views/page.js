@@ -21,10 +21,29 @@ exports = module.exports = function (req, res) {
     pages: [],
 		page: [],
 		categories: [],
-		years: []
+		years: [],
+		meta: {
+			title: _.capitalize(req.path.split("/")[1]) + " | CTVC",
+			description: "CTVC is an independent production company producing content that raises important ethical and moral issues, from the perspective of those of “all faiths and none”, for mainstream television and radio broadcasters.",
+			image: "",
+			url: "http://www.ctvc.co.uk"
+		}
+
 	}
 
 	locals.media = []
+
+	// Load other posts
+	view.on('init', function (next) {
+
+		var q = keystone.list('Media').model.find()
+
+		q.exec(function (err, results) {
+			locals.data.partners = _.filter(results, {showInFooter: true});
+			next(err)
+		})
+
+	})
 
 	// Load other posts
 	view.on('init', function (next) {

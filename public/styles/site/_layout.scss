@@ -897,7 +897,15 @@ p {
 
     justify-content: space-between;
     img {
-      height: 55px;
+      height: 35px;
+    }
+    &:after {
+      content: none;
+    }
+    a {
+      &:before {
+        content: none;
+      }
     }
   }
   @media (max-width: $breakpoint-lg) {
@@ -1036,7 +1044,7 @@ p {
       font-family: $font-face, sans-serif;
       line-height: 1.875rem;
       position: relative;
-      margin-top: 2rem;
+      margin: 2rem 0;
       padding: 2rem 2rem 1rem 5rem;
       color: white;
       p {
@@ -1070,7 +1078,7 @@ p {
       font-weight: 200;
       display: flex;
       flex-direction: column;
-      margin: 2rem 0;
+      margin: 0 0 2rem 0;
       padding: 2rem 0 0;
       border-top: solid 2px rgba(0,0,0,.1);
       h5 {
@@ -1546,8 +1554,16 @@ body {
   }
 }
 
+.blockquote-credit {
+  padding-bottom: 2rem;
+}
+
 .map-wrapper {
   width: 100%;
   height: 400px;
   margin-top: 1rem;
+}
+
+.press-links {
+  margin-top: 4rem !important;
 }

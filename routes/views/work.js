@@ -4,7 +4,6 @@ const _ = require('lodash')
 const moment = require('moment')
 
 exports = module.exports = function (req, res) {
-	console.log("YYAYYYYYYYYY")
 
 	var view = new keystone.View(req, res)
 	var locals = res.locals
@@ -17,7 +16,14 @@ exports = module.exports = function (req, res) {
 	locals.data = {
 		work: [],
 		categories: [],
-		years: []
+		years: [],
+		meta: {
+			title: "Our Work | CTVC",
+			description: "CTVC is an independent production company producing content that raises important ethical and moral issues, from the perspective of those of “all faiths and none”, for mainstream television and radio broadcasters.",
+			image: "",
+			url: "http://www.ctvc.co.uk"
+		}
+
 	}
 
 	// Load all categories
@@ -44,6 +50,18 @@ exports = module.exports = function (req, res) {
 		})
 	})
 
+	// Load other posts
+	view.on('init', function (next) {
+
+		var q = keystone.list('Media').model.find()
+
+		q.exec(function (err, results) {
+			locals.data.partners = _.filter(results, {showInFooter: true});
+			next(err)
+		})
+
+	})
+
 	// Load the work
 	view.on('init', function (next) {
 
@@ -55,7 +73,7 @@ exports = module.exports = function (req, res) {
 				state: 'published',
 			},
 		})
-			.sort('-siteOrder')
+			.sort('-publishedDate')
 			.populate('author workType')
 
 		if (locals.data.category) {
@@ -63,20 +81,25 @@ exports = module.exports = function (req, res) {
 		}
 
 		q.exec(function (err, results) {
+			console.log("THE RESULTS",results)
+			let archiveThreshold = moment().subtract(1, "years").year();
 			let yearsObject = {}
 			_.each(results.results, (data) => {
 				if (_.isUndefined(data.broadcastDate)) {
 					return
 				}
-
 				let broadCastDate = moment(data.broadcastDate)
 				data.shortBroadcastDate = broadCastDate.format("MMMM YYYY")
 				data.broadCastYear = broadCastDate.format("YYYY")
+				if(data.broadCastYear < archiveThreshold)
+				data.broadCastYear = "Older"
 				if (_.isUndefined(_.find(locals.data.years, data.broadCastYear))) {
 					locals.data.years.push(data.broadCastYear)
 				}
 			})
-			locals.data.years = _.uniq(locals.data.years).reverse();
+			locals.data.years = _.sortBy(_.uniq(locals.data.years));
+			locals.data.years.splice(2,1)
+			locals.data.years.splice(0, 0, "Older");
 			locals.data.work = results
 			next(err)
 		})
