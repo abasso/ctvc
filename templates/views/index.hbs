@@ -29,9 +29,6 @@
 			{{/each}}
 		</div>
 		<div class="swiper-pagination"></div>
-		<!-- <div class="swiper-button-prev"></div>
-		<div class="swiper-button-next"></div> -->
-
 	</div>
 		<div class="intro offset">
 			<div class="container">
@@ -46,7 +43,7 @@
 			{{# each data.categories }}
 				<div class="col-sm-12 col-md-6 col-lg-3 homepage-categories-column">
 					<a href="work/{{this.key}}" class=" homepage-category {{this.key}}">
-				{{#if image}}<img src="{{{cloudinaryUrl image width=400 height=214 crop='fit' }}}" class="img pull-right">{{/if}}
+				{{#if image}}<div class="homepage-category-image-wrapper"><img src="{{{cloudinaryUrl image width=400 height=214 crop='fit' }}}" class="img"></div>{{/if}}
 					<h5>{{this.name}}</h5>
 					{{{this.description}}}
 				</a>
@@ -71,7 +68,6 @@
 									<div class="list-item-title">
 										<h2>{{{title}}}</h2>
 										{{{content.brief}}}
-										<!-- {{#if shortBroadcastDate}}<span class="broadcast-date">{{shortBroadcastDate}}</span>{{/if}} -->
 									</div>
 								</div>
 								</a>

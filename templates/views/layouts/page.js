@@ -36,7 +36,6 @@ exports = module.exports = function (req, res) {
 		q.exec(function (err, results) {
       locals.data.pages = _.filter(results, {type: locals.filters.type })
       locals.data.page = (locals.filters.page === undefined) ? locals.data.pages[0] : _.find(locals.data.pages, {slug: locals.filters.page});
-      console.log(locals.data.page);
       locals.data.page.active = true;
       locals.section = locals.data.pages[0].type
 			next(err)

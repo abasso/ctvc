@@ -1,7 +1,7 @@
 /**
  * This file is where you define your application routes and controllers.
  *
- * Start by including the middleware you want to run for every request;
+ * Start by including the middleware you want to run for every request
  * you can attach middleware to the pre('routes') and pre('render') events.
  *
  * For simplicity, the default setup for route controllers is for each to be
@@ -18,36 +18,36 @@
  * http://expressjs.com/api.html#app.VERB
  */
 
-var keystone = require('keystone');
-var middleware = require('./middleware');
-var importRoutes = keystone.importer(__dirname);
+var keystone = require('keystone')
+var middleware = require('./middleware')
+var importRoutes = keystone.importer(__dirname)
 
 // Common Middleware
-keystone.pre('routes', middleware.initLocals);
-keystone.pre('render', middleware.flashMessages);
+keystone.pre('routes', middleware.initLocals)
+keystone.pre('render', middleware.flashMessages)
 
 // Import Route Controllers
 var routes = {
 	views: importRoutes('./views'),
-};
+}
 
 // Setup Route Bindings
 exports = module.exports = function (app) {
 	// Views
-	app.get('/', routes.views.index);
-	app.get('/work/:category?', routes.views.work);
-	app.get('/work/item/:item', routes.views.item);
-	app.get('/work/tv/:item', routes.views.item);
-	app.get('/work/audio/:item', routes.views.item);
-	app.get('/work/digital/:item', routes.views.item);
-	app.get('/work/truetube/:item', routes.views.item);
-	app.get('/about', routes.views.page);
-	app.get('/people', routes.views.people);
-	app.get('/about/:page', routes.views.page);
-	app.get('/awards', routes.views.award);
-	app.all('/contact', routes.views.contact);
+	app.get('/', routes.views.index)
+	app.get('/work/:category?', routes.views.work)
+	app.get('/work/item/:item', routes.views.item)
+	app.get('/work/tv/:item', routes.views.item)
+	app.get('/work/audio/:item', routes.views.item)
+	app.get('/work/digital/:item', routes.views.item)
+	app.get('/work/truetube/:item', routes.views.item)
+	app.get('/about', routes.views.page)
+	app.get('/people', routes.views.people)
+	app.get('/about/:page', routes.views.page)
+	app.get('/awards', routes.views.award)
+	app.all('/contact', routes.views.contact)
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
-	// app.get('/protected', middleware.requireUser, routes.views.protected);
+	// app.get('/protected', middleware.requireUser, routes.views.protected)
 
-};
+}

@@ -6554,6 +6554,7 @@ p {
     overflow: hidden;
     flex-direction: column;
     height: 100%;
+    transition: all 100ms ease-in;
     text-align: center;
     text-decoration: none;
     color: #333;
@@ -6564,7 +6565,8 @@ p {
       font-weight: 600;
       position: relative;
       margin: 0 .75rem .75rem;
-      padding: 1.5rem; }
+      padding: 1.5rem;
+      transition: all 100ms ease-in; }
       .homepage-categories .homepage-category h5:before {
         position: absolute;
         bottom: 0;
@@ -6574,16 +6576,25 @@ p {
         content: '';
         border-radius: 4px; }
     .homepage-categories .homepage-category img {
-      width: 100%; }
+      width: 100%;
+      transition: all 100ms ease-in; }
     .homepage-categories .homepage-category p {
       font-size: .875rem;
       padding: 1rem;
       flex-grow: 1; }
+    .homepage-categories .homepage-category .homepage-category-image-wrapper {
+      position: relative;
+      z-index: 1;
+      overflow: hidden; }
     .homepage-categories .homepage-category:hover {
       color: white;
       background: #333; }
+      .homepage-categories .homepage-category:hover h5 {
+        font-size: 1.875rem; }
       .homepage-categories .homepage-category:hover p {
         color: white; }
+      .homepage-categories .homepage-category:hover img {
+        transform: scale(1.1) rotate(2deg); }
     .homepage-categories .homepage-category.tv h5:before {
       background: rgba(20, 169, 229, 0.9); }
     .homepage-categories .homepage-category.tv:hover {
@@ -6652,8 +6663,13 @@ p {
   @media (max-width: 992px) {
     .partners {
       padding: 2rem 0; }
-      .partners .container img {
-        height: 30px; } }
+      .partners .container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; }
+        .partners .container img {
+          height: 30px;
+          margin: .5rem; } }
 
 .contact-footer {
   padding: 2rem 0;
@@ -6678,9 +6694,13 @@ p {
       text-align: center;
       align-items: center;
       flex-grow: 1; }
+      .contact-footer .container .address img {
+        margin-bottom: 1rem; }
       @media (min-width: 767px) {
         .contact-footer .container .address {
-          flex-direction: row; } }
+          flex-direction: row; }
+          .contact-footer .container .address img {
+            margin-bottom: 0rem; } }
     .contact-footer .container .deets {
       display: flex;
       flex-direction: column;

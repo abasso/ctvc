@@ -35,7 +35,7 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			locals.media = results
-			locals.data.partners = _.filter(results, {showInFooter: true});
+			locals.data.partners = _.filter(results, {showInFooter: true})
 			next(err)
 		})
 
@@ -47,7 +47,7 @@ exports = module.exports = function (req, res) {
 			if (err || !results.length) {
 				return next(err)
 			}
-			locals.data.categories = results;
+			locals.data.categories = results
 			next(err)
 		})
 	})
@@ -69,8 +69,7 @@ exports = module.exports = function (req, res) {
 			let yearsObject = {}
 			_.each(results.results, (data) => {
 				if(data.work) {
-					data.workType = _.find(locals.data.categories, {_id: data.work.workType});
-					// console.log("THE WORK TYPE", workType);
+					data.workType = _.find(locals.data.categories, {_id: data.work.workType})
 				}
 				if (_.isUndefined(data.receivedDate)) {
 					return
@@ -79,7 +78,7 @@ exports = module.exports = function (req, res) {
 				if (_.isUndefined(data.award)) {
 					return
 				}
-				let receivedDate = moment(data.receivedDate);
+				let receivedDate = moment(data.receivedDate)
 				data.receivedDate = receivedDate.format("MMMM YYYY")
 				data.receivedYear = receivedDate.format("YYYY")
 				data.receivedDateSort = receivedDate.format("X")
@@ -87,7 +86,7 @@ exports = module.exports = function (req, res) {
 					locals.data.years.push(data.receivedYear)
 				}
 			})
-			let groupedAwardsObject = _.groupBy(results.results, "receivedYear");
+			let groupedAwardsObject = _.groupBy(results.results, "receivedYear")
 			let groupedAwards = []
 			_.each(groupedAwardsObject, (value, key) => {
 				groupedAwards.push({
@@ -96,8 +95,8 @@ exports = module.exports = function (req, res) {
 				})
 			})
 
-			locals.data.years = _.uniq(locals.data.years);
-			locals.data.awards = _.sortBy(groupedAwards, "receivedDate").reverse();
+			locals.data.years = _.uniq(locals.data.years)
+			locals.data.awards = _.sortBy(groupedAwards, "receivedDate").reverse()
 			next(err)
 		})
 	})

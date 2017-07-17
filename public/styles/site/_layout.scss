@@ -766,17 +766,21 @@ p {
     overflow: hidden;
     flex-direction: column;
     height: 100%;
+    transition: all 100ms ease-in;
     text-align: center;
     text-decoration: none;
     color: #333;
     border-radius: .75rem;
     box-shadow: inset 0 0 1px rgba(0,0,0,.2);
+
     h5 {
       font-size: 1.5rem;
       font-weight: 600;
       position: relative;
       margin: 0 .75rem .75rem;
       padding: 1.5rem;
+      transition: all 100ms ease-in;
+
       &:before {
         position: absolute;
         bottom: 0;
@@ -789,6 +793,7 @@ p {
     }
     img {
       width: 100%;
+      transition: all 100ms ease-in;
     }
     p {
       font-size: .875rem;
@@ -796,11 +801,22 @@ p {
 
       flex-grow: 1;
     }
+    .homepage-category-image-wrapper {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
     &:hover {
       color: white;
       background: #333;
+      h5 {
+        font-size: 1.875rem;
+      }
       p {
         color: white;
+      }
+      img {
+        transform: scale(1.1) rotate(2deg);
       }
     }
     &.tv {
@@ -911,8 +927,13 @@ p {
   @media (max-width: $breakpoint-lg) {
     padding: 2rem 0;
     .container {
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
       img {
         height: 30px;
+        margin: .5rem;
       }
     }
   }
@@ -947,8 +968,14 @@ p {
 
       align-items: center;
       flex-grow: 1;
+      img {
+        margin-bottom: 1rem;
+      }
       @media (min-width: $breakpoint-md) {
         flex-direction: row;
+        img {
+          margin-bottom: 0rem;
+        }
       }
     }
 

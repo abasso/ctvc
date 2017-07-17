@@ -1,10 +1,10 @@
 // Simulate config options from your production environment by
 // customising the .env file in your project's root folder.
-require('dotenv').config();
+require('dotenv').config()
 
 // Require keystone
-var keystone = require('keystone');
-var handlebars = require('express-handlebars');
+var keystone = require('keystone')
+var handlebars = require('express-handlebars')
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
@@ -35,10 +35,10 @@ keystone.init({
 	'auth': true,
 	'user model': 'User',
 	'wysiwyg additional plugins': 'wordcount, paste',
-});
+})
 
 // Load your project's Models
-keystone.import('models');
+keystone.import('models')
 
 // Setup common locals for your templates. The following are required for the
 // bundled templates and layouts. Any runtime locals (that should be set uniquely
@@ -48,11 +48,11 @@ keystone.set('locals', {
 	env: keystone.get('env'),
 	utils: keystone.utils,
 	editable: keystone.content.editable,
-});
+})
 
 // Load your project's Routes
-keystone.set('routes', require('./routes'));
-keystone.set('signin logo', '/images/logo.svg');
+keystone.set('routes', require('./routes'))
+keystone.set('signin logo', '/images/logo.svg')
 
 
 // Configure the navigation bar in Keystone's Admin UI
@@ -65,7 +65,7 @@ keystone.set('nav', {
 	Carousel: 'carousels',
 	enquiries: 'enquiries',
 	users: 'users',
-});
+})
 
 // Start Keystone to connect to your database and initialise the web server
 
@@ -77,14 +77,14 @@ if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN) {
 	+ '\nYou have opted into email sending but have not provided'
 	+ '\nmailgun credentials. Attempts to send will fail.'
 	+ '\n\nCreate a mailgun account and add the credentials to the .env file to'
-	+ '\nset up your mailgun integration');
+	+ '\nset up your mailgun integration')
 }
 
 if (keystone.get('env') === 'development') {
     keystone.set('sass options', {
         debug: true,
         force: true
-    });
+    })
 }
 
-keystone.start();
+keystone.start()

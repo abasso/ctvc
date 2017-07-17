@@ -34,7 +34,7 @@ exports = module.exports = function (req, res) {
 				return next(err)
 			}
 
-			locals.data.categories = _.sortBy(results, 'order');
+			locals.data.categories = _.sortBy(results, 'order')
 
 			// Load the counts for each category
 			async.each(locals.data.categories, function (category, next) {
@@ -56,7 +56,7 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('Media').model.find()
 
 		q.exec(function (err, results) {
-			locals.data.partners = _.filter(results, {showInFooter: true});
+			locals.data.partners = _.filter(results, {showInFooter: true})
 			next(err)
 		})
 
@@ -81,8 +81,7 @@ exports = module.exports = function (req, res) {
 		}
 
 		q.exec(function (err, results) {
-			console.log("THE RESULTS",results)
-			let archiveThreshold = moment().subtract(1, "years").year();
+			let archiveThreshold = moment().subtract(1, "years").year()
 			let yearsObject = {}
 			_.each(results.results, (data) => {
 				if (_.isUndefined(data.broadcastDate)) {
@@ -97,9 +96,9 @@ exports = module.exports = function (req, res) {
 					locals.data.years.push(data.broadCastYear)
 				}
 			})
-			locals.data.years = _.sortBy(_.uniq(locals.data.years));
+			locals.data.years = _.sortBy(_.uniq(locals.data.years))
 			locals.data.years.splice(2,1)
-			locals.data.years.splice(0, 0, "Older");
+			locals.data.years.splice(0, 0, "Older")
 			locals.data.work = results
 			next(err)
 		})

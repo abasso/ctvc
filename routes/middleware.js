@@ -34,15 +34,15 @@ exports.initLocals = function (req, res, next) {
 				{ label: 'Show Reel', key: 'show-reel', href: '#', class: 'watch-show-reel hidden-large', src: _.find(results, {key: 'showreel'}).videoUrl, hiddenLarge: true },
 				{ label: 'People', key: 'people', href: '/people' },
 				{ label: 'Contact', key: 'contact', href: '/contact' },
-			];
+			]
 			res.locals.socialLinks = [
 				{ label: '', key: 'facebook', href: 'https://www.facebook.com/ctvcUK', class: 'social facebook' },
 				{ label: '', key: 'twitter', href: 'https://twitter.com/ctvc', class: 'social twitter' },
 			]
-			res.locals.user = req.user;
-			next();
+			res.locals.user = req.user
+			next()
 		})
-};
+}
 
 
 /**
@@ -54,10 +54,10 @@ exports.flashMessages = function (req, res, next) {
 		success: req.flash('success'),
 		warning: req.flash('warning'),
 		error: req.flash('error'),
-	};
-	res.locals.messages = _.some(flashMessages, function (msgs) { return msgs.length; }) ? flashMessages : false;
-	next();
-};
+	}
+	res.locals.messages = _.some(flashMessages, function (msgs) { return msgs.length }) ? flashMessages : false
+	next()
+}
 
 
 /**
@@ -65,9 +65,9 @@ exports.flashMessages = function (req, res, next) {
  */
 exports.requireUser = function (req, res, next) {
 	if (!req.user) {
-		req.flash('error', 'Please sign in to access this page.');
-		res.redirect('/keystone/signin');
+		req.flash('error', 'Please sign in to access this page.')
+		res.redirect('/keystone/signin')
 	} else {
-		next();
+		next()
 	}
-};
+}
