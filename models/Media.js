@@ -16,7 +16,10 @@ Media.add({
 	type: { type: Types.Select, options: 'image, video', default: 'image', index: true},
 	imageCategory: { type: Types.Select, options: 'Logo, Award, People', default: 'Logo', dependsOn: {type: 'image'}},
 	videoCategory: { type: Types.Select, options: 'Content, Showreel', default: 'Content', dependsOn: {type: 'video'}},
-	videoUrl: { type: String, dependsOn: {type: 'video'}},
+	videoType: { type: Types.Select, options: 'Local, Embed', dependsOn: {type: 'video'}},
+
+	videoUrl: { type: String, dependsOn: {videoType: 'Local'}},
+	videoEmbed: { type: Types.Html, dependsOn: {videoType: 'Embed'}},
 	image: { type: Types.CloudinaryImage, dependsOn: {type: 'image'}},
   alt: { type: String, dependsOn: {type: 'image'}},
   link: { type: Types.Url, dependsOn: {type: 'image'}},

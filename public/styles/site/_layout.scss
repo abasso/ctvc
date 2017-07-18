@@ -1595,3 +1595,27 @@ body {
 .press-links {
   margin-top: 4rem !important;
 }
+
+.embed-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.sidedock {
+  top: auto;
+  bottom: 40px;
+}
+
+.embed-modal {
+  .video-close {
+    right: auto;
+    left: 20px;
+  }
+}

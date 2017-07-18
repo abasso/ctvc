@@ -1,368 +1,378 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>{{data.meta.title}}</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta property="og:site_name" content="CTVC" />
-		<meta property="og:url" content="https://www.ctvc.co.uk" />
-		<meta property="og:image" content="{{data.meta.image}}" />
-		<meta property="og:type" content="website" />
-		<meta property="og:description" content="{{data.meta.description}}" />
-		<meta property="og:title" content="{{data.meta.title}}" />
-		<meta name="description" content="{{data.meta.description}}" />
-		<link rel="shortcut icon" href="/images/icon_grayscale_2@2x.png" type="image/x-icon">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
-		<link href="https://fonts.googleapis.com/css?family=Dosis:500,600,700|Open+Sans:300,400" rel="stylesheet">
-		<link href="http://vjs.zencdn.net/5.19.2/video-js.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<head>
+	<meta charset="utf-8">
+	<title>{{data.meta.title}}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta property="og:site_name" content="CTVC" />
+	<meta property="og:url" content="https://www.ctvc.co.uk" />
+	<meta property="og:image" content="{{data.meta.image}}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:description" content="{{data.meta.description}}" />
+	<meta property="og:title" content="{{data.meta.title}}" />
+	<meta name="description" content="{{data.meta.description}}" />
+	<link rel="shortcut icon" href="/images/icon_grayscale_2@2x.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Dosis:500,600,700|Open+Sans:300,400" rel="stylesheet">
+	<link href="http://vjs.zencdn.net/5.19.2/video-js.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
 
-		<link href="/styles/site.css" rel="stylesheet">
-		{{!-- This file provides the default styling for the KeystoneJS Content Editor
-			- only renders when user is logged in and admin--}}
-		{{{isAdminEditorCSS user}}}
+	<link href="/styles/site.css" rel="stylesheet">
+	{{!-- This file provides the default styling for the KeystoneJS Content Editor
+	- only renders when user is logged in and admin--}}
+	{{{isAdminEditorCSS user}}}
 
-		{{!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
-		//- Safely remove this block if you are not targeting IE8 --}}
-		<!--[if lt IE 9]>
-			<script src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js"></script>
-			<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+	{{!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+	//- Safely remove this block if you are not targeting IE8 --}}
+	<!--[if lt IE 9]>
+	<script src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js"></script>
+	<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
-	</head>
-	<body class="{{section}} {{data.item.workType.key}} {{#if data.item.useCompactLayout}}compact-item{{/if}}">
-		<div id="header">
-			<div class="container">
-				<div role="navigation" class="navbar navbar-default">
-						<div class="navbar-header">
-							<a href="/" class="navbar-brand">
-								<img src="/images/logo.svg"/>
-							</a>
+</head>
+<body class="{{section}} {{data.item.workType.key}} {{#if data.item.useCompactLayout}}compact-item{{/if}}">
+	<div id="header">
+		<div class="container">
+			<div role="navigation" class="navbar navbar-default">
+				<div class="navbar-header">
+					<a href="/" class="navbar-brand">
+						<img src="/images/logo.svg"/>
+					</a>
+				</div>
+				<a class="burger-menu-toggle hidden-lg-up"><span>Menu</span></a>
+				<nav class="nav">
+					{{# each navLinks}}
+					<div class="nav-item {{ class }}">
+						<a {{#ifeq ../section key}}class="active {{#if subItems}}sub-menu-trigger{{/if}}" {{else}}class=" {{#if subItems}}sub-menu-trigger{{/if}}"{{/ifeq}} href="{{ href }}" {{#if src}}data-src="{{src}}"{{/if}}>{{ label }}</a>
+						{{#if subItems}}
+						<div class="sub-menu">
+							{{#each subItems}}
+							<a {{#ifeq ../section key}}class="active {{#if subItems}}sub-menu{{/if}} {{ class }}"{{else}}class=" {{#if subItems}}sub-menu{{/if}}{{ class }}"{{/ifeq}} href="{{ href }}" {{#if src}}data-src="{{src}}"{{/if}}>{{ label }}</a>
+							{{/each}}
 						</div>
-						<a class="burger-menu-toggle hidden-lg-up"><span>Menu</span></a>
-							<nav class="nav">
-									{{# each navLinks}}
-									<div class="nav-item {{ class }}">
-										<a {{#ifeq ../section key}}class="active {{#if subItems}}sub-menu-trigger{{/if}}" {{else}}class=" {{#if subItems}}sub-menu-trigger{{/if}}"{{/ifeq}} href="{{ href }}" {{#if src}}data-src="{{src}}"{{/if}}>{{ label }}</a>
-										{{#if subItems}}
-										<div class="sub-menu">
-											{{#each subItems}}
-												<a {{#ifeq ../section key}}class="active {{#if subItems}}sub-menu{{/if}} {{ class }}"{{else}}class=" {{#if subItems}}sub-menu{{/if}}{{ class }}"{{/ifeq}} href="{{ href }}" {{#if src}}data-src="{{src}}"{{/if}}>{{ label }}</a>
-											{{/each}}
-										</div>
-										{{/if}}
-									</div>
-								{{/each}}
-								<div class="social-links">
-								{{# each socialLinks}}
-									<a {{#ifeq ../section key}} class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}" target="_blank" >{{ label }}</a>
-									{{/each}}
-								</div>
-							</nav>
-
-
-							<!-- <ul class="nav navbar-nav navbar-right">
-								{{#if user}}
-								<li><a href="/keystone/signout">Sign Out</a></li>
-								{{else}}
-								<li><a href="/keystone/signin">Sign In</a></li>
-								{{/if}}
-							</ul> -->
-				</div>
-			</div>
-		</div>
-		<div class="header-background"></div>
-		<div id="body" class="content-wrapper">
-			<!--
-				Flash messages allow you to display once-off status messages to users, e.g. form
-				validation errors, success messages, etc
-			-->
-			{{#if messages}}
-			<div id="flash-messages" class="container">
-				{{#if messages.info}}
-				<div class="alert alert-info">
-						{{{flashMessages messages.info}}}
-				</div>
-				{{/if}}
-				{{#if messages.success}}
-				<div class="alert alert-success">
-						{{{flashMessages messages.success}}}
-				</div>
-				{{/if}}
-				{{#if messages.warning}}
-				<div class="alert alert-warning">
-						{{{flashMessages messages.warning}}}
-				</div>
-				{{/if}}
-				{{#if messages.error}}
-				<div class="alert alert-danger">
-						{{{flashMessages messages.error}}}
-				</div>
-				{{/if}}
-			</div>
-			{{/if}}
-			<!-- The content block should contain the body of your template"s content-->
-			{{{body}}}
-		</div>
-		<div class="footer offset">
-			<div class="partners">
-				<div class="container">
-					<!-- <a href="#"><img src="/images/logos/bbc.png"/></a>
-					<a href="#"><img src="/images/logos/sky.png"/></a>
-					<a href="#"><img src="/images/logos/mtv.png"/></a>
-					<a href="#"><img src="/images/logos/channel4.png"/></a>
- -->
-					{{#each data.partners}}
-						<a href="{{link}}" {{#if newWindow}}target="_blank"{{/if}} ><img src="{{image.url}}"/></a>
+						{{/if}}
+					</div>
 					{{/each}}
-				</div>
-			</div>
-			<div class="contact-footer">
-				<div class="container">
-				<span class="address">
-					<img src="/images/logo.svg"/>
-					CTVC Ltd. First Floor, McBeath House, 310 Goswell Road, London, EC1V 7LW</span>
-				<span class="deets">Tel + 44 (0)20 7940 8480 <a href="mailto:info@ctvc.co.uk">info@ctvc.co.uk</a></span>
-			</div>
-			</div>
-			<div class="copyright"></div>
-		</div>
-		<div class="modal-player">
-			<div class="dog"></div>
-			<div class="video-close"></div>
-			<video controls autoplay preload="auto" class="video-js" id="modal-video">
-			</video>
-		</div>
-		<script src="/js/isotope/isotope.pkgd.min.js"></script>
-		<script src="/js/jquery/jquery-2.1.4.min.js"></script>
-		<script src="/js/bootstrap/bootstrap.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/6.1.0/video.min.js"></script>
-		<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+					<div class="social-links">
+						{{# each socialLinks}}
+						<a {{#ifeq ../section key}} class="active {{ class }}"{{else}}class="{{ class }}"{{/ifeq}} href="{{ href }}" target="_blank" >{{ label }}</a>
+						{{/each}}
+					</div>
+				</nav>
 
-		<script src="/js/lodash/lodash.min.js"></script>
-		{{{isAdminEditorJS user}}}
-		<script>
-		$.each($("a"), function() {
-			if($(this).attr("target") !== undefined) {
-				$(this).addClass("link-external");
+
+				<!-- <ul class="nav navbar-nav navbar-right">
+				{{#if user}}
+				<li><a href="/keystone/signout">Sign Out</a></li>
+				{{else}}
+				<li><a href="/keystone/signin">Sign In</a></li>
+				{{/if}}
+			</ul> -->
+		</div>
+	</div>
+</div>
+<div class="header-background"></div>
+<div id="body" class="content-wrapper">
+	<!--
+	Flash messages allow you to display once-off status messages to users, e.g. form
+	validation errors, success messages, etc
+-->
+{{#if messages}}
+<div id="flash-messages" class="container">
+	{{#if messages.info}}
+	<div class="alert alert-info">
+		{{{flashMessages messages.info}}}
+	</div>
+	{{/if}}
+	{{#if messages.success}}
+	<div class="alert alert-success">
+		{{{flashMessages messages.success}}}
+	</div>
+	{{/if}}
+	{{#if messages.warning}}
+	<div class="alert alert-warning">
+		{{{flashMessages messages.warning}}}
+	</div>
+	{{/if}}
+	{{#if messages.error}}
+	<div class="alert alert-danger">
+		{{{flashMessages messages.error}}}
+	</div>
+	{{/if}}
+</div>
+{{/if}}
+<!-- The content block should contain the body of your template"s content-->
+{{{body}}}
+</div>
+<div class="footer offset">
+	<div class="partners">
+		<div class="container">
+			<!-- <a href="#"><img src="/images/logos/bbc.png"/></a>
+			<a href="#"><img src="/images/logos/sky.png"/></a>
+			<a href="#"><img src="/images/logos/mtv.png"/></a>
+			<a href="#"><img src="/images/logos/channel4.png"/></a>
+		-->
+		{{#each data.partners}}
+		<a href="{{link}}" {{#if newWindow}}target="_blank"{{/if}} ><img src="{{image.url}}"/></a>
+		{{/each}}
+	</div>
+</div>
+<div class="contact-footer">
+	<div class="container">
+		<span class="address">
+			<img src="/images/logo.svg"/>
+			CTVC Ltd. First Floor, McBeath House, 310 Goswell Road, London, EC1V 7LW</span>
+			<span class="deets">Tel + 44 (0)20 7940 8480 <a href="mailto:info@ctvc.co.uk">info@ctvc.co.uk</a></span>
+		</div>
+	</div>
+	<div class="copyright"></div>
+</div>
+<div class="modal-player">
+	<div class="dog"></div>
+	<div class="video-close"></div>
+	<video controls autoplay preload="auto" class="video-js" id="modal-video">
+	</video>
+</div>
+<script src="/js/isotope/isotope.pkgd.min.js"></script>
+<script src="/js/jquery/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/6.1.0/video.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+<script src="/js/lodash/lodash.min.js"></script>
+{{{isAdminEditorJS user}}}
+<script>
+
+var showReelMarkup = '<div class="embed-player">{{{data.showreel}}}</div>'
+{{#if data.item.hasEmbedVideo}}
+var embedMarkup = '<div class="embed-player">{{{data.item.video}}}</div>'
+{{/if}}
+$.each($("a"), function() {
+	if($(this).attr("target") !== undefined) {
+		$(this).addClass("link-external");
+	}
+})
+$('#body').imagesLoaded( function() {
+	// $("body").on({
+	// 	"mouseenter": function() {
+	// 		$("body").addClass("video-active")
+	// 	},
+	// 	"mouseleave": function() {
+	// 		$("body").removeClass("video-active")
+	// 	}
+	// }, ".vjs-big-play-button")
+
+	// let player = document.getElementsByTagName('video')[0]
+	// if (player !== undefined) {
+	// 	player.addEventListener('play', function(data) {
+	// 		$("body").addClass("video-active")
+	// 	}, true)
+	// }
+	var myPlayer = videojs("modal-video")
+
+	$(".burger-menu-toggle").on({
+		"click": function() {
+			if ($(this).hasClass("is-active")) {
+				$(this).removeClass("is-active")
+				$(".nav").removeClass("show")
+			} else {
+				$(this).addClass("is-active")
+				$(".nav").addClass("show")
+			}
+		}
+	})
+
+	$(".people-more-toggle").on({
+		"click": function(e) {
+			e.preventDefault();
+			if ($(this).parent().children(".people-copy").hasClass("is-open")) {
+				$(this).removeClass("active").html("Show biography");
+				$(this).parent().children(".people-copy").removeClass("is-open")
+			} else {
+				$(this).addClass("active").html("Hide biography");
+				$(this).parent().children(".people-copy").addClass("is-open")
+			}
+		}
+	})
+
+	$(".video-close").on({
+		"click": function() {
+			myPlayer.pause()
+			$(".modal-player").hide().removeClass("embed-modal").children().show()
+			$(".embed-player").remove()
+		}
+	})
+
+	$(".filter-toggle").on({
+		"click": function() {
+			if ($(this).hasClass('open')) {
+				$(this).removeClass("open")
+				$(".work-filter").removeClass('show')
+
+			} else {
+				$(this).addClass("open")
+				$(".work-filter").addClass('show')
+			}
+		}
+	})
+
+	$("body").on({
+		"click": function() {
+			if (_.isUndefined(embedMarkup)) {
+				myPlayer.src($(this).attr("data-src"))
+				myPlayer.ready(function() {
+					myPlayer.play()
+				})
+			} else {
+				$(".modal-player").children().hide();
+				$(".modal-player").addClass("embed-modal").append(embedMarkup);
+				$(".video-close").show();
+			}
+
+			$(".modal-player").fadeIn()
+		},
+		"mouseenter": function() {
+			$(this).parent().addClass("focus").removeClass("blur")
+		},
+		"mouseleave": function() {
+			$(this).parent().addClass("blur").removeClass("focus")
+		}
+	}, ".btn-play-video")
+
+	$("body").on({
+		"click": function(e) {
+			$(".modal-player").children().hide();
+			$(".modal-player").addClass("embed-modal").append(showReelMarkup);
+			$(".video-close").show();
+			$(".modal-player").fadeIn()
+		},
+		"mouseenter": function() {
+			$(this).parent().addClass("focus").removeClass("blur")
+		},
+		"mouseleave": function() {
+			$(this).parent().addClass("blur").removeClass("focus")
+		}
+	}, ".watch-show-reel")
+
+	$(".work .list-item").on({
+		"mouseenter": function() {
+			$(this).addClass("focus").removeClass("blur")
+		},
+		"mouseleave": function() {
+			$(this).addClass("blur").removeClass("focus")
+		}
+	})
+	if($(".grid-row.work").length) {
+		var elem = document.querySelector(".grid-row")
+		var iso = new Isotope( ".grid-row", {
+			itemSelector: '.list-item',
+			layoutMode: 'fitRows',
+		})
+	}
+	if($("body").hasClass("item") && $(".swiper-slide").length > 1) {
+		var mySwiper = new Swiper ('.swiper-container', {
+			loop: true,
+			pagination: '.swiper-pagination',
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			paginationClickable: true
+		})
+	}
+	if($("body").hasClass("homepage")) {
+		if($(window).width() > 1200) {
+			var swiper = $(".swiper-wrapper")
+			var offset = swiper.height()
+			$(".offset").each( function(index, item) {
+				$(item).css('top', offset)
+			})
+		}
+
+		var mySwiper = new Swiper ('.swiper-container', {
+			loop: true,
+			pagination: '.swiper-pagination',
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			paginationClickable: true
+
+		})
+
+
+		$(window).resize(function() {
+			if($(window).width() > 1200) {
+				var swiper = $(".swiper-wrapper")
+				var offset = swiper.height()
+				$(".offset").each( function(index, item) {
+					$(item).css('top', offset)
+				})
+			} else {
+				$(".offset").removeAttr("style")
 			}
 		})
-		$('#body').imagesLoaded( function() {
-				// $("body").on({
-				// 	"mouseenter": function() {
-				// 		$("body").addClass("video-active")
-				// 	},
-				// 	"mouseleave": function() {
-				// 		$("body").removeClass("video-active")
-				// 	}
-				// }, ".vjs-big-play-button")
 
-				// let player = document.getElementsByTagName('video')[0]
-				// if (player !== undefined) {
-				// 	player.addEventListener('play', function(data) {
-				// 		$("body").addClass("video-active")
-				// 	}, true)
-				// }
-				var myPlayer = videojs("modal-video")
+	}
 
-				$(".burger-menu-toggle").on({
-					"click": function() {
-						if ($(this).hasClass("is-active")) {
-							$(this).removeClass("is-active")
-							$(".nav").removeClass("show")
-						} else {
-							$(this).addClass("is-active")
-							$(".nav").addClass("show")
-						}
+
+	var filterArray = []
+	if($("body").hasClass("work")) {
+		if(window.location.pathname !== "/work") {
+			let pathArray = window.location.pathname.split("/")
+			iso.arrange({
+				filter: "." + pathArray[pathArray.length -1]
+			})
+			$(".work-filter.type a").removeClass("active")
+			$(".work-filter.type a[data-filter=" + pathArray[pathArray.length -1] + "]").addClass("active")
+		}
+
+		$(".work-filter a").on("click", function(e) {
+			e.preventDefault()
+			_.each(filterArray, (arrayItem, index) => {
+				_.each($(this).siblings(), function(sibling) {
+					if (arrayItem === "." + $(sibling).attr("data-filter")) {
+						filterArray.splice(index, 1)
 					}
 				})
-
-				$(".people-more-toggle").on({
-					"click": function(e) {
-						e.preventDefault();
-						if ($(this).parent().children(".people-copy").hasClass("is-open")) {
-							$(this).removeClass("active").html("Show biography");
-							$(this).parent().children(".people-copy").removeClass("is-open")
-						} else {
-							$(this).addClass("active").html("Hide biography");
-							$(this).parent().children(".people-copy").addClass("is-open")
-						}
-					}
-				})
-
-				$(".video-close").on({
-					"click": function() {
-						myPlayer.pause()
-						$(".modal-player").fadeOut()
-					}
-				})
-
-				$(".filter-toggle").on({
-					"click": function() {
-						if ($(this).hasClass('open')) {
-							$(this).removeClass("open")
-							$(".work-filter").removeClass('show')
-
-						} else {
-							$(this).addClass("open")
-							$(".work-filter").addClass('show')
-						}
-					}
-				})
-
-
-
-				$("body").on({
-					"click": function() {
-						myPlayer.src($(this).attr("data-src"))
-						myPlayer.ready(function() {
-						  myPlayer.play()
-						})
-						$(".modal-player").fadeIn()
-					},
-					"mouseenter": function() {
-					$(this).parent().addClass("focus").removeClass("blur")
-					},
-					"mouseleave": function() {
-						$(this).parent().addClass("blur").removeClass("focus")
-					}
-				}, ".btn-play-video")
-
-				$("body").on({
-					"click": function(e) {
-						e.preventDefault()
-						myPlayer.src($(this).attr("data-src"))
-						myPlayer.ready(function() {
-							myPlayer.play()
-						})
-						$(".modal-player").fadeIn()
-					},
-					"mouseenter": function() {
-					$(this).parent().addClass("focus").removeClass("blur")
-					},
-					"mouseleave": function() {
-						$(this).parent().addClass("blur").removeClass("focus")
-					}
-				}, ".watch-show-reel")
-
-				$(".work .list-item").on({
-						"mouseenter": function() {
-						$(this).addClass("focus").removeClass("blur")
-					},
-						"mouseleave": function() {
-							$(this).addClass("blur").removeClass("focus")
-						}
-				})
-				if($(".grid-row.work").length) {
-					var elem = document.querySelector(".grid-row")
-					var iso = new Isotope( ".grid-row", {
-						itemSelector: '.list-item',
-						layoutMode: 'fitRows',
-					})
-				}
-				if($("body").hasClass("item") && $(".swiper-slide").length > 1) {
-					var mySwiper = new Swiper ('.swiper-container', {
-						loop: true,
-						pagination: '.swiper-pagination',
-						nextButton: '.swiper-button-next',
-						prevButton: '.swiper-button-prev',
-						paginationClickable: true
-					})
-				}
-				if($("body").hasClass("homepage")) {
-					if($(window).width() > 1200) {
-						var swiper = $(".swiper-wrapper")
-						var offset = swiper.height()
-						$(".offset").each( function(index, item) {
-							$(item).css('top', offset)
-						})
-					}
-
-					var mySwiper = new Swiper ('.swiper-container', {
-						loop: true,
-						pagination: '.swiper-pagination',
-						nextButton: '.swiper-button-next',
-						prevButton: '.swiper-button-prev',
-						paginationClickable: true
-
-					})
-
-
-					$(window).resize(function() {
-						if($(window).width() > 1200) {
-							var swiper = $(".swiper-wrapper")
-							var offset = swiper.height()
-							$(".offset").each( function(index, item) {
-								$(item).css('top', offset)
-							})
-						} else {
-							$(".offset").removeAttr("style")
-						}
-					})
-
-				}
-
-
-				var filterArray = []
-				if($("body").hasClass("work")) {
-					if(window.location.pathname !== "/work") {
-						let pathArray = window.location.pathname.split("/")
-						iso.arrange({
-							filter: "." + pathArray[pathArray.length -1]
-						})
-						$(".work-filter.type a").removeClass("active")
-						$(".work-filter.type a[data-filter=" + pathArray[pathArray.length -1] + "]").addClass("active")
-					}
-
-					$(".work-filter a").on("click", function(e) {
-						e.preventDefault()
-							_.each(filterArray, (arrayItem, index) => {
-								_.each($(this).siblings(), function(sibling) {
-								if (arrayItem === "." + $(sibling).attr("data-filter")) {
-										filterArray.splice(index, 1)
-									}
-								})
-							})
-
-						if ($(this).hasClass("active") && !$(this).hasClass("all")) {
-							$(this).removeClass("active")
-							var filterKey = "all"
-							$(this).siblings(".work-filter a[data-filter=all]").addClass("active")
-							_.each(filterArray, (arrayItem, index) => {
-								history.pushState({}, null, "/work")
-								if (arrayItem === "." + $(this).attr("data-filter")) {
-									filterArray.splice(index, 1)
-								}
-							})
-						} else {
-							if ($(this).parent().hasClass("type")) {
-								if ($(this).hasClass("all")) {
-									history.pushState({}, null, "/work")
-								} else {
-									history.pushState({}, null, "/work/" + $(this).attr("data-filter"))
-								}
-							}
-							$(this).siblings().removeClass("active")
-							$(this).addClass("active")
-							filterArray.push("." + $(this).attr("data-filter"))
-						}
-						iso.arrange({
-							filter: filterArray.join("")
-						})
-						if ($(".grid-row.work").css('height') === '0px') {
-							$(".no-results").removeClass("hidden-xs-up")
-						} else {
-							$(".no-results").addClass("hidden-xs-up")
-						}
-					})
-				}
-
 			})
 
+			if ($(this).hasClass("active") && !$(this).hasClass("all")) {
+				$(this).removeClass("active")
+				var filterKey = "all"
+				$(this).siblings(".work-filter a[data-filter=all]").addClass("active")
+				_.each(filterArray, (arrayItem, index) => {
+					history.pushState({}, null, "/work")
+					if (arrayItem === "." + $(this).attr("data-filter")) {
+						filterArray.splice(index, 1)
+					}
+				})
+			} else {
+				if ($(this).parent().hasClass("type")) {
+					if ($(this).hasClass("all")) {
+						history.pushState({}, null, "/work")
+					} else {
+						history.pushState({}, null, "/work/" + $(this).attr("data-filter"))
+					}
+				}
+				$(this).siblings().removeClass("active")
+				$(this).addClass("active")
+				filterArray.push("." + $(this).attr("data-filter"))
+			}
+			iso.arrange({
+				filter: filterArray.join("")
+			})
+			if ($(".grid-row.work").css('height') === '0px') {
+				$(".no-results").removeClass("hidden-xs-up")
+			} else {
+				$(".no-results").addClass("hidden-xs-up")
+			}
+		})
+	}
 
-		  </script>
-	</body>
+})
+
+
+</script>
+</body>
 </html>

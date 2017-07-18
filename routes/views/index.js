@@ -6,7 +6,7 @@ exports = module.exports = function (req, res) {
 	var view = new keystone.View(req, res)
 	var locals = res.locals
 
-	locals.section = 'homepage';
+	locals.section = 'homepage'
 
 	locals.data = {
 		partners: [],
@@ -28,9 +28,9 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 
 			keystone.list('WorkCategory').model.find({}).exec(function (err, result) {
-				locals.data.categories = _.sortBy(result, 'order');
+				locals.data.categories = _.sortBy(result, 'order')
 				next(err)
-			});
+			})
 	})
 
 	// Load other posts
@@ -39,8 +39,10 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('Media').model.find()
 
 		q.exec(function (err, results) {
-			locals.data.showreel = _.find(results, {key: 'showreel'}).videoUrl
-			locals.data.partners = _.filter(results, {showInFooter: true});
+			let showreel = _.find(results, {key: 'showreel'}).videoEmbed
+			locals.data.showreel = showreel.split("\n").join("")
+
+			locals.data.partners = _.filter(results, {showInFooter: true})
 			next(err)
 		})
 
@@ -66,14 +68,14 @@ exports = module.exports = function (req, res) {
 			keystone.list('Page').model.find({}).exec(function (err, result) {
 				locals.data.copy = _.find(result, {slug: 'homepage'})
 				next(err)
-			});
+			})
 	})
 
 	view.on('init', function (next) {
 		var q = keystone.list('Work').model.find({}).populate('workType').lean()
 
 		q.exec(function (err, results) {
-			locals.data.work = _.take(results, 3);
+			locals.data.work = _.take(results, 3)
 			next(err)
 		})
 	})
@@ -81,4 +83,4 @@ exports = module.exports = function (req, res) {
 
 	// Render the view
 	view.render('index')
-};
+}

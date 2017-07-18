@@ -23,6 +23,8 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			locals.data.partners = _.filter(results, {showInFooter: true})
+			locals.data.showreel = _.find(results, {key: 'showreel'}).videoEmbed
+
 			next(err)
 		})
 

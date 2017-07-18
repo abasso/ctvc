@@ -206,6 +206,7 @@ module.exports = function () {
 		return ('/work/' + categorySlug);
 	};
 
+
 	// ### Pagination Helpers
 	// These are helpers used in rendering a pagination system for content
 	// Mostly generalized and with a small adjust to `_helper.pageUrl` could be universal for content types

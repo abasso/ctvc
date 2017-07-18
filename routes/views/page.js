@@ -39,7 +39,9 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('Media').model.find()
 
 		q.exec(function (err, results) {
-			locals.data.partners = _.filter(results, {showInFooter: true});
+			locals.data.partners = _.filter(results, {showInFooter: true})
+			locals.data.showreel = _.find(results, {key: 'showreel'}).videoEmbed
+
 			next(err)
 		})
 
@@ -54,13 +56,12 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
       locals.data.pages = _.filter(results, {type: locals.filters.type })
-      locals.data.page = (locals.filters.page === undefined) ? locals.data.pages[0] : _.find(locals.data.pages, {slug: locals.filters.page});
-      console.log(locals.data.page);
-      locals.data.page.active = true;
+      locals.data.page = (locals.filters.page === undefined) ? locals.data.pages[0] : _.find(locals.data.pages, {slug: locals.filters.page})
+      locals.data.page.active = true
       locals.section = locals.data.pages[0].type
 			next(err)
 		})
-  });
+  })
 
 	// Render the view
 	view.render('page')

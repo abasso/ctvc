@@ -21,7 +21,8 @@ Work.add({
 	thumbnail: { type: Types.CloudinaryImage },
 	images: { type: Types.CloudinaryImages },
 	useCompactLayout: {type: Boolean, default: false},
-	video: { type: Types.Url},
+	videoType: { type: Types.Select, options: 'Local, Embed'},
+	video: { type: Types.Html},
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400 },
@@ -72,14 +73,14 @@ Work.add({
 	}},
 	inAssociationWith: {
 		type: Types.List, fields: {
-		logo: { type: Types.Relationship, ref: 'Media', many: false},
+		blockType: { type: Types.Select, options: 'header, item' },
+		logo: { type: Types.Relationship, ref: 'Media', many: false, dependsOn: { blockType: ['header']}},
 		label: { type: String },
-		showLabel: { type: Boolean, default: true },
-		type: { type: Types.Select, options: 'text, link', default: 'text', },
-		text: { type: String },
-		link: { type: Types.Url, dependsOn: { type: ['link'] }},
-		newWindow: {type: Boolean, dependsOn: { type: ['link'] }},
-		media: { type: Types.Relationship, ref: 'Media', many: true },
+		showLabel: { type: Boolean, default: true, dependsOn: { blockType: ['item']}},
+		type: { type: Types.Select, options: 'text, link', default: 'text', dependsOn: { blockType: ['item'] }},
+		text: { type: String, dependsOn: { blockType: ['item']}},
+		link: { type: Types.Url, dependsOn: { type: ['link'], blockType: ['item']  }},
+		newWindow: { type: Boolean, dependsOn: { type: ['link'], blockType: ['item'] }},
 	}},
 	awards: {
 		type: Types.List, fields: {

@@ -20,7 +20,7 @@ const keystone = require('keystone')
 exports.initLocals = function (req, res, next) {
 		var q = keystone.list('Media').model.find()
 		q.exec(function (err, results) {
-			let showReelUrl = (results === undefined) ? "" : _.find(results, {key: 'showreel'}).videoUrl
+			let showReelUrl = (results === undefined) ? "" : _.find(results, {key: 'showreel'}).videoEmbed
 			res.locals.navLinks = [
 				{ label: 'Work', key: 'work', href: '/work',
 					subItems: [
@@ -31,7 +31,7 @@ exports.initLocals = function (req, res, next) {
 			 	},
 				{ label: 'Awards', key: 'award', href: '/awards', class: 'hidden-large' },
 				{ label: 'About', key: 'about', href: '/about' },
-				{ label: 'Show Reel', key: 'show-reel', href: '#', class: 'watch-show-reel hidden-large', src: _.find(results, {key: 'showreel'}).videoUrl, hiddenLarge: true },
+				{ label: 'Show Reel', key: 'show-reel', href: '#', class: 'watch-show-reel hidden-large', src: _.find(results, {key: 'showreel'}).videoEmbed, hiddenLarge: true },
 				{ label: 'People', key: 'people', href: '/people' },
 				{ label: 'Contact', key: 'contact', href: '/contact' },
 			]

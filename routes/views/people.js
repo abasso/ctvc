@@ -36,7 +36,10 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('Media').model.find()
 
 		q.exec(function (err, results) {
-			locals.data.partners = _.filter(results, {showInFooter: true});
+			locals.data.partners = _.filter(results, {showInFooter: true})
+			let showreel = _.find(results, {key: 'showreel'}).videoEmbed
+			locals.data.showreel = showreel.split("\n").join("")
+
 			next(err)
 		})
 
@@ -49,11 +52,11 @@ exports = module.exports = function (req, res) {
     }).populate('image').lean()
 
 		q.exec(function (err, results) {
-      console.log(err);
+      console.log(err)
       locals.data.people = results
 			next(err)
 		})
-  });
+  })
 
 	// Render the view
 	view.render('people')

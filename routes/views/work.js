@@ -57,6 +57,9 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			locals.data.partners = _.filter(results, {showInFooter: true})
+			let showreel = _.find(results, {key: 'showreel'}).videoEmbed
+			locals.data.showreel = showreel.split("\n").join("")
+
 			next(err)
 		})
 
@@ -73,7 +76,7 @@ exports = module.exports = function (req, res) {
 				state: 'published',
 			},
 		})
-			.sort('-publishedDate')
+			.sort('-broadcastDate')
 			.populate('author workType')
 
 		if (locals.data.category) {
@@ -99,6 +102,7 @@ exports = module.exports = function (req, res) {
 			locals.data.years = _.sortBy(_.uniq(locals.data.years))
 			locals.data.years.splice(2,1)
 			locals.data.years.splice(0, 0, "Older")
+			locals.data.years = locals.data.years.reverse()
 			locals.data.work = results
 			next(err)
 		})

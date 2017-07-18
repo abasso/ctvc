@@ -32,7 +32,9 @@ exports = module.exports = function (req, res) {
 			var q = keystone.list('Media').model.find()
 			q.exec(function (err, results) {
 				locals.media = results
-				locals.data.partners = _.filter(results, {showInFooter: true});
+				locals.data.partners = _.filter(results, {showInFooter: true})
+				let showreel = _.find(results, {key: 'showreel'}).videoEmbed
+				locals.data.showreel = showreel.split("\n").join("")
 
 				next(err)
 			})
@@ -47,7 +49,7 @@ exports = module.exports = function (req, res) {
 				_.each(results, (result) => {
 					let receivedDate = moment(result.receivedDate)
 					result.year = receivedDate.format("YYYY")
-					result.award = _.find(locals.media, {_id: result.award});
+					result.award = _.find(locals.media, {_id: result.award})
 				})
 				locals.awards = results
 				next(err)
@@ -73,6 +75,7 @@ exports = module.exports = function (req, res) {
 			if(result.producedBy.length === 1 && result.producedBy[0].type === 'text' && result.producedBy[0].text === '')  {
 				delete result.producedBy
 			}
+			result.hasEmbedVideo = (result.videoType === 'Embed') ? true : false
 			if (result.images) {
 				_.each(result.images, (image, index) => {
 					if (index === 0 && result.video) {
