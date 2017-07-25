@@ -7403,7 +7403,7 @@ body.truetube blockquote {
     .filters a.digital:hover, .filters a.digital.active, .filters button.digital:hover, .filters button.digital.active {
       color: white;
       background: #d9115b; }
-    .filters a.true-tube:hover, .filters a.true-tube.active, .filters button.true-tube:hover, .filters button.true-tube.active {
+    .filters a.truetube:hover, .filters a.truetube.active, .filters button.truetube:hover, .filters button.truetube.active {
       color: white;
       background: #d7e100; }
   .filters button {

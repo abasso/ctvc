@@ -53,7 +53,7 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
       console.log(err)
-      locals.data.people = results
+      locals.data.people = _.sortBy(results, 'sortOrder');
 			next(err)
 		})
   })

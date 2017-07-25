@@ -4,7 +4,7 @@
     <div class="grid-row people">
       {{# each data.people}}
       <div class="list-item">
-        {{#if image}}<img src="{{{cloudinaryUrl image.image width=610 height=343 crop='fit' }}}" class="img">{{/if}}
+        {{#if image}}<img src="{{{cloudinaryUrl image.image width=610 height=343 crop='lfill' }}}" class="img">{{/if}}
           <div class="list-item-title">
             <h2>{{{name}}}</h2>
             <h3>{{{position}}}</h3>

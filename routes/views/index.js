@@ -70,12 +70,11 @@ exports = module.exports = function (req, res) {
 				next(err)
 			})
 	})
-
 	view.on('init', function (next) {
 		var q = keystone.list('Work').model.find({}).populate('workType').lean()
 
 		q.exec(function (err, results) {
-			locals.data.work = _.take(results, 3)
+			locals.data.work = _.take(_.sortBy(results, 'publishedDate'), 3)
 			next(err)
 		})
 	})
