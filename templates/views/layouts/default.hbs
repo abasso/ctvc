@@ -293,12 +293,15 @@ $('body').imagesLoaded( function() {
 			updateOnImagesReady: true,
 			onImagesReady: function() {
 				if($(window).width() > 1200) {
+					setTimeout(function() {
 					var swiper = $(".swiper-wrapper")
 					var offset = swiper.height()
+					console.log("THE OFFSET", offset)
 					$(".offset").each( function(index, item) {
 						$(item).css('top', offset)
 					})
 				}
+			}, 100)
 			}
 		});
 		$(window).resize(function() {
