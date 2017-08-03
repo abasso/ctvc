@@ -303,11 +303,13 @@ $('body').imagesLoaded( function() {
 		});
 		$(window).resize(function() {
 			if($(window).width() > 1200) {
-				var swiper = $(".swiper-wrapper")
-				var offset = swiper.height()
-				$(".offset").each( function(index, item) {
-					$(item).css('top', offset)
-				})
+				setTimeout(function() {
+					var swiper = $(".swiper-wrapper")
+					var offset = swiper.height()
+					$(".offset").each( function(index, item) {
+						$(item).css('top', offset)
+					})
+				}, 100)
 			} else {
 				$(".offset").removeAttr("style")
 			}
