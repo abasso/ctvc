@@ -306,6 +306,7 @@ $('body').imagesLoaded( function() {
 				setTimeout(function() {
 					var swiper = $(".swiper-wrapper")
 					var offset = swiper.height()
+					console.log("THE OFFSET", offset)
 					$(".offset").each( function(index, item) {
 						$(item).css('top', offset)
 					})
