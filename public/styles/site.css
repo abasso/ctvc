@@ -6659,18 +6659,20 @@ p {
       height: 35px; }
     .partners .container:after {
       content: none; }
-    .partners .container a:before {
-      content: none; }
+    .partners .container a {
+      padding-right: 0 !important; }
+      .partners .container a:before {
+        content: none; }
   @media (max-width: 992px) {
     .partners {
       padding: 2rem 0; }
       .partners .container {
-        flex-direction: column;
         align-items: center;
+        flex-wrap: wrap;
         justify-content: center; }
         .partners .container img {
           height: 30px;
-          margin: .5rem; } }
+          margin: 1rem; } }
 
 .contact-footer {
   padding: 2rem 0;

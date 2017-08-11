@@ -50,6 +50,11 @@ keystone.set('locals', {
 	editable: keystone.content.editable,
 })
 
+if (process.env.CLOUDINARY_NAME) {
+	keystone.set('cloudinary config', { cloud_name: process.env.CLOUDINARY_NAME, api_key: process.env.CLOUDINARY_API_KEY, api_secret: process.env.CLOUDINARY_API_SECRET });
+
+}
+
 // Load your project's Routes
 keystone.set('routes', require('./routes'))
 keystone.set('signin logo', '/images/logo.svg')

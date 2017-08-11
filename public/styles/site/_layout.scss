@@ -920,6 +920,7 @@ p {
       content: none;
     }
     a {
+      padding-right: 0 !important;
       &:before {
         content: none;
       }
@@ -928,13 +929,12 @@ p {
   @media (max-width: $breakpoint-lg) {
     padding: 2rem 0;
     .container {
-      flex-direction: column;
-
       align-items: center;
+      flex-wrap: wrap;
       justify-content: center;
       img {
         height: 30px;
-        margin: .5rem;
+        margin: 1rem;
       }
     }
   }

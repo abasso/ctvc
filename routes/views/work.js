@@ -7,6 +7,7 @@ const request = require('request')
 
 var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
+		if(_.isUndefined(res)) return;
     console.log('content-type:', res.headers['content-type']);
     console.log('content-length:', res.headers['content-length']);
 
@@ -42,6 +43,17 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 
 		keystone.list('WorkCategory').model.find().sort('name').exec(function (err, results) {
+			console.log('work category results', results);
+			// _.each(results, (result) => {
+			// 	if(result.image) {
+			// 		result.image.url = result.image.url.replace("keystone-demo", "dc8wwqxzk");
+			// 		result.image.secure_url = result.image.secure_url.replace("keystone-demo", "dc8wwqxzk");
+			// 		// download(result.image.url, __dirname + '/images/' + result.image.public_id + '.' + result.image.format, function(){
+			// 		// 	console.log('done')
+			// 		// })
+			// 		result.save();
+			// 	}
+			// });
 			if (err || !results.length) {
 				return next(err)
 			}
@@ -68,6 +80,18 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('Media').model.find()
 
 		q.exec(function (err, results) {
+			console.log("media results", results);
+			_.each(results, (result) => {
+				if(result.image) {
+					// download(result.image.url, __dirname + '/images/' + result.image.public_id + '.' + result.image.format, function(){
+					// 	console.log('done')
+					// })
+					if (_.isUndefined(result.image.url)) return;
+					result.image.secure_url = result.image.secure_url.replace("keystone-demo", "dc8wwqxzk");
+					result.image.url = result.image.url.replace("keystone-demo", "dc8wwqxzk");
+				}
+				result.save();
+			});
 			locals.data.partners = _.filter(results, {showInFooter: true})
 			let showreel = _.find(results, {key: 'showreel'}).videoEmbed
 			locals.data.showreel = showreel.split("\n").join("")
@@ -97,16 +121,24 @@ exports = module.exports = function (req, res) {
 
 		q.exec(function (err, results) {
 			// _.each(results.results, (result) => {
-			// 	console.log("THE RESULT", result);
-			// 	download(result.thumbnail.url, __dirname + '/images/' + result.slug + '/thumbnail/' + result.thumbnail.public_id + '.' + result.thumbnail.public_id, function(){
-			// 	  console.log('done');
-			// 	});
 			// 	_.each(results.results, (result) => {
 			// 		_.each(result.images, (image) => {
-			// 			download(image.url, __dirname + '/images/' + result.slug + '/' + image.public_id + '.' + image.format, function(){
-			// 				console.log('done');
-			// 			});
+			// 			// download(image.url, __dirname + '/images/' + image.public_id + '.' + image.format, function(){
+			// 			// 	console.log('done')
+			// 			// })
+			// 			//image.url = image.url.replace("keystone-demo", "dc8wwqxzk");
+			// 			//image.secure_url = image.secure_url.replace("keystone-demo", "dc8wwqxzk");
+			// 			console.log(image.url);
 			// 		})
+			// 		// download(result.thumbnail.url, __dirname + '/images/' + result.thumbnail.public_id + '.' + result.thumbnail.format, function(){
+			// 		// 	console.log('done')
+			// 		// })
+			// 		console.log(result.thumbnail.url);
+			//
+			// 		result.thumbnail.url = result.thumbnail.url.replace("keystone-demo", "dc8wwqxzk");
+			// 		result.thumbnail.secure_url = result.thumbnail.secure_url.replace("keystone-demo", "dc8wwqxzk");
+			// 		result.save();
+			//
 			// 	})
 			// })
 
