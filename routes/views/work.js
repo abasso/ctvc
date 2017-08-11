@@ -2,6 +2,18 @@ const keystone = require('keystone')
 const async = require('async')
 const _ = require('lodash')
 const moment = require('moment')
+const fs = require('fs')
+const request = require('request')
+
+var download = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
+
 
 exports = module.exports = function (req, res) {
 
@@ -77,13 +89,27 @@ exports = module.exports = function (req, res) {
 			},
 		})
 			.sort('-broadcastDate')
-			.populate('author workType')
+			.populate('author workType images thumb')
 
 		if (locals.data.category) {
 			q.where('workType').in([locals.data.category])
 		}
 
 		q.exec(function (err, results) {
+			// _.each(results.results, (result) => {
+			// 	console.log("THE RESULT", result);
+			// 	download(result.thumbnail.url, __dirname + '/images/' + result.slug + '/thumbnail/' + result.thumbnail.public_id + '.' + result.thumbnail.public_id, function(){
+			// 	  console.log('done');
+			// 	});
+			// 	_.each(results.results, (result) => {
+			// 		_.each(result.images, (image) => {
+			// 			download(image.url, __dirname + '/images/' + result.slug + '/' + image.public_id + '.' + image.format, function(){
+			// 				console.log('done');
+			// 			});
+			// 		})
+			// 	})
+			// })
+
 			let archiveThreshold = moment().subtract(1, "years").year()
 			let yearsObject = {}
 			_.each(results.results, (data) => {
