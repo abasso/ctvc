@@ -31,7 +31,7 @@ keystone.init({
 	'emails': 'templates/emails',
 
 	'auto update': true,
-	'session': true,
+	'session': false,
 	'auth': true,
 	'user model': 'User',
 	'wysiwyg additional plugins': 'wordcount, paste',
@@ -51,9 +51,15 @@ keystone.set('locals', {
 })
 
 if (process.env.CLOUDINARY_NAME) {
+	console.log("CLOUDINARY CONFIG SET");
+	console.log("CLOUD NAME", process.env.CLOUDINARY_NAME);
 	keystone.set('cloudinary config', { cloud_name: process.env.CLOUDINARY_NAME, api_key: process.env.CLOUDINARY_API_KEY, api_secret: process.env.CLOUDINARY_API_SECRET });
+	keystone.set('cloudinary secure', true);
+
 
 }
+
+console.log("KEYSTONE CLOUDINARY", keystone.get('cloudinary config'));
 
 // Load your project's Routes
 keystone.set('routes', require('./routes'))
