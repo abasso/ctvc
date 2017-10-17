@@ -1227,6 +1227,11 @@ p {
   .post {
     margin: 0 0 4rem 0;
   }
+  &.hillside {
+    .content-wrapper {
+      margin-top: 0 !important;
+    }
+  }
 }
 body {
   &.tv {
