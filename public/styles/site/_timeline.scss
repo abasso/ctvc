@@ -120,6 +120,9 @@ Modules - reusable parts of our design
 .timeline-pip-audio {
   background: rgba(0,168,157,1);
 }
+.timeline-pip-hillside {
+  background: rgba(226,139,60,1);
+}
 @media only screen and (min-width: 1170px) {
   .timeline-pip {
     top: 25px;
@@ -191,6 +194,13 @@ Modules - reusable parts of our design
     h2 {
       &:after {
         background: rgba(215,225,0,1);
+      }
+    }
+  }
+  &.hillside {
+    h2 {
+      &:after {
+        background: rgba(226,139,60,1);
       }
     }
   }
@@ -309,6 +319,13 @@ h3 {
     &:hover, &.active {
       color: white;
       background: rgba(215,225,0,1);
+    }
+  }
+  &.hillside {
+    color: rgba(226,139,60,1);
+    &:hover, &.active {
+      color: white;
+      background: rgba(226,139,60,1);
     }
   }
 }

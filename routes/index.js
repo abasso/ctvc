@@ -43,6 +43,7 @@ exports = module.exports = function (app) {
 	app.get('/work/audio/:item', routes.views.item);
 	app.get('/work/digital/:item', routes.views.item);
 	app.get('/work/truetube/:item', routes.views.item);
+	app.get('/work/hillside/:item', routes.views.item);
 	app.get('/about', routes.views.page);
 	app.get('/people', routes.views.people);
 	app.get('/about/:page', routes.views.page);

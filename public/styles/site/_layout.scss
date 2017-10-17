@@ -57,7 +57,7 @@ p {
     margin-top: 1.5rem;
     margin-bottom: 3rem;
     @media (min-width:$breakpoint-xl) {
-      margin-top: 130px;
+      margin-top: 100px;
     }
   }
 }
@@ -535,6 +535,16 @@ p {
       }
     }
   }
+  &.swiper-slide-hillside {
+    .slide-title {
+      background: rgba(48,50,6,.6);
+      h2 {
+        &:before {
+          background: rgba(226,139,60,.9);
+        }
+      }
+    }
+  }
 }
 
 .swiper-pagination {
@@ -858,6 +868,16 @@ p {
       h5 {
         &:before {
           background: rgba(215,225,0,.9);
+        }
+      }
+      &:hover {
+        background: rgba(0,0,0,.9);
+      }
+    }
+    &.hillside {
+      h5 {
+        &:before {
+          background: rgba(226,139,60,.9);
         }
       }
       &:hover {
@@ -1258,6 +1278,19 @@ body {
       background: rgba(215,225,0,.9);
       &:after {
         border-color: transparent rgba(215,225,0,.9) transparent transparent;
+      }
+    }
+  }
+  &.hillside {
+    h1 {
+      &:before {
+        background: rgba(226,139,60,.9);
+      }
+    }
+    blockquote {
+      background: rgba(226,139,60,.9);
+      &:after {
+        border-color: transparent rgba(226,139,60,.9) transparent transparent;
       }
     }
   }
