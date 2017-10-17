@@ -46,12 +46,16 @@ p {
   }
 }
 
-.work, .award, .page, .about, .people, .compact-item, .contact {
+.work, .award, .page, .about, .people, .facilities, .hillside, .compact-item, .contact {
   #header {
     background: #333;
   }
+  h1 {
+    margin-bottom: 1.5rem;
+  }
   .content-wrapper {
     margin-top: 1.5rem;
+    margin-bottom: 3rem;
     @media (min-width:$breakpoint-xl) {
       margin-top: 130px;
     }

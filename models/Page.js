@@ -9,14 +9,14 @@ var Types = keystone.Field.Types;
 var Page = new keystone.List('Page', {
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
-	sortable:true
+	sortable: true,
 });
 
 Page.add({
 	title: { type: String, required: true },
 	subTitle: { type: String },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
-	type: { type: Types.Select, options: 'news, press release, about, content, site block'},
+	type: { type: Types.Select, options: 'news, press release, about, content, facilities, hillside, site block' },
 	author: { type: Types.Relationship, ref: 'User', index: true },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
 	image: { type: Types.CloudinaryImage },

@@ -43,8 +43,8 @@
 			<div class="container">
 			<div class="row">
 			{{# each data.categories }}
-				<div class="col-sm-12 col-md-6 col-lg-3 homepage-categories-column">
-					<a href="work/{{this.key}}" class=" homepage-category {{this.key}}">
+				<div class="col-sm-12 col-md-6 col-lg-2_5 homepage-categories-column">
+					<a href="{{this.slug}}" class=" homepage-category {{this.key}}">
 				{{#if image}}<div class="homepage-category-image-wrapper"><img src="{{{cloudinaryUrl image width=400 height=214 crop='lfill' }}}" class="img"></div>{{/if}}
 					<h5>{{this.name}}</h5>
 					{{{this.description}}}
