@@ -59,10 +59,10 @@ Enquiry.schema.methods.sendNotificationEmail = function (callback) {
 			templateName: 'enquiry-notification',
 			transport: 'mailgun',
 		}).send({
-			to: admins,
+			to: 'info@ctvc.co.uk',
 			from: {
 				name: 'CTVC',
-				email: 'contact@ctvc.com',
+				email: 'info@ctvc.co.uk',
 			},
 			subject: 'New Enquiry for CTVC',
 			enquiry: enquiry,
