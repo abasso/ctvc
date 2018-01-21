@@ -58,8 +58,8 @@ exports = module.exports = function (req, res) {
 			locals.data.pages = _.filter(results, { type: locals.filters.type });
 			if (locals.filters.type === 'facilities') {
 				locals.data.pages.push({
-					slug: 'enquire',
-					type: 'facilities',
+					slug: 'facilities',
+					type: 'contact',
 					title: 'Enquire',
 				});
 			}

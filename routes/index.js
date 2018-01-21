@@ -25,6 +25,8 @@ var importRoutes = keystone.importer(__dirname);
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
+// keystone.redirect('/facilities/enquire', '/contact');
+
 
 // Import Route Controllers
 var routes = {
@@ -52,7 +54,7 @@ exports = module.exports = function (app) {
 	app.get('/facilities', routes.views.page);
 	app.get('/facilities/enquire', routes.views.contact);
 	app.get('/facilities/:page', routes.views.page);
-	app.all('/contact', routes.views.contact);
+	app.all('/contact/:enquiry?', routes.views.contact);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected)

@@ -36,7 +36,7 @@ exports = module.exports = function (req, res) {
 	locals.validationErrors = {};
 	locals.enquirySubmitted = false;
 
-	if (req.path.split('/')[1] === 'facilities') {
+	if (req.params.enquiry === 'facilities') {
 		_.each(locals.enquiryTypes, enquiryType => {
 			if (enquiryType.value === 'facilities') {
 				enquiryType.selected = 'selected';
