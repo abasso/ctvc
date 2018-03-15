@@ -28,9 +28,16 @@ exports.initLocals = function (req, res, next) {
 						{ label: 'Awards', key: 'award', href: '/awards' },
 						{ label: 'Show Reel', key: 'show-reel', href: '#', class: 'watch-show-reel', src: showReelUrl },
 				],
-			 	},
+			},
+
 				{ label: 'Awards', key: 'award', href: '/awards', class: 'hidden-large' },
-				{ label: 'About', key: 'about', href: '/about' },
+			{ label: 'About', key: 'about', href: '/about',
+				subItems: [
+						{ label: 'About Us', key: 'about', href: '/about' },
+						{ label: 'News', key: 'award', href: '/about/news' },
+				],
+				 },
+				{ label: 'News', key: 'news', href: '/about/news', class: 'hidden-large' },
 				{ label: 'Show Reel', key: 'show-reel', href: '#', class: 'watch-show-reel hidden-large', src: _.find(results, { key: 'showreel' }).videoEmbed, hiddenLarge: true },
 				{ label: 'People', key: 'people', href: '/people' },
 				{ label: 'Facilities', key: 'facilities', href: '/facilities' },
